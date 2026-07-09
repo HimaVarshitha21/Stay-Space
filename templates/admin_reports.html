@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>All Reported Issues</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:
+    linear-gradient(rgba(10,15,40,0.9), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+    no-repeat center/cover;
+    color:white;
+}
+
+/* TOP BAR */
+.topbar{
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+}
+
+/* BACK */
+.back{
+    color:#00c6ff;
+    text-decoration:none;
+    font-size:16px;
+}
+
+/* CONTAINER */
+.container{
+    max-width:700px;
+    margin:30px auto;
+    padding:20px;
+}
+
+/* TITLE */
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.4);
+    position:relative;
+}
+
+/* TEXT */
+.label{
+    font-size:13px;
+    opacity:0.7;
+}
+
+.value{
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+/* DELETE BUTTON */
+.delete-btn{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:#ff4d4d;
+    border:none;
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.delete-btn:hover{
+    background:#ff1a1a;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    margin-top:40px;
+    opacity:0.7;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .container{
+        padding:10px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="topbar">
+    <a href="/admin" class="back">← Back</a>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+<h2>All Reported Issues</h2>
+
+{% if reports %}
+
+    {% for r in reports %}
+
+    <div class="card">
+
+        <!-- DELETE -->
+        <form action="/admin/delete_report/{{ r.id }}" method="POST" style="display:inline;">
+    <button style="background:#ff4d4d; border:none; padding:6px 12px; border-radius:6px; color:white;">
+        Delete
+    </button>
+</form>
+
+        <div class="label">User</div>
+        <div class="value">{{ r.user }}</div>
+
+        <div class="label">Issue</div>
+        <div class="value">{{ r.issue }}</div>
+
+        <div class="label">Date</div>
+        <div class="value">{{ r.created_at }}</div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p class="empty">No reported issues</p>
+
+{% endif %}
+
+</div>
+
+<script>
+
+function deleteReport(id){
+
+    if(confirm("Delete this report?")){
+        window.location.href = "/delete_report/" + id;
+    }
+
+}
+
+</script>
+
+</body>
+</html>

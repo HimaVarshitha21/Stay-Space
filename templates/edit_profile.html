@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Profile</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+
+    background:
+    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+    no-repeat center/cover;
+
+    color:white;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* CARD */
+.card{
+    width:420px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.5),
+        inset 0 0 10px rgba(255,255,255,0.05);
+}
+
+/* TITLE */
+h2{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+/* INPUTS */
+.input-box{
+    margin-bottom:15px;
+}
+
+.input-box label{
+    display:block;
+    margin-bottom:6px;
+    font-size:14px;
+    opacity:0.9;
+}
+
+.input-box input,
+.input-box textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.1);
+
+    color:white;
+
+    outline:none;
+
+    box-sizing:border-box;
+
+    transition:0.3s;
+}
+
+.input-box textarea{
+    resize:none;
+    height:90px;
+}
+
+.input-box input:focus,
+.input-box textarea:focus{
+
+    background:rgba(255,255,255,0.15);
+
+    box-shadow:0 0 12px rgba(0,198,255,0.3);
+}
+
+/* BUTTONS */
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.btn{
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.save-btn{
+    background:linear-gradient(45deg,#6a5cff,#00c6ff);
+}
+
+.cancel-btn{
+    background:rgba(255,255,255,0.1);
+}
+
+.btn:hover{
+    transform:scale(1.03);
+}
+
+/* BACK BUTTON */
+.back-btn{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    text-decoration:none;
+
+    color:#00c6ff;
+
+    background:rgba(0,0,0,0.4);
+
+    padding:8px 14px;
+
+    border-radius:10px;
+
+    backdrop-filter:blur(10px);
+}
+
+/* FLASH MESSAGE */
+.flash{
+
+    margin-bottom:15px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    background:rgba(255,80,80,0.15);
+
+    border:1px solid rgba(255,80,80,0.4);
+
+    color:#ffb3b3;
+}
+
+</style>
+</head>
+
+<body>
+
+<a href="/account" class="back-btn">← Back</a>
+
+<div class="card">
+
+    <h2>Edit Profile</h2>
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <!-- PROFILE IMAGE -->
+<div style="text-align:center; margin-bottom:25px;">
+
+    <label for="profileInput" style="cursor:pointer;">
+
+        <img
+            src="{% if user.profile_image %}{{ url_for('static', filename='uploads/' + user.profile_image) }}{% else %}https://cdn-icons-png.flaticon.com/512/149/149071.png{% endif %}"
+            id="profilePreview"
+
+            style="
+                width:120px;
+                height:120px;
+
+                border-radius:50%;
+
+                object-fit:cover;
+
+                border:4px solid rgba(255,255,255,0.25);
+
+                box-shadow:0 0 20px rgba(0,198,255,0.3);
+
+                transition:0.3s;
+            "
+        >
+
+    </label>
+
+    <br><br>
+
+    <label for="profileInput"
+        style="
+            padding:10px 18px;
+            border-radius:12px;
+
+            background:rgba(255,255,255,0.1);
+
+            cursor:pointer;
+
+            font-size:14px;
+        ">
+        Change Picture
+    </label>
+
+    <input
+        type="file"
+        id="profileInput"
+        name="profile_image"
+
+        accept="image/*"
+
+        style="display:none;"
+    >
+
+</div>
+
+        <div class="input-box">
+            <label>Username</label>
+            <input type="text"
+                   name="username"
+                   value="{{ user.username }}"
+                   required>
+        </div>
+
+        <div class="input-box">
+            <label>Email</label>
+            <input type="email"
+                   name="email"
+                   value="{{ user.email }}"
+                   required>
+        </div>
+
+        <div class="input-box">
+            <label>Mobile</label>
+            <input type="text"
+                   name="mobile"
+                   value="{{ user.mobile }}"
+                   required>
+        </div>
+
+        <div class="input-box">
+            <label>First Name</label>
+            <input type="text"
+                   name="first_name"
+                   value="{{ user.firstName }}">
+        </div>
+
+        <div class="input-box">
+            <label>Last Name</label>
+            <input type="text"
+                   name="last_name"
+                   value="{{ user.lastName }}">
+        </div>
+
+        <div class="input-box">
+            <label>Location</label>
+            <input type="text"
+                   name="location"
+                   value="{{ user.location }}">
+        </div>
+
+        <div class="input-box">
+            <label>About</label>
+            <textarea name="about">{{ user.about }}</textarea>
+        </div>
+
+        <div class="buttons">
+
+            <a href="/account" style="flex:1;">
+                <button type="button"
+                        class="btn cancel-btn">
+                    Cancel
+                </button>
+            </a>
+
+            <button type="submit"
+                    class="btn save-btn">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+
+document.getElementById("profileInput")
+.addEventListener("change", function(event){
+
+    const file = event.target.files[0];
+
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            document.getElementById("profilePreview")
+            .src = e.target.result;
+
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>

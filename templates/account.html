@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Account</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:
+    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+    no-repeat center/cover;
+    color:white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.card{
+    width:350px;
+    padding:25px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    text-align:center;
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+.info{
+    text-align:left;
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+.edit-btn{
+    margin-top:15px;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background: rgba(255,255,255,0.1);
+    color:white;
+    cursor:pointer;
+}
+
+.edit-btn:hover {
+    background: rgba(255, 255, 255b, 0.2);
+}
+
+.back-btn{
+    position:absolute;
+    top:20px;
+    left:20px;
+    text-decoration:none;
+    color:#00c6ff;
+    font-size:15px;
+    padding:6px 12px;
+    border-radius:10px;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(10px);
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    background:rgba(0,0,0,0.7);
+}
+
+
+/* 🔥 POPUP BACKDROP */
+.popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+/* 🔥 POPUP CARD */
+.popup{
+    width:320px;
+    padding:25px;
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.6),
+        inset 0 0 15px rgba(255,255,255,0.05);
+
+    text-align:center;
+    animation: fadeIn 0.3s ease;
+}
+
+/* 🔥 TITLE */
+.popup h3{
+    margin-bottom:15px;
+    font-weight:600;
+}
+
+/* 🔥 INPUTS */
+.popup input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+
+    border-radius:10px;
+    border:none;
+
+    background:rgba(255,255,255,0.1);
+    color:white;
+
+    outline:none;
+    transition:0.3s;
+}
+
+/* 🔥 INPUT FOCUS */
+.popup input:focus{
+    background:rgba(255,255,255,0.15);
+    box-shadow:0 0 10px rgba(0,198,255,0.3);
+}
+
+/* 🔥 BUTTONS CONTAINER */
+.popup-buttons{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:15px;
+}
+
+/* 🔥 BUTTON STYLE */
+.popup button{
+    flex:1;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+
+    background:rgba(255,255,255,0.1);
+    color:white;
+
+    transition:0.3s;
+}
+
+/* 🔥 HOVER EFFECT */
+.popup button:hover{
+    background:rgba(255,255,255,0.2);
+    transform:scale(1.03);
+}
+
+/* 🔥 PRIMARY BUTTON */
+.popup .primary{
+    background:linear-gradient(45deg,#6a5cff,#00c6ff);
+}
+
+/* 🔥 ANIMATION */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* 🔥 TOAST */
+#toast{
+    position:fixed;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%) translateY(-20px);
+
+    padding:12px 20px;
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+
+    color:white;
+    font-size:14px;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:0.4s ease;
+    z-index:99999;
+
+    border:1px solid rgba(255,255,255,0.15);
+}
+
+/* SHOW */
+#toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* SUCCESS */
+#toast.success{
+    box-shadow:0 0 15px rgba(0,255,150,0.4);
+}
+
+/* ERROR */
+#toast.error{
+    box-shadow:0 0 15px rgba(255,80,80,0.4);
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<a href="/profile" class="back-btn">← Back</a>
+
+<div class="card">
+
+<h2>Account Details</h2>
+
+<div class="info"><b>UserName:</b> {{ user.username }}</div>
+<div class="info"><b>Email:</b> {{ user.email }}</div>
+<div class="info"><b>Mobile:</b> {{ user.mobile }}</div>
+
+<a href="/edit_profile">
+    <button class="edit-btn">Edit Profile</button>
+</a>
+
+    <button class="edit-btn" onclick="openConfirm()">Change Password</button>
+
+
+</div>
+<div id="confirmBox" class="popup-overlay" style="display:none;">
+    <div class="popup">
+        <h3>Change Password?</h3>
+        <p style="opacity:0.7;">This will update your login credentials</p>
+
+        <div class="popup-buttons">
+            <button onclick="closeConfirm()">Cancel</button>
+            <button class="primary" onclick="openPasswordForm()">Continue</button>
+        </div>
+    </div>
+</div>
+<div id="passwordBox" class="popup-overlay" style="display:none;">
+    <div class="popup">
+
+        <h3>Change Password</h3>
+
+        <input type="password" id="oldPass" placeholder="Old Password">
+        <div id="newPassFields" style="display:none;">
+            <input type="password" id="newPass" placeholder="New Password">
+            <input type="password" id="confirmPass" placeholder="Confirm Password">
+        </div>
+
+        <div class="popup-buttons">
+            <button onclick="closePasswordForm()">Cancel</button>
+            <button class="primary" onclick="updatePassword()">Update</button>
+        </div>
+
+    </div>
+</div>
+<div id="toast"></div>
+
+<script>
+function openConfirm(){
+    document.getElementById("confirmBox").style.display = "flex";
+}
+
+function closeConfirm(){
+    document.getElementById("confirmBox").style.display = "none";
+}
+
+function openPasswordForm(){
+    closeConfirm();
+    document.getElementById("passwordBox").style.display = "flex";
+}
+
+function closePasswordForm(){
+    document.getElementById("passwordBox").style.display = "none";
+}
+
+function updatePassword(){
+
+    const oldPass = document.getElementById("oldPass").value;
+    const newPass = document.getElementById("newPass").value;
+    const confirmPass = document.getElementById("confirmPass").value;
+
+    // STEP 1 → verify old password first
+    if(!document.getElementById("newPassFields").style.display || 
+       document.getElementById("newPassFields").style.display === "none"){
+
+        if(!oldPass){
+            showToast("Enter old password", "error");
+            return;
+        }
+
+        fetch("/verify_old_password", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ old_password: oldPass })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            if(data.status === "wrong_old"){
+                showToast("Old password is incorrect", "error");
+            }
+            else if(data.status === "correct"){
+                showToast("Verified ✓", "success");
+                document.getElementById("newPassFields").style.display = "block";
+            }
+            else{
+                showToast("Error", "error");
+            }
+
+        });
+
+        return;
+    }
+
+    // STEP 2 → update password
+    if(!newPass || !confirmPass){
+        showToast("Fill all fields", "error");
+        return;
+    }
+
+    if(newPass !== confirmPass){
+        showToast("Passwords do not match", "error");
+        return;
+    }
+
+    fetch("/change_password", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            old_password: oldPass,
+            new_password: newPass
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.status === "success"){
+            showToast("Password updated", "success");
+            closePasswordForm();
+        } else {
+            showToast("Error updating password", "error");
+        }
+
+    });
+}
+  
+
+function showToast(message, type="success"){
+
+    const toast = document.getElementById("toast");
+
+    toast.innerText = message;
+    toast.className = ""; // reset
+
+    toast.classList.add("show", type);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Profile</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+min-height:100vh;
+background:
+linear-gradient(rgba(10,15,40,0.8), rgba(10,15,40,0.95)),
+url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+no-repeat center center/cover;
+color:white;
+padding:20px;
+}
+
+/* BACK BUTTON */
+.back{
+position:absolute;
+top:20px;
+left:20px;
+cursor:pointer;
+}
+
+/* PROFILE CARD */
+.profile{
+text-align:center;
+margin-top:40px;
+}
+
+/* PROFILE IMAGE */
+.profile-img{
+width:90px;
+height:90px;
+border-radius:50%;
+object-fit:cover;
+margin:auto;
+display:block;
+}
+
+/* STATS */
+.stats{
+display:flex;
+justify-content:center;
+gap:25px;
+margin-top:12px;
+opacity:0.9;
+}
+
+/* BUTTONS */
+.buttons{
+margin-top:15px;
+display:flex;
+justify-content:center;
+gap:10px;
+}
+
+.btn{
+padding:10px 18px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:6px;
+text-decoration:none;
+color:white;
+font-size:14px;
+}
+
+.msg-btn{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+}
+
+.like-btn{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+}
+
+/* PROPERTY SECTION */
+.section-title{
+margin-top:40px;
+margin-bottom:10px;
+font-size:16px;
+opacity:0.8;
+}
+
+/* PROPERTY CARD */
+.card{
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(20px);
+border-radius:18px;
+padding:12px;
+margin-bottom:15px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+.price{
+font-weight:bold;
+}
+
+.default-avatar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background: linear-gradient(135deg,#6a5cff,#00c6ff);
+
+    font-size:32px;
+    font-weight:600;
+    color:white;
+
+    border-radius:50%;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- BACK -->
+<div class="back" onclick="history.back()">
+<svg width="24" height="24" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2">
+<path d="M15 18l-6-6 6-6"/>
+</svg>
+</div>
+
+<!-- PROFILE -->
+<div class="profile">
+
+{% if user.profile_image %}
+    <img 
+    src="{% if user.profile_image %}
+    {{ url_for('static', filename='uploads/' + user.profile_image) }}
+    {% else %}
+    https://cdn-icons-png.flaticon.com/512/149/149071.png
+    {% endif %}"
+    
+    class="profile-img">
+{% else %}
+    <div class="profile-img default-avatar">
+        {{ user.username[0].upper() }}
+    </div>
+{% endif %}
+
+<h2>{{ user.username }}</h2>
+
+<!-- 📍 LOCATION -->
+<div style="
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    margin-top:5px;
+    opacity:0.85;
+    font-size:14px;
+">
+
+    <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" fill="none">
+        <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" stroke-width="2"/>
+        <circle cx="12" cy="10" r="2.5" stroke-width="2"/>
+    </svg>
+
+    <span>{{ user.location if user.location else "No location added" }}</span>
+</div>
+
+<!-- 📝 ABOUT -->
+<div style="
+    margin-top:8px;
+    font-size:14px;
+    opacity:0.75;
+    text-align:center;
+    max-width:320px;
+    margin-left:auto;
+    margin-right:auto;
+">
+    {{ user.about if user.about else "No bio available" }}
+</div>
+
+<!-- STATS -->
+<div class="stats">
+
+<!-- LIKES -->
+<div style="display:flex;align-items:center;gap:5px;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff4d6d" stroke-width="2">
+<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+</svg>
+<span>{{ user.likes if user.likes else 0 }} Likes</span>
+</div>
+
+<!-- PROPERTIES -->
+<div style="display:flex;align-items:center;gap:5px;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c6ff" stroke-width="2">
+<path d="M3 10L12 3l9 7"/>
+<path d="M5 10v10h14V10"/>
+<path d="M9 21v-6h6v6"/>
+</svg>
+<span>{{ properties|length }} Properties</span>
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+<div class="buttons">
+
+<a href="/chat/{{ user.username }}/0" class="btn msg-btn">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+</svg>
+Message
+</a>
+
+<a href="/like_profile/{{ user.username }}" class="btn like-btn">
+
+    {% if is_liked %}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4d6d" stroke="#ff4d6d" stroke-width="2">
+            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+        Liked
+    {% else %}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+        Like
+    {% endif %}
+
+</a>
+
+</div>
+
+</div>
+
+<!-- PROPERTIES -->
+<div class="section-title">
+Listings by {{ user.username }}
+</div>
+
+{% if properties %}
+    {% for p in properties %}
+
+    <div class="card" onclick="location.href='/view/{{ p.id }}'">
+
+        {% if p.image %}
+            <img src="/{{ p.image }}">
+        {% else %}
+            <img src="https://via.placeholder.com/400x200?text=No+Image">
+        {% endif %}
+
+        <h3>{{ p.area }}, {{ p.city }}</h3>
+
+        <p class="price">
+        ₹ {{ "{:,}".format(p.price|int) if p.price else "N/A" }}
+        </p>
+
+        <p style="font-size:13px;opacity:0.8;">
+            {{ p.size if p.size else "" }}
+            {{ " • " + p.facing if p.facing else "" }}
+        </p>
+
+    </div>
+
+    {% endfor %}
+{% else %}
+    <p style="text-align:center;margin-top:30px;">No properties yet</p>
+{% endif %}
+
+</body>
+</html>

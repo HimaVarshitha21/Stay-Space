@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Profile</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+
+    background:
+    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+    no-repeat center center/cover;
+
+    color:white;
+}
+
+/* TOP BAR */
+.topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between; /* ✅ IMPORTANT */
+    padding:0 15px; /* reduce a bit */
+    background: rgba(0,0,0,0.6);
+    box-sizing:border-box; /* ✅ prevents overflow */
+}
+
+.back{
+    color:#00c6ff;
+    text-decoration:none;
+}
+
+/* MAIN */
+.container{
+    max-width:500px;
+    margin:80px auto;
+    padding:15px;
+}
+
+/* PROFILE CARD */
+.profile-card{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(25px);
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+}
+
+/* 🔥 STORY RING ANIMATION */
+.avatar-wrapper{
+    width:110px;
+    height:110px;
+    margin:auto;
+    padding:3px;
+    border-radius:50%;
+    background: linear-gradient(270deg,#ff00cc,#00c6ff,#6a5cff,#ff00cc);
+    background-size:400% 400%;
+    animation: ringAnim 5s linear infinite;
+}
+
+@keyframes ringAnim{
+    0%{background-position:0%}
+    100%{background-position:400%}
+}
+
+.avatar-img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    cursor:pointer;
+}
+
+/* TEXT */
+.name{font-size:20px;font-weight:600;}
+.sub{opacity:0.7;font-size:14px;}
+
+/* BUTTONS */
+.btn{
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    border:none;
+    width:100%;
+    cursor:pointer;
+}
+
+.edit{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    color:white;
+
+    box-shadow: 
+        0 8px 25px rgba(0,0,0,0.4),
+        inset 0 0 10px rgba(255,255,255,0.05);
+
+    transition:0.3s ease;
+}
+
+.edit:hover{
+    transform: scale(1.03);
+
+    background: rgba(255,255,255,0.12);
+
+    box-shadow: 
+        0 10px 35px rgba(0,0,0,0.6),
+        0 0 15px rgba(106,92,255,0.2);
+}
+
+.logout{
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    color:white;
+    border:1px solid rgba(255,255,255,0.15);
+}
+
+/* LISTINGS */
+.section{margin-top:30px;font-weight:600;}
+
+.property{
+    display:flex;
+    gap:10px;
+    background: rgba(255,255,255,0.08);
+    padding:10px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.property img{
+    width:90px;
+    height:80px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+/* ================= VIEWER ================= */
+
+.viewer{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:9999;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+/* 🔥 BLUR BACKGROUND IMAGE */
+.viewer-bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    filter: blur(40px) brightness(0.5);
+    transform: scale(1.2);
+}
+
+/* IMAGE */
+.viewer img{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    object-fit:cover;
+    z-index:2;
+    transition: transform 0.2s ease;
+}
+
+/* CLOSE */
+.close-btn{
+    position:absolute;
+    top:25px;
+    right:25px;
+    z-index:3;
+    cursor:pointer;
+}
+
+/* OPTIONS */
+.options{
+    display:flex;
+    gap:30px;
+    margin-top:30px;
+    z-index:2;
+}
+
+.option{
+    text-align:center;
+    cursor:pointer;
+}
+
+.option svg{
+    width:24px;
+    height:24px;
+    margin-bottom:6px;
+}
+
+.property:hover{
+    transform:scale(1.02);
+    transition:0.3s;
+}
+
+.property svg{
+    transition: 0.3s;;
+}
+
+.property svg:hover{
+    transform: scale(1.2);
+    filter: brightness(1.3);
+}
+
+.icon{
+    width:22px;
+    height:22px;
+    stroke:white;
+    fill:none;
+    stroke-width:2;
+    cursor:pointer;
+    opacity:0.8;
+    transition:0.3s;
+}
+
+/* HOVER EFFECT */
+.icon:hover{
+    opacity:1;
+    transform:scale(1.2);
+}
+
+/* OPTIONAL: subtle color feedback */
+.icon:hover{
+    stroke:#6a5cff;
+}
+
+.menu-item{
+    display:block;
+    padding:10px 5px;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.menu-item:hover{
+    background: rgba(255,255,255,0.1);
+}
+
+/* ===== ADMIN CARD =====*/
+
+.admin-card{
+    margin-top:22px;
+    padding:16px;
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    border-radius:20px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+
+    cursor:pointer;
+    transition:0.35s ease;
+}
+
+.admin-card:hover{
+    transform: translateY(-3px) scale(1.01);
+
+    background: rgba(255,255,255,0.08);
+
+    box-shadow: 
+        0 10px 35px rgba(0,0,0,0.6),
+        0 0 20px rgba(106,92,255,0.2);
+}
+
+.admin-icon{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background: linear-gradient(45deg,#6a5cff,#00c6ff);
+
+    box-shadow: 0 0 15px rgba(106,92,255,0.5);
+}
+
+.admin-title{
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:0.3px;
+}
+
+.admin-sub{
+    font-size:12px;
+    opacity:0.65;
+}
+
+.admin-card{
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.location-icon {
+    transition:0.3s;
+    opacity:0.8;
+}
+
+.location-icon:hover {
+    transform: scale(1.2);
+    stroke:#6a5cff;
+    opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <a href="/home" class="back">← Back</a>
+
+    <div style="position:relative;">
+
+    <!-- MENU BUTTON -->
+    <div onclick="toggleMenu()" style="cursor:pointer; padding:6px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" stroke="white" fill="none">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2"/>
+        </svg>
+    </div>
+
+    <!-- DROPDOWN -->
+    <div id="menuBox" style="
+        display:none;
+        position:absolute;
+        right:0;
+        top:40px;
+        width:200px;
+        padding:15px;
+        border-radius:15px;
+        background: rgba(0,0,0,0.9);
+        backdrop-filter: blur(20px);
+        border:1px solid rgba(255,255,255,0.1);
+        z-index:9999;
+    ">
+
+    
+
+        <hr style="border-color:rgba(255,255,255,0.1);">
+
+        <!-- LOGOUT -->
+        <a href="/account" class="menu-item">Account</a>
+        <a href="/help" class="menu-item">Help Center</a>
+        <a href="/privacy" class="menu-item">Privacy Policy</a>
+        <a href="/logout" class="menu-item">Logout</a>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="container">
+
+
+    <!-- 🔥 CLEAN PROFILE (NO BOX) -->
+
+<div style="text-align:center; margin-top:20px;">
+
+    <div class="avatar-wrapper">
+        <img
+        src="{% if user.profile_image %}
+        {{ url_for('static', filename='uploads/' + user.profile_image) }}
+        {% else %}
+        https://ui-avatars.com/api/?name={{ user.firstName }}+{{ user.lastName }}
+        {% endif %}"
+
+        class="avatar-img"
+
+        onclick="openViewer()">
+    </div>
+
+    <div class="name" style="margin-top:10px;">
+        {{ user.firstName }} {{ user.lastName }}
+    </div>
+
+    <!-- 📍 LOCATION -->
+
+    {% if user.location %}
+<div style="
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    opacity:0.8;
+    font-size:14px;
+    margin-top:4px;
+">
+
+    <!-- 📍 SVG ICON -->
+    <svg class="location-icon" viewBox="0 0 24 24" width="16" height="16" stroke="white" fill="none">
+        <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" stroke-width="2"/>
+        <circle cx="12" cy="10" r="2.5" stroke-width="2"/>
+    </svg>
+
+    <span>{{ user.location }}</span>
+</div>
+{% endif %}
+
+<!-- 📝 ABOUT -->
+{% if user.about %}
+<div style="
+    margin-top:8px;
+    font-size:14px;
+    opacity:0.75;
+    line-height:1.4;
+    max-width:300px;
+    margin-left:auto;
+    margin-right:auto;
+">
+    {{ user.about }}
+</div>
+{% endif %}
+
+    <!-- ✅ LIKES -->
+    <div style="opacity:0.7; font-size:14px; margin-top:4px;">
+        {{ user.likes if user.likes else 0 }} Likes
+    </div>
+
+    <!-- EDIT BUTTON -->
+    <div style="margin-top:12px;">
+        <a href="/edit_profile">
+            <button class="btn edit" style="width:220px;">
+                Edit Profile
+            </button>
+        </a>
+    </div>
+
+</div>
+
+    
+
+{% if is_admin %}
+
+<div class="admin-card" onclick="location.href='/admin'">
+
+    <div class="admin-left">
+        <div class="admin-icon">
+    <svg viewBox="0 0 24 24" width="18" height="18">
+        <path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"
+              stroke="white" fill="none" stroke-width="2"/>
+        <path d="M9 12l2 2 4-4"
+              stroke="white" fill="none" stroke-width="2"/>
+    </svg>
+</div>
+    </div>
+
+    <div class="admin-info">
+        <div class="admin-title">Admin Panel</div>
+        <div class="admin-sub">Control users, properties & reports</div>
+    </div>
+
+</div>
+
+{% endif %}
+
+    <div class="section">My Listings</div>
+
+{% for p in my_properties %}
+
+<div class="property">
+
+    <!-- CLICKABLE AREA -->
+    <a href="/view/{{ p.id }}" 
+       style="display:flex; gap:10px; text-decoration:none; color:white; flex:1; align-items:center;">
+
+        <img src="{{ p.image if p.image else 'https://via.placeholder.com/100' }}">
+
+        <div>
+            <b>{{ p.area }}, {{ p.city }}</b><br>
+            ₹ {{ p.price }}
+        </div>
+
+    </a>
+
+    <!-- ACTION BUTTONS -->
+    <div style="display:flex; gap:15px; align-items:center;">
+
+        <!-- EDIT -->
+        <a href="/edit_property/{{ p.id }}">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none">
+                <path d="M12 20h9" stroke-width="2"/>
+                <path d="M16.5 3.5l4 4L7 21H3v-4L16.5 3.5z" stroke-width="2"/>
+            </svg>
+        </a>
+
+        <!-- DELETE -->
+        <a href="/delete_property/{{ p.id }}">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none">
+                <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" stroke-width="2"/>
+            </svg>
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+<div class="section">Saved Properties</div>
+
+{% for p in saved_properties %}
+
+<div class="property">
+
+    <!-- LEFT SIDE (CLICKABLE) -->
+    <a href="/view/{{ p.id }}" 
+       style="display:flex; gap:10px; text-decoration:none; color:white; flex:1; align-items:center;">
+
+        <img src="{{ p.image if p.image else 'https://via.placeholder.com/100' }}">
+
+        <div>
+            <b>{{ p.area }}, {{ p.city }}</b><br>
+            ₹ {{ p.price }}
+        </div>
+
+    </a>
+
+    <!-- RIGHT SIDE DELETE -->
+    <a href="/unsave/{{ p.id }}" style="display:flex; align-items:center;">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none">
+            <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" stroke-width="2"/>
+        </svg>
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<script>
+
+let scale = 1;
+let posX = 0, posY = 0;
+let startX = 0, startY = 0;
+let isDragging = false;
+let lastTap = 0;
+
+
+function toggleMenu(){
+    const menu = document.getElementById("menuBox");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+
+/* OPEN VIEWER */
+function openViewer(){
+
+    const imgSrc = document.querySelector(".avatar-img").src;
+
+    const viewer = document.createElement("div");
+    viewer.className = "viewer";
+
+    viewer.innerHTML = `
+
+        <div class="viewer-bg" style="background-image:url('${imgSrc}')"></div>
+
+        <div class="close-btn" onclick="this.parentElement.remove()">
+            <svg viewBox="0 0 24 24" stroke="white" fill="none">
+                <path d="M18 6L6 18M6 6l12 12" stroke-width="2"/>
+            </svg>
+        </div>
+
+        <img id="zoomImg" src="${imgSrc}">
+
+        <div class="options">
+            <div class="option" onclick="shareProfile()">Share</div>
+            <div class="option" onclick="copyLink()">Copy</div>
+            <div class="option" onclick="editProfile()">Edit</div>
+        </div>
+    `;
+
+    document.body.appendChild(viewer);
+
+    const img = document.getElementById("zoomImg");
+
+    /* 🔥 DOUBLE TAP ZOOM */
+    img.addEventListener("click", function(e){
+        const now = Date.now();
+        if(now - lastTap < 300){
+            scale = scale === 1 ? 2 : 1;
+            img.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
+        }
+        lastTap = now;
+    });
+
+    /* 🔥 DRAG */
+    img.addEventListener("mousedown", (e)=>{
+        isDragging = true;
+        startX = e.clientX - posX;
+        startY = e.clientY - posY;
+    });
+
+    document.addEventListener("mousemove", (e)=>{
+        if(!isDragging) return;
+        posX = e.clientX - startX;
+        posY = e.clientY - startY;
+        img.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
+    });
+
+    document.addEventListener("mouseup", ()=> isDragging=false);
+
+    /* TOUCH DRAG */
+    img.addEventListener("touchstart", (e)=>{
+        isDragging = true;
+        startX = e.touches[0].clientX - posX;
+        startY = e.touches[0].clientY - posY;
+    });
+
+    img.addEventListener("touchmove", (e)=>{
+        if(!isDragging) return;
+        posX = e.touches[0].clientX - startX;
+        posY = e.touches[0].clientY - startY;
+        img.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
+    });
+
+    img.addEventListener("touchend", ()=> isDragging=false);
+}
+
+/* SHARE */
+function shareProfile(){
+    const url = window.location.href;
+    if(navigator.share){
+        navigator.share({title:"Profile", url:url});
+    } else {
+        navigator.clipboard.writeText(url);
+        alert("Copied!");
+    }
+}
+
+/* COPY */
+function copyLink(){
+    navigator.clipboard.writeText(window.location.href);
+    alert("Copied!");
+}
+
+/* EDIT */
+function editProfile(){
+    window.location.href="/edit_profile";
+}
+
+</script>
+
+</body>
+</html>

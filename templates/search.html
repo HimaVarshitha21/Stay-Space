@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+
+background:
+url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+no-repeat center/cover;
+
+position: relative;
+color:white;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+/* smoother gradient */
+background: rgba(10,15,40,0.75);
+
+backdrop-filter: blur(8px);
+z-index:-1;
+}
+
+/* TOP BAR */
+.topbar{
+display:flex;
+align-items:center;
+gap:10px;
+padding:15px;
+}
+
+/* BACK */
+.back{
+font-size:18px;
+cursor:pointer;
+color:#00c6ff;
+}
+
+/* SEARCH BOX */
+.search-container{
+flex:1;
+position:relative;
+}
+
+/* INPUT */
+.search-input{
+width:100%;
+padding:12px 15px 12px 40px;
+
+border-radius:30px;
+border:none;
+outline:none;
+
+/* smoother glass */
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(12px);
+
+color:white;
+font-size:14px;
+}
+
+/* ICON */
+.search-icon{
+position:absolute;
+left:12px;
+top:50%;
+transform:translateY(-50%);
+opacity:0.7;
+}
+
+/* RESULTS */
+.results{
+padding:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.result-card{
+padding:12px;
+border-radius:12px;
+
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+
+cursor:pointer;
+transition:0.2s;
+}
+
+.result-card:hover{
+background:rgba(255,255,255,0.12);
+}
+
+</style>
+</head>
+
+<body>
+
+    <div class="overlay"></div>
+
+<div class="topbar">
+
+<span class="back" onclick="history.back()">←</span>
+
+<div class="search-container">
+
+<input type="text" id="searchInput" class="search-input"
+placeholder="Search users or properties..."
+onkeyup="searchData()">
+
+<svg class="search-icon" width="18" height="18" stroke="white" fill="none" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="11" cy="11" r="8"/>
+<line x1="21" y1="21" x2="16.65" y2="16.65"/>
+</svg>
+
+</div>
+
+</div>
+
+<div id="results" class="results"></div>
+
+<script>
+
+function searchData(){
+    let q = document.getElementById("searchInput").value;
+
+    if(q.length === 0){
+        document.getElementById("results").innerHTML = "";
+        return;
+    }
+
+    fetch("/search?q=" + q)
+    .then(res => res.json())
+    .then(data => {
+
+        let html = "";
+
+        // USERS
+        // USERS
+data.users.forEach(u=>{
+    html += `
+    <div class="result-card" onclick="openUser('${u.username}')">
+        
+        <div style="display:flex; align-items:center; gap:10px;">
+            
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2">
+                <path d="M20 21a8 8 0 10-16 0"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+
+            ${u.username}
+        </div>
+
+    </div>`;
+});
+
+
+// PROPERTIES
+data.properties.forEach(p=>{
+    html += `
+    <div class="result-card" onclick="openProperty(${p.id})">
+
+        <div style="display:flex; align-items:center; gap:10px;">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c6ff" stroke-width="2">
+                <path d="M3 10L12 3l9 7"/>
+                <path d="M5 10v10h14V10"/>
+                <path d="M9 21v-6h6v6"/>
+            </svg>
+
+            ${p.title}
+        </div>
+
+    </div>`;
+});
+
+        if(html === ""){
+            html = "<div style='opacity:0.6'>No results found</div>";
+        }
+
+        document.getElementById("results").innerHTML = html;
+    });
+}
+
+function openUser(username){
+    window.location.href = "/user_profile/" + username;
+}
+
+function openProperty(id){
+    window.location.href = "/view/" + id;
+}
+
+</script>
+
+</body>
+</html>

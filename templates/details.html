@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Property Details</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+/* 🔥 BACKGROUNDS */
+.land-bg{
+background:
+linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+url('https://images.unsplash.com/photo-1500382017468-9049fed747ef')
+no-repeat center/cover;
+}
+
+.house-bg{
+background:
+linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c')
+no-repeat center/cover;
+}
+
+.hostel-bg{
+background:
+linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5')
+no-repeat center/cover;
+}
+
+.commercial-bg{
+background:
+linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab')
+no-repeat center/cover;
+}
+
+/* CARD */
+.card{
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(25px);
+padding:30px;
+border-radius:24px;
+width:380px;
+box-shadow:0 25px 70px rgba(0,0,0,0.6);
+position:relative;
+}
+
+/* 🔙 BACK ICON */
+.back-icon{
+position:absolute;
+top:18px;
+left:18px;
+cursor:pointer;
+}
+
+.back-icon svg{
+width:22px;
+height:22px;
+stroke:white;
+}
+
+/* TITLE */
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* 🔥 GLASS INPUTS */
+input, select{
+width:100%;
+padding:14px;
+margin:10px 0;
+border-radius:12px;
+border:none;
+outline:none;
+font-size:14px;
+
+background: rgba(255,255,255,0.12);
+color:white;
+}
+
+input::placeholder{
+color:rgba(255,255,255,0.6);
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+select option {
+    background: #1a1a2e; /* dark instead of white */
+    color: white;
+}
+
+
+/* focus effect */
+select:focus {
+    outline: none;
+    border: 1px solid #00c6ff;
+    box-shadow: 0 0 10px rgba(0,198,255,0.3);
+}
+
+/* BUTTON */
+.next-btn{
+margin-top:15px;
+padding:14px;
+border:none;
+border-radius:12px;
+width:100%;
+cursor:pointer;
+font-weight:600;
+font-size:15px;
+color:white;
+background: linear-gradient(45deg,#6a5cff,#00c6ff);
+transition:0.25s;
+}
+
+.next-btn:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body class="{{ propertyType }}-bg">
+
+<form method="POST">
+
+<div class="card">
+
+<!-- 🔙 BACK -->
+<div class="back-icon" onclick="window.history.back()">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M15 18l-6-6 6-6" stroke-width="2"/>
+</svg>
+</div>
+
+<h2>Property Details</h2>
+
+<!-- COMMON -->
+<input name="state" placeholder="State *" required value="{{ data.get('state','') }}">
+<input name="pincode" placeholder="Pin Code *" required value="{{ data.get('pincode','') }}">
+<input name="city" placeholder="City *" required value="{{ data.get('city','') }}">
+<input name="area" placeholder="Area *" required value="{{ data.get('area','') }}">
+<input name="street" placeholder="Street *" required value="{{ data.get('street','') }}">
+<input name="landmark" placeholder="Nearby Landmark *" required value="{{ data.get('landmark','') }}">
+
+<!-- LAND -->
+{% if propertyType == "land" %}
+
+<input name="size" placeholder="Plot Size *" required value="{{ data.get('size','') }}">
+
+<select name="plotType" required>
+<option value="">Plot Type *</option>
+<option>Residential</option>
+<option>Agricultural</option>
+<option>Commercial</option>
+</select>
+
+<select name="facing" required>
+<option value="">Facing *</option>
+<option>North</option>
+<option>South</option>
+<option>East</option>
+<option>West</option>
+</select>
+
+<input name="road" placeholder="Road Access">
+<input name="boundary" placeholder="Boundary Wall">
+<input name="price" placeholder="Total Price *" required value="{{ data.get('price','') }}">
+
+{% endif %}
+
+<!-- HOUSE SALE -->
+{% if propertyType == "house" and listingType == "sale" %}
+
+<input name="bhk" placeholder="BHK *" required value="{{ data.get('bhk','') }}">
+<input name="bathrooms" placeholder="Bathrooms *" required value="{{ data.get('bathrooms','') }}">
+
+<select name="furnishing">
+<option value="">Furnishing</option>
+<option>Fully Furnished</option>
+<option>Semi Furnished</option>
+<option>Unfurnished</option>
+</select>
+
+<input name="floor" placeholder="Floor Number">
+<input name="totalFloors" placeholder="Total Floors">
+<input name="parking" placeholder="Parking">
+<input name="size" placeholder="Size (sqft)">
+<input name="price" placeholder="Total Price *" required>
+
+{% endif %}
+
+<!-- RENT -->
+{% if propertyType == "house" and listingType == "rent" %}
+
+<input name="bhk" placeholder="BHK *" required>
+<input name="rent" placeholder="Monthly Rent *" required>
+<input name="deposit" placeholder="Deposit">
+<input name="available" placeholder="Available From">
+<input name="tenant" placeholder="Preferred Tenant">
+
+{% endif %}
+
+<!-- HOSTEL -->
+{% if propertyType == "hostel" %}
+
+<select name="roomType" required>
+<option value="">Room Type *</option>
+<option>Single</option>
+<option>Shared</option>
+</select>
+
+<input name="rent" placeholder="Rent *" required>
+<input name="food" placeholder="Food Included">
+<input name="gender" placeholder="Boys / Girls">
+<input name="beds" placeholder="Available Beds">
+
+{% endif %}
+
+<!-- COMMERCIAL -->
+{% if propertyType == "commercial" %}
+
+<input name="type" placeholder="Type *" required>
+<input name="size" placeholder="Area Size *" required>
+<input name="parking" placeholder="Parking">
+<input name="power" placeholder="Power Supply">
+<input name="price" placeholder="Price *" required>
+
+{% endif %}
+
+<button class="next-btn">Next →</button>
+
+</div>
+
+</form>
+
+</body>
+</html>

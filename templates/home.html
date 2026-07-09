@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>StaySpace</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+min-height:100vh;
+background:
+linear-gradient(rgba(10,15,40,0.75), rgba(10,15,40,0.9)),
+url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+no-repeat center center/cover;
+color:white;
+
+padding-top:90px;
+padding-bottom:100px;
+}
+
+/* KEEP EVERYTHING SAME */
+a{
+text-decoration:none;
+color:inherit;
+}
+
+.topbar{
+position:fixed;
+top:15px;
+left:50%;
+transform:translateX(-50%);
+width:92%;
+height:65px;
+border-radius:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 20px;
+background: rgba(0, 0, 0, 0.7);
+backdrop-filter: blur(18px);
+box-shadow:0 6px 20px rgba(0,0,0,0.35);
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+}
+
+.top-icons{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.icon{
+width:22px;
+height:22px;
+stroke:white;
+stroke-width:2;
+fill:none;
+opacity:1;
+}
+
+.nav-item{
+display:flex;
+align-items:center;
+justify-content:center;
+width:42px;
+height:42px;
+border-radius:12px;
+transition:0.25s;
+cursor:pointer;
+}
+
+.nav-item:hover{
+background: rgba(0,198,255,0.25);
+transform:scale(1.1);
+}
+
+.logout-btn{
+color:#00c6ff;
+font-size:14px;
+margin-left:5px;
+}
+
+/* SEARCH */
+.search-box{
+padding:15px;
+width:85%;
+margin:0 auto 25px auto;
+border-radius:30px;
+border:none;
+background: rgba(255,255,255,0.18);
+color:white;
+display:block;
+outline:none;
+}
+
+/* CARD */
+.card{
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(20px);
+border-radius:22px;
+padding:15px;
+margin:20px auto;
+width:88%;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:16px;
+margin-bottom:10px;
+}
+
+/* NEW SMALL TAG STYLE */
+.badge{
+display:inline-block;
+padding:5px 10px;
+border-radius:20px;
+font-size:11px;
+background: linear-gradient(45deg,#6a5cff,#00c6ff);
+margin-bottom:8px;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+position:fixed;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+width:92%;
+height:65px;
+border-radius:18px;
+background: rgba(0,0,0,0.7);
+backdrop-filter: blur(18px);
+display:flex;
+justify-content:space-around;
+align-items:center;
+box-shadow:0 6px 20px rgba(0,0,0,0.6);
+z-index:1000;
+}
+
+.plus-icon{
+font-size:30px;
+font-weight:500;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+height:100%;
+position:relative;
+top:-3px;
+}
+
+.floating-btn{
+position:fixed;
+bottom:100px;
+right:25px;
+width:60px;
+height:60px;
+border-radius:50%;
+background: linear-gradient(45deg,#00c6ff,#6a5cff);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:700;
+box-shadow:0 8px 25px rgba(0,0,0,0.5);
+z-index:2000;
+transition:0.3s;
+}
+
+.floating-btn:hover{
+transform:scale(1.1);
+}
+
+/* 🔵 BLUE DOT */
+.nav-item{
+    position: relative;  /* REQUIRED */
+}
+
+.dot{
+    position:absolute;
+    top:6px;
+    right:8px;
+
+    width:8px;
+    height:8px;
+
+    background:#00c6ff;
+    border-radius:50%;
+
+    box-shadow:0 0 8px #00c6ff;
+}
+
+</style>
+</head>
+
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div id="flash-container" style="
+        position:fixed;
+        top:90px;
+        left:50%;
+        transform:translateX(-50%);
+        z-index:999;
+    ">
+      {% for category, message in messages %}
+        <div class="flash-msg" style="
+            background:#00c6ff;
+            color:white;
+            padding:12px 20px;
+            border-radius:10px;
+            margin-bottom:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.3);
+        ">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- TOP NAV -->
+<div class="topbar">
+<div class="logo">StaySpace</div>
+
+<div class="top-icons">
+
+
+<div class="icon" onclick="goToSearch()">
+    <svg viewBox="0 0 24 24" width="20" height="20" stroke="white" fill="none" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+</div>
+
+
+<a href="/notifications" class="nav-item">
+    <svg class="icon" viewBox="0 0 24 24">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z"/>
+    </svg>
+
+    {% if unread_notifications > 0 %}
+        <span class="dot"></span>
+    {% endif %}
+</a>
+
+<a href="/visit_requests" class="nav-item" style="position:relative;">
+
+<svg class="icon" viewBox="0 0 24 24">
+<path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
+<path d="M5 9h14"/>
+</svg>
+
+{% if has_new_requests %}
+<span class="blue-dot"></span>
+{% endif %}
+
+</a>
+
+
+<a href="/profile" class="nav-item">
+<svg class="icon" viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22c0-4 4-6 8-6s8 2 8 6"/>
+</svg>
+</a>
+
+<a href="/logout" class="logout-btn">Logout</a>
+
+</div>
+</div>
+
+<!-- SEARCH -->
+<form method="GET" action="/home">
+<input class="search-box" name="search" placeholder="Search properties..." value="{{ search }}">
+</form>
+
+<!-- PROPERTIES -->
+<div>
+
+{% if properties %}
+    {% for p in properties %}
+      
+    <div class="card" onclick="location.href='/view/{{ p.id}}'">
+
+        <!-- ✅ FIXED IMAGE -->
+        {% if p.image %}
+            <img src="/{{ p.image }}">
+        {% else %}
+            <img src="https://via.placeholder.com/400x200?text=No+Image">
+        {% endif %}
+
+        <!-- BADGE -->
+        {% if p.propertyType and p.listingType %}
+        <div class="badge">
+            {{ p.propertyType|upper }} • {{ p.listingType|upper }}
+        </div>
+        {% endif %}
+
+        <!-- LOCATION -->
+        <h3>{{ p.area }}, {{ p.city }}</h3>
+
+        <!-- PRICE -->
+        <p>
+        <b>
+        ₹ {{ "{:,}".format(p.price|int) if p.price else "N/A" }}
+        </b>
+        </p>
+
+        <!-- EXTRA INFO -->
+        <p style="font-size:13px;opacity:0.8;">
+            {{ p.size if p.size else "" }}
+            {{ " • " + p.facing if p.facing else "" }}
+        </p>
+
+    </div>
+
+    {% endfor %}
+{% else %}
+    <p style="text-align:center;margin-top:50px;">No properties found</p>
+{% endif %}
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+
+<a href="/home" class="nav-item">
+<svg class="icon" viewBox="0 0 24 24">
+<path d="M3 10L12 3l9 7"/>
+<path d="M5 10v10h14V10"/>
+<path d="M9 21v-6h6v6"/>
+</svg>
+</a>
+
+<a href="/inbox" class="nav-item">
+    <svg class="icon" viewBox="0 0 24 24">
+        <path d="M20 2H4a2 2 0 0 0-2 2v14l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+    </svg>
+
+    {% if unread_messages > 0 %}
+        <span class="dot"></span>
+    {% endif %}
+</a>
+
+<a href="/listing" class="nav-item">
+<span class="plus-icon">+</span>
+</a>
+
+<a href="/notifications" class="nav-item">
+    <svg class="icon" viewBox="0 0 24 24">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z"/>
+    </svg>
+
+    {% if unread_notifications > 0 %}
+        <span class="dot"></span>
+    {% endif %}
+</a>
+
+<a href="/profile" class="nav-item">
+<svg class="icon" viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22c0-4 4-6 8-6s8 2 8 6"/>
+</svg>
+</a>
+
+</div>
+
+<!-- FLOATING BUTTON -->
+<a href="/listing" class="floating-btn">
+<span>+</span>
+</a>
+
+<script>
+setTimeout(() => {
+    const flash = document.getElementById("flash-container");
+    if (flash) {
+        flash.style.opacity = "0";
+        flash.style.transition = "0.5s";
+
+        setTimeout(() => {
+            flash.remove();
+        }, 500);
+    }
+}, 2500); // ⏱️ 2.5 seconds
+
+
+
+
+
+
+
+
+
+
+// redirects
+function openUser(username){
+    window.location.href = "/user_profile/" + username;
+}
+
+function openProperty(id){
+    window.location.href = "/view/" + id;
+}
+
+
+
+function goToSearch(){
+    window.location.href = "/search_page";
+}
+
+
+
+
+</script>
+
+</body>
+</html>

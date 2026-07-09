@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Property</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920')
+    no-repeat center/cover;
+
+    color:white;
+}
+
+/* CARD */
+.card{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(25px);
+    padding:30px;
+    border-radius:25px;
+    width:380px;
+    position:relative;
+}
+
+/* BACK ICON */
+.back-icon{
+    position:absolute;
+    top:15px;
+    left:15px;
+    cursor:pointer;
+}
+
+/* CLEAN BACK ICON */
+.back-icon svg{
+    width:20px;
+    height:20px;
+    stroke:white;
+}
+
+/* TITLE */
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* INPUTS (GLASS STYLE) */
+input, select{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:12px;
+    border:none;
+    outline:none;
+    background: rgba(255,255,255,0.12);
+    color:white;
+}
+
+/* BUTTON */
+.btn{
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    border:none;
+    width:100%;
+    cursor:pointer;
+    font-weight:500;
+    background: linear-gradient(45deg,#00c6ff,#6a5cff);
+    color:white;
+}
+
+/* DELETE BUTTON (SAME STYLE) */
+.delete-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+/* 🔥 CLEAN BIN ICON */
+.delete-btn svg{
+    width:18px;
+    height:18px;
+    stroke:white;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* HOVER */
+button:hover{
+    opacity:0.9;
+}
+
+</style>
+</head>
+
+<body>
+
+<form method="POST">
+
+<div class="card">
+
+<!-- BACK -->
+<div class="back-icon" onclick="goBack()">
+    <svg viewBox="0 0 24 24" fill="none">
+        <path d="M15 18l-6-6 6-6" stroke-width="2"/>
+    </svg>
+</div>
+
+<h2>Edit Property</h2>
+
+<input type="text" name="area" value="{{ property.area }}" required>
+<input type="text" name="city" value="{{ property.city }}" required>
+<input type="number" name="price" value="{{ property.price }}" required>
+<input type="text" name="size" value="{{ property.size }}" required>
+
+<select name="propertyType">
+<option value="land" {{ 'selected' if property.propertyType=='land' }}>Land</option>
+<option value="house" {{ 'selected' if property.propertyType=='house' }}>House</option>
+<option value="hostel" {{ 'selected' if property.propertyType=='hostel' }}>Hostel</option>
+<option value="commercial" {{ 'selected' if property.propertyType=='commercial' }}>Commercial</option>
+</select>
+
+<!-- UPDATE -->
+<button type="submit" class="btn">
+    Update Property
+</button>
+
+<!-- DELETE (FIXED ICON) -->
+<button type="button" class="btn delete-btn" onclick="deleteProperty()">
+    <svg viewBox="0 0 24 24" fill="none">
+        <path d="M4 7h16"/>
+        <path d="M10 11v6"/>
+        <path d="M14 11v6"/>
+        <path d="M6 7l1-2h10l1 2"/>
+        <path d="M6 7v12a2 2 0 002 2h8a2 2 0 002-2V7"/>
+    </svg>
+    Delete Property
+</button>
+
+</div>
+
+</form>
+
+<script>
+
+function goBack(){
+    window.history.back();
+}
+
+function deleteProperty(){
+    if(confirm("Delete this property?")){
+        window.location.href="/delete/{{ property.id }}";
+    }
+}
+
+</script>
+
+</body>
+</html>

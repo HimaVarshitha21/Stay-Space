@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Privacy Policy</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:
+    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+    no-repeat center/cover;
+    color:white;
+}
+
+/* TOP */
+.topbar{
+    height:60px;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    background: rgba(0,0,0,0.6);
+}
+
+/* MAIN */
+.container{
+    max-width:600px;
+    margin:40px auto;
+    padding:20px;
+}
+
+/* CARD */
+.card{
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    border-radius:20px;
+    margin-bottom:15px;
+    overflow:hidden;
+}
+
+/* HEADER */
+.card-header{
+    padding:18px;
+    cursor:pointer;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* CONTENT */
+.card-content{
+    padding:0 18px 18px;
+    font-size:14px;
+    line-height:1.6;
+    display:none;
+    opacity:0.85;
+}
+
+/* HOVER */
+.card-header:hover{
+    background: rgba(255,255,255,0.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <a href="/profile" style="color:#00c6ff;">← Back</a>
+</div>
+
+<div class="container">
+
+    <div style="text-align:center; margin-bottom:25px;">
+
+    <h1 style="
+    margin:0;
+    font-size:30px;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">
+    Privacy Policy
+    </h1>
+
+    <div style="font-size:13px; opacity:0.7; margin-top:5px;">
+        Last updated: April 2026
+    </div>
+
+</div>
+
+    <!-- WHAT WE COLLECT -->
+    <div class="card">
+        <div class="card-header" onclick="toggle(this)">
+            What We Collect
+            <span>+</span>
+        </div>
+        <div class="card-content">
+            We collect basic information such as your name, email address, and mobile number 
+            when you create an account. Additionally, we collect property details you provide 
+            such as location, price, images, and descriptions to help display listings properly 
+            on the platform.
+        </div>
+    </div>
+
+    <!-- WHY WE COLLECT -->
+    <div class="card">
+        <div class="card-header" onclick="toggle(this)">
+            Why We Collect
+            <span>+</span>
+        </div>
+        <div class="card-content">
+            Your data helps us connect buyers and sellers efficiently. It also allows us to 
+            improve user experience, personalize listings, and ensure smooth communication 
+            between users through chat and notifications.
+        </div>
+    </div>
+
+    <!-- WHAT WE DO NOT DO -->
+    <div class="card">
+        <div class="card-header" onclick="toggle(this)">
+            What We Do NOT Do
+            <span>+</span>
+        </div>
+        <div class="card-content">
+            We do not sell your personal data to third parties. Your information is never 
+            shared publicly without your consent. We strictly maintain privacy and ensure 
+            that your data is used only within the platform.
+        </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="card">
+        <div class="card-header" onclick="toggle(this)">
+            Security
+            <span>+</span>
+        </div>
+        <div class="card-content">
+            We implement secure authentication systems and encrypted communication wherever 
+            possible. Your login details are protected, and all interactions within the 
+            platform are kept private and secure.
+        </div>
+    </div>
+
+    <!-- USER CONTROL -->
+    <div class="card">
+        <div class="card-header" onclick="toggle(this)">
+            User Control
+            <span>+</span>
+        </div>
+        <div class="card-content">
+            You have full control over your data. You can edit your profile, update property 
+            details, or delete your account anytime. We believe in giving users complete 
+            control over their information.
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+function toggle(el){
+
+    const content = el.nextElementSibling;
+    const icon = el.querySelector("span");
+
+    // close others
+    document.querySelectorAll(".card-content").forEach(c => {
+        if(c !== content){
+            c.style.display = "none";
+        }
+    });
+
+    // toggle current
+    if(content.style.display === "block"){
+        content.style.display = "none";
+        icon.innerText = "+";
+    } else {
+        content.style.display = "block";
+        icon.innerText = "−";
+    }
+}
+
+</script>
+
+</body>
+</html>

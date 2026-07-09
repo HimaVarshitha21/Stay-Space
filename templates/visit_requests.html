@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Visit Requests</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+min-height:100vh;
+
+background:
+linear-gradient(rgba(10,15,40,0.75), rgba(10,15,40,0.9)),
+url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+no-repeat center center/cover;
+
+color:white;
+padding:20px;
+}
+
+/* HEADER */
+.title{
+text-align:center;
+font-size:24px;
+margin-bottom:20px;
+}
+
+/* CARD */
+.card{
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(20px);
+border-radius:18px;
+padding:18px;
+margin:15px auto;
+width:100%;
+max-width: 500px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+/* TEXT */
+.label{
+opacity:0.7;
+font-size:13px;
+}
+
+.value{
+font-size:15px;
+margin-bottom:6px;
+}
+
+/* STATUS TAG */
+.status{
+display:inline-block;
+padding:4px 10px;
+border-radius:12px;
+font-size:12px;
+margin-top:5px;
+}
+
+.pending{
+background:rgba(255,255,255,0.2);
+}
+
+.accepted{
+background:rgba(0,200,100,0.4);
+}
+
+.rejected{
+background:rgba(255,80,80,0.4);
+}
+
+/* BUTTON ROW */
+.actions{
+margin-top:12px;
+display:flex;
+gap:10px;
+flex-wrap: wrap;
+}
+
+/* BUTTON */
+.btn{
+flex:1;
+padding:10px;
+border-radius:10px;
+text-align:center;
+cursor:pointer;
+font-size:14px;
+transition:0.3s;
+}
+
+.accept{
+background: linear-gradient(45deg,#00c6ff,#6a5cff);
+}
+
+.reject{
+background: rgba(255,80,80,0.3);
+border:1px solid rgba(255,80,80,0.5);
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* EMPTY */
+.empty{
+text-align:center;
+margin-top:50px;
+opacity:0.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="title">Visit Requests</div>
+
+{% if visits %}
+
+    {% for v in visits %}
+
+    <div class="card">
+
+        <div class="label">User</div>
+        <div class="value">{{ v.username }}</div>
+
+        <div class="label">Date</div>
+        <div class="value">{{ v.date }}</div>
+
+        <div class="label">Time</div>
+        <div class="value">{{ v.time }}</div>
+
+        <div class="label">Status</div>
+
+        <div class="status 
+            {% if v.status == 'pending' %}pending{% endif %}
+            {% if v.status == 'accepted' %}accepted{% endif %}
+            {% if v.status == 'rejected' %}rejected{% endif %}
+        ">
+            {{ v.status|upper }}
+        </div>
+
+        {% if v.status == "pending" %}
+
+        <div class="actions">
+            <a href="/accept_visit/{{ v.id }}" class="btn accept">Accept</a>
+            <a href="/reject_visit/{{ v.id }}" class="btn reject">Reject</a>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <div class="empty">No visit requests yet</div>
+
+{% endif %}
+
+</body>
+</html>

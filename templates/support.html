@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Support Chat</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:
+    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+    no-repeat center/cover;
+    color:white;
+}
+
+/* TOP */
+.topbar{
+    height:60px;
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    background: rgba(0,0,0,0.6);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.topbar a{
+    color:#00c6ff;
+    text-decoration:none;
+}
+
+/* CHAT BOX */
+.chat-container{
+    width:90%;
+    max-width:600px;
+    height:80vh;
+    margin:30px auto;
+    display:flex;
+    flex-direction:column;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+/* 📱 MOBILE FIX */
+@media (max-width:768px){
+
+    .chat-container{
+        width:100%;
+        height:100vh;
+        margin:0;
+        border-radius:0;
+    }
+
+}
+
+/* MESSAGES AREA */
+.messages{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    padding-bottom: 80px;
+}
+
+/* MESSAGE */
+.msg{
+    max-width:70%;
+    padding:10px 14px;
+    border-radius:15px;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+/* 📱 MOBILE */
+@media (max-width:768px){
+    .msg{
+        max-width:85%;
+        font-size:13px;
+    }
+}
+
+/* USER MESSAGE */
+.user{
+    background:#00c6ff;
+    color:black;
+    margin-left:auto;
+}
+
+/* ADMIN MESSAGE */
+.admin{
+    background:rgba(255,255,255,0.2);
+}
+
+/* INPUT AREA */
+
+.input-box{
+    display:flex;
+    padding:10px;
+    background:rgba(0,0,0,0.6);
+    position:sticky;
+    bottom:0;
+}
+
+.input-box input{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+}
+
+.input-box button{
+    margin-left:8px;
+    padding:10px 14px;
+    border:none;
+    border-radius:10px;
+    background:#00c6ff;
+    cursor:pointer;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <a href="/help">← Back</a>
+</div>
+
+<div class="chat-container">
+
+    <div style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.1); text-align:center;">
+    <b>Support Chat</b><br>
+    <span style="font-size:12px; opacity:0.7;">
+        Have a question? Chat with us here 👇
+    </span>
+</div>
+
+    <!-- MESSAGES -->
+    <div class="messages" id="messages">
+
+    {% if messages %}
+        {% for m in messages %}
+            <div class="msg {% if m.sender == 'user' %}user{% else %}admin{% endif %}">
+                {{ m.message }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div style="text-align:center; opacity:0.6; margin-top:50px;">
+            Start conversation with support
+        </div>
+    {% endif %}
+
+</div>
+
+    <!-- INPUT -->
+    <div class="input-box">
+        <input type="text" id="msg" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+</div>
+
+<script>
+
+function sendMessage(){
+
+    let message = document.getElementById("msg").value;
+
+    if(!message.trim()){
+        return;
+    }
+
+    fetch("/send_support_message", {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            message: message
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.status === "success"){
+            location.reload();
+        }
+    });
+
+}
+let box = document.getElementById("messages");
+box.scrollTop = box.scrollHeight;
+</script>
+
+
+
+<script>
+document.getElementById("msg").addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>

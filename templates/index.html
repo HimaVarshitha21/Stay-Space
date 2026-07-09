@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>StaySpace</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+min-height:100vh;
+
+background:
+linear-gradient(rgba(10,15,40,0.75), rgba(10,15,40,0.90)),
+url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920')
+no-repeat center center/cover;
+
+color:white;
+}
+
+.hero{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+padding:20px;
+}
+
+.logo{
+font-size:52px;
+font-weight:700;
+margin-bottom:10px;
+background: linear-gradient(45deg,#6a5cff,#00c6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.tagline{
+font-size:20px;
+opacity:0.95;
+margin-bottom:30px;
+max-width:500px;
+}
+
+.features{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+margin-bottom:40px;
+gap:20px;
+}
+
+.feature{
+background: rgba(255,255,255,0.15);
+backdrop-filter: blur(25px);
+padding:18px 25px;
+border-radius:15px;
+width:220px;
+font-weight:500;
+box-shadow:0 8px 25px rgba(0,0,0,0.4);
+}
+
+.btn{
+padding:14px 28px;
+margin:10px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+transition:0.3s;
+min-width:150px;
+text-decoration:none;
+display:inline-block;
+}
+
+.primary{
+background: linear-gradient(45deg,#6a5cff,#00c6ff);
+color:white;
+}
+
+.secondary{
+background: rgba(255,255,255,0.85);
+color:#333;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="logo">StaySpace</div>
+
+<div class="tagline">
+Find • Post • Connect — Your Property Journey Starts Here
+</div>
+
+<div class="features">
+
+<div class="feature">🏠 Buy & Sell Properties Easily</div>
+<div class="feature">📸 Post Listings in Minutes</div>
+<div class="feature">🔐 Verified Owners & Listings</div>
+<div class="feature">📍 Find Nearby Homes Instantly</div>
+
+</div>
+
+
+<a href="/signup" class="btn primary">Get Started</a>
+<a href="/login" class="btn secondary">Login</a>
+
+</div>
+
+</body>
+</html>

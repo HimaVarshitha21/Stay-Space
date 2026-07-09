@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Help Center</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:
+    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
+    no-repeat center/cover;
+    color:white;
+}
+
+/* TOP */
+.topbar{
+    height:60px;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    background: rgba(0,0,0,0.6);
+}
+
+/* MAIN */
+.container{
+    max-width:600px;
+    margin:40px auto;
+    padding:20px;
+}
+
+/* CARD */
+.card{
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+/* TITLE */
+.title{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+/* FAQ */
+.faq{
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.faq-item{
+    padding:12px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.faq-item:hover{
+    background: rgba(255,255,255,0.05);
+}
+
+.faq-q{
+    font-weight:500;
+}
+
+.faq-a{
+    margin-top:10px;
+    font-size:14px;
+    line-height:1.6;
+    opacity:0.85;
+    display:none;
+}
+
+/* BUTTON */
+.btn{
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    width:100%;
+    border-radius:12px;
+    background: rgba(255,255,255,0.1);
+    color:white;
+    cursor:pointer;
+}
+
+.report-box{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.report-content{
+    width:350px;
+    padding:20px;
+    border-radius:15px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.report-title{
+    font-size:18px;
+    font-weight:600;
+}
+
+.report-content textarea{
+    height:100px;
+    border:none;
+    border-radius:10px;
+    padding:10px;
+    resize:none;
+    outline:none;
+}
+
+.report-actions{
+    display:flex;
+    justify-content:space-between;
+}
+
+.report-actions button{
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-box{
+    width:300px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    text-align:center;
+}
+
+.modal button{
+    margin-top:10px;
+    padding:8px 12px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.modal input, .modal select{
+    width:100%;
+    padding:8px;
+    margin-top:10px;
+    border-radius:6px;
+    border:none;
+}
+
+.full-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+/* same style as Report button */
+.full-btn{
+    background:rgba(255,255,255,0.1);
+    color:white;
+}
+
+/* delete special color */
+.delete-btn{
+    background:linear-gradient(255, 255, 255, 0.1);
+    color:white;
+}
+#reason{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    font-size:14px;
+
+    background:rgba(255,255,255,0.08);
+    color:white;
+
+    backdrop-filter:blur(10px);
+}
+
+/* dropdown options */
+#reason option{
+    background:#1a1f3a;
+    color:white;
+}
+
+#reason:focus{
+    border:1px solid #4facfe;
+    box-shadow:0 0 8px rgba(79,172,254,0.5);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+    <a href="/profile" style="color:#00c6ff;">← Back</a>
+</div>
+
+<div class="container">
+
+    <!-- QUICK HELP -->
+    <div class="card">
+
+    <div class="title">Quick Help</div>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Can't upload property?</div>
+        <div class="faq-a">
+            If you are unable to upload a property, first check that all required fields such as location, price, and description are filled correctly. 
+            Make sure you have uploaded at least one image, as properties without images may not be accepted. 
+            Also check your internet connection, as slow or unstable networks can interrupt uploads. 
+            If the issue still continues, try refreshing the page or logging out and logging back in.
+        </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Chat not working?</div>
+        <div class="faq-a">
+            If the chat feature is not working, ensure that you are logged in and have an active internet connection. 
+            Try refreshing the page or reopening the chat window. 
+            Sometimes delays can occur due to server response time. 
+            If messages are not sending or loading, please wait a few seconds and try again. 
+            If the problem persists, report the issue through the Help Center.
+        </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Edit profile issue?</div>
+        <div class="faq-a">
+            If you are facing issues while editing your profile, check that all fields are entered correctly and no invalid data is submitted. 
+            Ensure your image size is within allowed limits when uploading a profile picture. 
+            If changes are not saving, try refreshing the page and submitting again. 
+            If the issue still exists, you can report it using the "Report Problem" option in this page.
+        </div>
+    </div>
+
+</div>
+
+    <!-- FAQ -->
+    <div class="card">
+
+    <div class="title">FAQs</div>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">How to add property?</div>
+        <div class="faq-a">
+            To add a property, go to the home page and click on the "Add Property" option. 
+            You will be asked to fill in important details such as location, price, area, and description. 
+            Make sure to upload clear images of your property, as listings with images get better visibility. 
+            Once all the details are filled correctly, click on submit. Your property will be listed and visible to other users.
+        </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">How to delete property?</div>
+        <div class="faq-a">
+            To delete a property, go to your profile page and navigate to "My Listings". 
+            You will see all the properties you have added. Click on the delete icon next to the property 
+            you want to remove. Once deleted, the property will no longer be visible to other users. 
+            Please note that this action cannot be undone.
+        </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">How to contact owner?</div>
+        <div class="faq-a">
+            To contact a property owner, open the property you are interested in and click on the "Chat" button. 
+            This will open a messaging interface where you can directly communicate with the owner. 
+            You can ask questions, negotiate price, or request more details about the property. 
+            All conversations are private and secure within the platform.
+        </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Why my listing not visible?</div>
+        <div class="faq-a">
+            If your listing is not visible, it may be due to incomplete details or missing images. 
+            Ensure that all required fields are filled correctly and that at least one image is uploaded. 
+            Sometimes, there might be a slight delay in displaying new listings. 
+            If the issue persists, try refreshing the page or contact support for assistance.
+        </div>
+    </div>
+
+</div>
+
+<div class="card danger">
+
+    <h3>Delete Account</h3>
+    <p>This action is permanent and cannot be undone.</p>
+
+    <button class="full-btn delete-btn" onclick="startDelete()">
+        Delete My Account
+    </button>
+
+</div>
+
+    <!-- REPORT -->
+    <div class="card">
+        <div class="title">Report Issue</div>
+
+        <button class="btn" onclick="openReport()">Report a Problem</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="card">
+        <div class="title">Contact Support system</div>
+        <button class="btn" onclick="window.location.href='/support'">
+     contact support
+</button>
+    </div>
+
+</div>
+
+
+<div id="reportBox" class="report-box">
+
+    <div class="report-content">
+
+        <div class="report-title">Report Issue</div>
+
+        <textarea id="reportText" placeholder="Describe your problem clearly..."></textarea>
+
+        <div class="report-actions">
+            <button type="button" onclick="submitReport()">Submit</button>
+            <button onclick="closeReport()">Cancel</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="successMsg" style="
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: lightgreen;
+    display: none;
+    z-index: 9999;
+">
+    Issue submitted successfully!
+</div>
+
+<div id="deleteModal" class="modal">
+
+    <div class="modal-box">
+
+        <!-- STEP 1 -->
+        <div id="step1">
+            <h3>Are you sure?</h3>
+            <p>Do you really want to delete your account?</p>
+            <button onclick="nextStep(2)">Yes, Continue</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="step2" style="display:none;">
+            <h3>Why are you leaving?</h3>
+
+            <select id="reason">
+                <option>App not useful</option>
+                <option>Bugs / Not working properly</option>
+                <option>Too many ads</option>
+                <option>Slow performance</option>
+                <option>Privacy concerns</option>
+                <option>Found a better app</option>
+                <option>Temporary use only</option>
+                <option>Hard to use / UI confusing</option>
+                <option>Not enough features</option>
+                <option>Other</option>
+            </select>
+
+            <button onclick="nextStep(3)">Next</button>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="step3" style="display:none;">
+            <h3>Enter Password</h3>
+
+            <input type="password" id="deletePassword" placeholder="Enter password">
+
+            <button onclick="deleteAccount()">Delete Account</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+
+function toggleFAQ(el){
+
+    const all = document.querySelectorAll(".faq-a");
+
+    all.forEach(a => {
+        if(a !== el.querySelector(".faq-a")){
+            a.style.display = "none";
+        }
+    });
+
+    const answer = el.querySelector(".faq-a");
+
+    answer.style.display =
+        answer.style.display === "block" ? "none" : "block";
+}
+
+
+function openReport(){
+    document.getElementById("reportBox").style.display = "flex";
+}
+
+function closeReport(){
+    document.getElementById("reportBox").style.display = "none";
+}
+
+function submitReport(){
+
+    const text = document.getElementById("reportText").value.trim();
+
+    if(text === ""){
+        alert("Please enter your issue");
+        return;
+    }
+
+    fetch("/report_issue", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ issue: text })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+    if(data.status === "success"){
+        alert("Report submitted successfully!");
+        closeReport();
+        document.getElementById("reportText").value = "";
+    }else{
+        alert("Error: " + (data.msg || "Something went wrong"));
+    }
+
+})
+    .catch(err => {
+        alert("Something went wrong");
+    });
+}
+
+
+</script>
+
+<script>
+function startDelete(){
+    document.getElementById("deleteModal").style.display = "flex";
+}
+
+function closeModal(){
+    document.getElementById("deleteModal").style.display = "none";
+
+    // reset steps
+    document.getElementById("step1").style.display = "block";
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "none";
+}
+
+function nextStep(step){
+    document.getElementById("step1").style.display = "none";
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "none";
+
+    document.getElementById("step"+step).style.display = "block";
+}
+
+function deleteAccount(){
+
+    let password = document.getElementById("deletePassword").value;
+    let reason = document.getElementById("reason").value;
+
+    if(!password){
+        alert("Enter password");
+        return;
+    }
+
+    fetch("/delete_account", {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:"password="+encodeURIComponent(password)+"&reason="+encodeURIComponent(reason)
+    })
+    .then(res=>res.text())
+    .then(data=>{
+        if(data.includes("Wrong password")){
+            alert("Wrong password!");
+        } else {
+            alert("Account deleted successfully");
+            window.location.href="/login";
+        }
+    });
+}
+</script>
+
+</body>
+</html>
