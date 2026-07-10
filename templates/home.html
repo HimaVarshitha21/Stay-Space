@@ -18,7 +18,6 @@ padding-top:90px;
 padding-bottom:100px;
 }
 
-/* KEEP EVERYTHING SAME */
 a{
 text-decoration:none;
 color:inherit;
@@ -30,7 +29,7 @@ top:15px;
 left:50%;
 transform:translateX(-50%);
 width:95%;
-height:78px;
+height:74px;
 padding:0 24px;
 display:flex;
 justify-content:space-between;
@@ -43,7 +42,7 @@ z-index:1000;
 }
 
 .logo{
-font-size:32px;
+font-size:36px;
 font-weight:700;
 letter-spacing:.5px;
 background:linear-gradient(45deg,#6a5cff,#00c6ff);
@@ -90,37 +89,43 @@ font-size:14px;
 margin-left:5px;
 }
 
-/* SEARCH */
 .search-box{
 display:block;
-width:92%;
-height:58px;
-margin:0 auto 30px auto;
-padding:0 22px;
+width:94%;
+height:60px;
+margin:0 auto 28px;
+padding:0 24px;
+border:none;
+border-radius:35px;
 font-size:17px;
 color:white;
-border:none;
-border-radius:30px;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(15px);
+background:rgba(255,255,255,.13);
+backdrop-filter:blur(18px);
+box-shadow:0 8px 20px rgba(0,0,0,.25);
 outline:none;
+transition:.25s;
+}
+
+.search-box:focus{
+background:rgba(255,255,255,.18);
+box-shadow:0 0 0 3px rgba(0,198,255,.2);
 }
 
 .search-box::placeholder{
 color:#d8d8d8;
 }
 
-/* CARD */
 .card{
-background: rgba(255,255,255,0.08);
-backdrop-filter: blur(20px);
-border-radius:22px;
-padding:15px;
-margin:20px auto;
-width:88%;
-cursor:pointer;
-transition:0.3s;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+width:92%;
+background:rgba(255,255,255,.09);
+backdrop-filter:blur(22px);
+border-radius:24px;
+overflow:hidden;
+padding:16px;
+margin:24px auto;
+box-shadow:0 15px 35px rgba(0,0,0,.30);
+transition:.3s;
 }
 
 .card:hover{
@@ -128,14 +133,13 @@ transform:translateY(-5px);
 }
 
 .card img{
+height:240px;
 width:100%;
-height:180px;
 object-fit:cover;
-border-radius:16px;
-margin-bottom:10px;
+border-radius:18px;
+margin-bottom:14px;
 }
 
-/* NEW SMALL TAG STYLE */
 .badge{
 display:inline-block;
 padding:5px 10px;
@@ -145,7 +149,6 @@ background: linear-gradient(45deg,#6a5cff,#00c6ff);
 margin-bottom:8px;
 }
 
-/* BOTTOM NAV */
 .bottom-nav{
 position:fixed;
 bottom:15px;
@@ -176,144 +179,95 @@ position:relative;
 top:-3px;
 }
 
-.floating-btn{
-position:fixed;
-bottom:105px;
-right:20px;
-width:72px;
-height:72px;
-border-radius:50%;
-background:linear-gradient(45deg,#6a5cff,#00c6ff);
-display:flex;
-justify-content:center;
-align-items:center;
-box-shadow:0 12px 25px rgba(0,0,0,.45);
-transition:.25s;
-}
-
-.floating-btn:hover{
-transform:scale(1.1);
-}
-
-/* 🔵 BLUE DOT */
 .nav-item{
-    position: relative;  /* REQUIRED */
+    position: relative;
 }
 
 .dot{
     position:absolute;
     top:6px;
     right:8px;
-
     width:8px;
     height:8px;
-
     background:#00c6ff;
     border-radius:50%;
-
     box-shadow:0 0 8px #00c6ff;
+}
+
+.add-btn{
+width:46px;
+height:46px;
+border-radius:50%;
+background:linear-gradient(135deg,#6a5cff,#00c6ff);
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 0 18px rgba(0,198,255,.45);
+}
+
+.add-btn:hover{
+transform:scale(1.08);
 }
 
 @media (max-width:768px){
 
 body{
-
 padding-top:100px;
-
 padding-bottom:110px;
-
 }
 
 .topbar{
-
 height:72px;
-
 padding:0 14px;
-
 }
 
 .logo{
-
 font-size:28px;
-
 }
 
 .icon{
 
 width:24px;
-
 height:24px;
-
 }
 
 .nav-item{
-
 width:44px;
-
 height:44px;
-
 }
 
 .search-box{
-
 width:94%;
-
 height:52px;
-
 font-size:16px;
-
 }
 
 .card{
-
-width:95%;
-
-padding:18px;
-
+width:96%;
+padding:16px;
+margin:18px auto;
 }
 
 .card img{
-
-height:220px;
-
+height:240px;
 }
 
 .card h3{
-
-font-size:22px;
-
+font-size:21px;
+margin:8px 0;
 }
 
 .card p{
-
 font-size:16px;
-
 }
 
 .bottom-nav{
-
 height:72px;
-
-}
-
-.floating-btn{
-
-width:65px;
-
-height:65px;
-
-bottom:92px;
-
-right:18px;
-
 }
 
 .logout-btn{
-
 display:none;
-
 }
-
 }
 
 </style>
@@ -346,7 +300,6 @@ display:none;
   {% endif %}
 {% endwith %}
 
-<!-- TOP NAV -->
 <div class="topbar">
 <div class="logo">StaySpace</div>
 
@@ -374,16 +327,6 @@ display:none;
 </div>
 
 
-<a href="/notifications" class="nav-item">
-    <svg class="icon" viewBox="0 0 24 24">
-        <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z"/>
-    </svg>
-
-    {% if unread_notifications > 0 %}
-        <span class="dot"></span>
-    {% endif %}
-</a>
-
 <a href="/visit_requests" class="nav-item" style="position:relative;">
 
 <svg class="icon" viewBox="0 0 24 24">
@@ -410,12 +353,14 @@ display:none;
 </div>
 </div>
 
-<!-- SEARCH -->
 <form method="GET" action="/home">
-<input class="search-box" name="search" placeholder="Search properties..." value="{{ search }}">
+<input
+class="search-box"
+name="search"
+placeholder="Search by city, area, property or user..."
+value="{{ search }}">
 </form>
 
-<!-- PROPERTIES -->
 <div>
 
 {% if properties %}
@@ -423,32 +368,31 @@ display:none;
       
     <div class="card" onclick="location.href='/view/{{ p.id}}'">
 
-        <!-- ✅ FIXED IMAGE -->
         {% if p.image %}
             <img src="/{{ p.image }}">
         {% else %}
             <img src="https://via.placeholder.com/400x200?text=No+Image">
         {% endif %}
 
-        <!-- BADGE -->
         {% if p.propertyType and p.listingType %}
         <div class="badge">
             {{ p.propertyType|upper }} • {{ p.listingType|upper }}
         </div>
         {% endif %}
 
-        <!-- LOCATION -->
-        <h3>{{ p.area }}, {{ p.city }}</h3>
+        <h3 style="margin:8px 0 5px;font-size:24px;">
 
-        <!-- PRICE -->
-        <p>
-        <b>
+        {{ p.area }}, {{ p.city }}
+
+        </h3>
+
+        <p style="font-size:24px;font-weight:700;color:#00d4ff;margin:10px 0;">
+
         ₹ {{ "{:,}".format(p.price|int) if p.price else "N/A" }}
-        </b>
+
         </p>
 
-        <!-- EXTRA INFO -->
-        <p style="font-size:13px;opacity:0.8;">
+        <p style="font-size:15px;opacity:.85;line-height:1.7;">
             {{ p.size if p.size else "" }}
             {{ " • " + p.facing if p.facing else "" }}
         </p>
@@ -462,7 +406,6 @@ display:none;
 
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav">
 
 <a href="/home" class="nav-item">
@@ -483,8 +426,19 @@ display:none;
     {% endif %}
 </a>
 
-<a href="/listing" class="nav-item">
-<span class="plus-icon">+</span>
+<a href="/listing" class="nav-item add-btn">
+<svg
+class="icon"
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 24 24"
+fill="none"
+stroke="white"
+stroke-width="2.5"
+stroke-linecap="round"
+stroke-linejoin="round">
+<path d="M12 5V19"/>
+<path d="M5 12H19"/>
+</svg>
 </a>
 
 <a href="/notifications" class="nav-item">
@@ -506,26 +460,6 @@ display:none;
 
 </div>
 
-<!-- FLOATING BUTTON -->
-<a href="/listing" class="floating-btn">
-
-<svg xmlns="http://www.w3.org/2000/svg"
-width="34"
-height="34"
-viewBox="0 0 24 24"
-fill="none"
-stroke="white"
-stroke-width="2.8"
-stroke-linecap="round">
-
-<path d="M12 5v14"/>
-
-<path d="M5 12h14"/>
-
-</svg>
-
-</a>
-
 <script>
 setTimeout(() => {
     const flash = document.getElementById("flash-container");
@@ -537,7 +471,7 @@ setTimeout(() => {
             flash.remove();
         }, 500);
     }
-}, 2500); // ⏱️ 2.5 seconds
+}, 2500);
 
 // redirects
 function openUser(username){

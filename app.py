@@ -691,7 +691,7 @@ def send_message(property_id):
     # 
     # MESSAGE CHECK
     if not text:
-        return redirect(f"/chat/{receiver_user.username}/{property_id}")
+        return redirect(f"/chat/{receiver_user.username}")
 
     # SAVE MESSAGE
     msg = Message(
@@ -782,8 +782,8 @@ def inbox():
 # CHAT
 # ================================
 
-@app.route("/chat/<username>/<int:property_id>")
-def chat(username, property_id):
+@app.route("/chat/<username>")
+def chat(username):
 
     if "user" not in session:
         return redirect("/login")
@@ -851,8 +851,6 @@ def chat(username, property_id):
         (Message.sender == receiver) &
         (Message.receiver == sender)
     )
-    ).filter(
-    Message.property_id == property_id
     )
 
     if cleared_at:
@@ -915,7 +913,6 @@ def chat(username, property_id):
         receiver=receiver_username,
         receiver_name=receiver_user.username,
         receiver_user=receiver_user,
-        property_id=property_id,
         time_ago=time_ago,
         is_blocked=is_blocked,
         is_restricted=is_restricted,
