@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Create Account - StaySpace</title>
 
 <style>
@@ -40,6 +42,51 @@ color:#222;
 font-size:15px;
 outline:none;
 }
+.password-box{
+
+position:relative;
+
+display:flex;
+
+align-items:center;
+
+}
+
+.password-box input{
+
+padding-right:50px;
+
+}
+
+.eye-btn{
+
+position:absolute;
+
+right:15px;
+
+background:none;
+
+border:none;
+
+cursor:pointer;
+
+color:#555;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:0;
+
+}
+
+.eye-btn:hover{
+
+color:#000000;
+
+}
 
 .btn{
 width:100%;
@@ -64,12 +111,95 @@ color:#00ffcc;
 margin-top:10px;
 font-size:14px;
 }
+.hint{
+
+display:block;
+
+text-align:left;
+
+margin-top:6px;
+
+font-size:13px;
+
+color:#ff7070;
+
+}
+
+.password-hint{
+
+display:none;
+
+text-align:left;
+
+font-size:13px;
+
+margin-top:8px;
+
+color:#ff6b6b;
+
+line-height:1.4;
+
+}
+
+input:invalid{
+border:2px solid transparent;
+}
+
+input:focus{
+border:2px solid #00c6ff;
+}
+
+@media(max-width:768px){
+
+.card{
+
+width:92%;
+
+padding:28px;
+
+border-radius:18px;
+
+}
+
+h3{
+
+font-size:32px;
+
+margin-bottom:20px;
+
+}
+
+input{
+
+font-size:18px;
+
+padding:18px;
+
+margin-top:15px;
+
+}
+
+.btn{
+
+padding:18px;
+
+font-size:19px;
+
+}
+
+.hint{
+
+font-size:15px;
+
+}
+
+}
 </style>
 </head>
 
 <body>
 
-<form method="POST">
+<form method="POST" id="signupForm" novalidate>
 
 <div class="card">
 
@@ -81,11 +211,96 @@ font-size:14px;
 
 <input name="firstName" placeholder="First Name" required>
 <input name="lastName" placeholder="Last Name" required>
-<input name="mobile" placeholder="Mobile Number" required>
-<input name="email" placeholder="Email" required>
+<input
+type="tel"
+name="mobile"
+id="mobile"
+placeholder="Mobile Number"
+maxlength="10"
+pattern="[6-9]{1}[0-9]{9}"
+inputmode="numeric"
+required>
 
-<input type="password" name="password" placeholder="Password" required>
-<input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+<small id="mobileError" class="hint"></small>
+<input
+type="email"
+name="email"
+id="email"
+placeholder="Email Address"
+required>
+
+<small id="emailError" class="hint"></small>
+
+<div class="password-box">
+
+<input
+type="password"
+name="password"
+id="password"
+placeholder="Password"
+required>
+
+<button type="button" class="eye-btn" onclick="togglePassword('password',this)">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+width="22"
+height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round">
+
+<path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/>
+
+<circle cx="12" cy="12" r="3"/>
+
+</svg>
+
+</button>
+
+</div>
+
+<small id="passwordHint" class="password-hint">
+
+Password must be at least 8 characters and include one uppercase letter, one lowercase letter, one number and one special character.
+
+</small>
+<div class="password-box">
+
+<input
+type="password"
+name="confirmPassword"
+id="confirmPassword"
+placeholder="Confirm Password"
+required>
+
+<button type="button"
+class="eye-btn"
+onclick="togglePassword('confirmPassword',this)">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+width="22"
+height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round">
+
+<path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/>
+
+<circle cx="12" cy="12" r="3"/>
+
+</svg>
+
+</button>
+
+</div>
+
+<small id="confirmError" class="hint"></small>
 
 <button class="btn" type="submit">Create Account</button>
 
@@ -96,6 +311,118 @@ Already have account? <a href="/login" style="color:#00c6ff;">Login</a>
 </div>
 
 </form>
+<script>
+
+const mobile=document.getElementById("mobile");
+
+mobile.addEventListener("input",function(){
+
+this.value=this.value.replace(/\D/g,"");
+
+if(this.value.length>10){
+
+this.value=this.value.slice(0,10);
+
+}
+
+if(this.value.length!=10){
+
+mobileError.innerHTML="Mobile number must contain exactly 10 digits.";
+
+}else{
+
+mobileError.innerHTML="";
+
+}
+
+});
+
+
+const email=document.getElementById("email");
+
+email.addEventListener("input",function(){
+
+const regex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(regex.test(this.value)){
+
+emailError.innerHTML="";
+
+}else{
+
+emailError.innerHTML="Enter a valid email address.";
+
+}
+
+});
+
+
+const password=document.getElementById("password");
+
+const regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+password.addEventListener("focus",function(){
+
+passwordHint.style.display="block";
+
+});
+
+password.addEventListener("blur",function(){
+
+if(regex.test(password.value))
+
+passwordHint.style.display="none";
+
+});
+
+password.addEventListener("input",function(){
+
+if(regex.test(password.value)){
+
+passwordHint.style.display="none";
+
+}else{
+
+passwordHint.style.display="block";
+
+}
+
+});
+
+
+const confirm=document.getElementById("confirmPassword");
+
+confirm.addEventListener("input",function(){
+
+if(confirm.value!==password.value){
+
+confirmError.innerHTML="Passwords do not match.";
+
+}else{
+
+confirmError.innerHTML="";
+
+}
+
+});
+
+function togglePassword(id,button){
+
+const input=document.getElementById(id);
+
+if(input.type==="password"){
+
+input.type="text";
+
+}else{
+
+input.type="password";
+
+}
+
+}
+
+</script>
 
 </body>
 </html>

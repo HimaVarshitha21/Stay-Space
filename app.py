@@ -270,10 +270,9 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        session["user"] = mobile
-        session["username"] = username
+        flash("Account created successfully! Please login to continue.", "success")
 
-        return redirect("/home")
+        return redirect("/login")
 
     return render_template("signup.html")
 

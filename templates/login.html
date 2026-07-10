@@ -1,122 +1,470 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Login - StaySpace</title>
 
 <style>
 
-body{
+*{
 margin:0;
-font-family:'Segoe UI', sans-serif;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
 min-height:100vh;
+
 display:flex;
 justify-content:center;
 align-items:center;
 
+padding:20px;
+
 background:
-linear-gradient(rgba(10,15,40,0.75), rgba(10,15,40,0.90)),
+linear-gradient(rgba(10,15,40,.75),rgba(10,15,40,.90)),
 url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
-no-repeat center center/cover;
+center center/cover no-repeat;
+
 }
 
 /* CARD */
+
 .card{
-background: rgba(255,255,255,0.15);
-backdrop-filter: blur(25px);
-padding:45px;
+
+width:100%;
+max-width:460px;
+
+padding:40px;
+
 border-radius:24px;
-box-shadow:0 20px 60px rgba(0,0,0,0.6);
-text-align:center;
-width:340px;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(25px);
+
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+
 color:white;
+
 }
 
 /* LOGO */
+
 .logo{
-font-size:36px;
+
+font-size:48px;
+
 font-weight:700;
-margin-bottom:10px;
-background: linear-gradient(45deg,#6a5cff,#00c6ff);
+
+text-align:center;
+
+margin-bottom:30px;
+
+background:linear-gradient(45deg,#6a5cff,#00c6ff);
+
 -webkit-background-clip:text;
+
 -webkit-text-fill-color:transparent;
+
 }
 
-/* INPUTS */
-input{
-width:100%;
-padding:14px;
-margin-top:15px;
-border:none;
-border-radius:12px;
-background: rgba(255,255,255,0.85);
-color:#222;
-font-size:15px;
-outline:none;
-}
+/* FLASH */
 
-/* BUTTON */
-.btn{
-width:100%;
-padding:14px;
-margin-top:20px;
-border:none;
-border-radius:12px;
-cursor:pointer;
+.flash{
+
+padding:12px;
+
+border-radius:10px;
+
+margin-bottom:20px;
+
+text-align:center;
+
 font-weight:600;
-font-size:15px;
-background: linear-gradient(45deg,#6a5cff,#00c6ff);
-color:white;
+
+background:#d4edda;
+
+color:#155724;
+
 }
 
 /* ERROR */
+
 .error{
-color:#ff6b6b;
-margin-top:10px;
-font-size:14px;
+
+margin-bottom:18px;
+
+padding:12px;
+
+background:#ff4d4d22;
+
+border:1px solid #ff4d4d;
+
+border-radius:10px;
+
+color:#ffb3b3;
+
 }
 
-/* LINK */
-.link{
-margin-top:15px;
+/* INPUT GROUP */
+
+.input-group{
+
+position:relative;
+
+margin-bottom:20px;
+
+}
+
+.input-group input{
+
+width:100%;
+
+padding:17px 50px 17px 50px;
+
+border:none;
+
+border-radius:14px;
+
+font-size:17px;
+
+outline:none;
+
+background:rgba(255,255,255,.9);
+
+}
+
+/* LEFT ICON */
+
+.left-icon{
+
+position:absolute;
+
+left:15px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+color:#666;
+
+display:flex;
+
+}
+
+/* EYE BUTTON */
+
+.eye{
+
+position:absolute;
+
+right:15px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+background:none;
+
+border:none;
+
+cursor:pointer;
+
+color:#666;
+
+display:flex;
+
+padding:0;
+
+}
+
+.eye:hover{
+
+color:#00c6ff;
+
+}
+
+input:focus{
+
+box-shadow:0 0 0 3px rgba(0,198,255,.25);
+
+}
+
+/* BUTTON */
+
+.btn{
+
+width:100%;
+
+padding:16px;
+
+font-size:18px;
+
+font-weight:600;
+
+border:none;
+
+border-radius:14px;
+
+cursor:pointer;
+
+background:linear-gradient(45deg,#6a5cff,#00c6ff);
+
+color:white;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+/* LINKS */
+
+.links{
+
+margin-top:22px;
+
+text-align:center;
+
+}
+
+.links a{
+
 display:block;
-color:#eee;
-font-size:14px;
+
+margin-top:12px;
+
+color:white;
+
 text-decoration:none;
+
+font-size:16px;
+
 }
 
-.link:hover{
+.links a:hover{
+
 text-decoration:underline;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.card{
+
+padding:28px;
+
+border-radius:20px;
+
+}
+
+.logo{
+
+font-size:42px;
+
+}
+
+.input-group input{
+
+font-size:18px;
+
+padding:18px 50px;
+
+}
+
+.btn{
+
+font-size:19px;
+
+padding:18px;
+
+}
+
+.links a{
+
+font-size:17px;
+
+}
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<form method="POST">
+<form method="POST" style="width:100%;display:flex;justify-content:center;">
 
 <div class="card">
 
-<div class="logo">StaySpace</div>
+<div class="logo">
+
+StaySpace
+
+</div>
+
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category,message in messages %}
+
+<div class="flash">
+
+{{ message }}
+
+</div>
+
+{% endfor %}
+{% endif %}
+{% endwith %}
 
 {% if error %}
 <div class="error">{{ error }}</div>
 {% endif %}
 
-<!-- SAME FIELD -->
-<input type="text" name="loginId" placeholder="Enter Email or Mobile" required>
+<!-- USER -->
 
-<input type="password" name="password" placeholder="Enter Password" required>
+<div class="input-group">
 
-<button class="btn" type="submit">Login</button>
+<div class="left-icon">
 
-<a href="#" class="link">Forgot Password?</a>
+<svg xmlns="http://www.w3.org/2000/svg"
+width="22"
+height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
 
-<a href="/signup" class="link">New user? Create account</a>
+<path d="M20 21a8 8 0 0 0-16 0"/>
+
+<circle cx="12" cy="7" r="4"/>
+
+</svg>
+
+</div>
+
+<input
+type="text"
+name="loginId"
+placeholder="Email or Mobile Number"
+required>
+
+</div>
+
+<!-- PASSWORD -->
+
+<div class="input-group">
+
+<div class="left-icon">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+width="22"
+height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<rect x="5" y="11" width="14" height="10" rx="2"/>
+
+<path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+
+</svg>
+
+</div>
+
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Password"
+required>
+
+<button
+type="button"
+class="eye"
+onclick="togglePassword()">
+
+<svg id="eyeIcon"
+xmlns="http://www.w3.org/2000/svg"
+width="22"
+height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+
+<circle cx="12" cy="12" r="3"/>
+
+</svg>
+
+</button>
+
+</div>
+
+<button class="btn">
+
+Login
+
+</button>
+
+<div class="links">
+
+<a href="/forgot_password">
+
+Forgot Password?
+
+</a>
+
+<a href="/signup">
+
+New user? Create Account
+
+</a>
+
+</div>
 
 </div>
 
 </form>
 
+<script>
+
+function togglePassword(){
+
+const password=document.getElementById("password");
+
+if(password.type==="password"){
+
+password.type="text";
+
+}else{
+
+password.type="password";
+
+}
+
+}
+
+</script>
+
 </body>
+
 </html>
