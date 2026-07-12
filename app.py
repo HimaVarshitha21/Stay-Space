@@ -640,8 +640,7 @@ def search_page():
 # ================================
 
 @app.route("/send_message/<int:property_id>", methods=["POST"])
-def send_message():
-    property_id = int(request.form.get("property_id",0))
+def send_message(property_id):
 
     if "user" not in session:
         return redirect("/login")
@@ -853,10 +852,6 @@ def chat(username):
         Message.id.asc()
     ).all()
 
-    # ================================
-    # UPDATE STATUS
-    # ================================
-
     restricted_by_other = UserAction.query.filter_by(
         owner_mobile=receiver,
         target_mobile=sender,
@@ -877,26 +872,15 @@ def chat(username):
 
     db.session.commit()
 
-    # ================================
-    # REPLY MAP
-    # ================================
-
     message_map = {
         msg.id: msg
         for msg in messages
     }
 
-    # ================================
-    # DEBUG
-    # ================================
-
     print("Blocked:", is_blocked)
     print("Restricted:", is_restricted)
-
-    # ================================
-    # TEMPLATE
-    # ================================
-
+    
+    property_id = request.args.get("property_id", 0, type=int)
     return render_template(
         "chat.html",
         messages=messages,
@@ -904,10 +888,11 @@ def chat(username):
         receiver=receiver_username,
         receiver_name=receiver_user.username,
         receiver_user=receiver_user,
+        property_id=property_id,
         time_ago=time_ago,
         is_blocked=is_blocked,
         is_restricted=is_restricted,
-        blocked_by_other=blocked_by_other,
+        blocked_by_other=blocked_by_other
     )
 # ================================
 # BLOCK USER

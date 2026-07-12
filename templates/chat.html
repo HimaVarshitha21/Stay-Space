@@ -544,7 +544,7 @@ unblock to message
 </div>
 {% else %}
 <form method="POST"
-      action="{{ url_for('send_message') }}"
+      action="{{ url_for('send_message',property_id=property_id) }}"
       class="input-area"
       enctype="multipart/form-data">
       <input type="hidden" name="property_id" value="{{ property_id or 0 }}">
