@@ -2,33 +2,33 @@
 <html>
 <head>
 <title>Account</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
     margin:0;
-    font-family:'Segoe UI', sans-serif;
-    background:
-    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
-    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
-    no-repeat center/cover;
+    font-family:'Segoe UI',sans-serif;
+    min-height:100vh;
     color:white;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background:
+    linear-gradient(rgba(10,15,40,.85),rgba(10,15,40,.95)),
+    url("https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920")
+    center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:80px 15px 25px;
+    box-sizing:border-box;
 }
 
-
 .card{
-    width:350px;
-    padding:25px;
-    border-radius:16px;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(12px);
-    text-align:center;
+    width:100%;
+    max-width:420px;
+    border-radius:25px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.15);
+    overflow:hidden;
 }
 
 h2{
@@ -36,46 +36,67 @@ h2{
 }
 
 .info{
-    text-align:left;
-    margin-bottom:10px;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    margin-bottom:18px;
     font-size:15px;
+    line-height:1.5;
+}
+
+.info svg{
+    width:22px;
+    height:22px;
+    stroke:#ffffff;
+    flex-shrink:0;
+    margin-top:2px;
+    opacity:0.9;
+}
+
+.info b{
+    display:block;
+    margin-bottom:2px;
+    font-size:14px;
+    color:#d8e6ff;
 }
 
 .edit-btn{
-    margin-top:15px;
-    width:100%;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    background: rgba(255,255,255,0.1);
-    color:white;
-    cursor:pointer;
+width:100%;
+padding:16px;
+margin-top:15px;
+font-size:17px;
+font-weight:600;
+border:none;
+border-radius:14px;
+background:linear-gradient(45deg,#4e7bff,#00c6ff);
+color:white;
+cursor:pointer;
+transition:.3s;
 }
 
 .edit-btn:hover {
     background: rgba(255, 255, 255b, 0.2);
+    transform: translateY(-2px);
 }
 
-.back-btn{
-    position:absolute;
-    top:20px;
-    left:20px;
-    text-decoration:none;
-    color:#00c6ff;
-    font-size:15px;
-    padding:6px 12px;
-    border-radius:10px;
-    background:rgba(0,0,0,0.4);
-    backdrop-filter:blur(10px);
-    transition:0.3s;
+.edit-btn{
+width:100%;
+padding:16px;
+margin-top:15px;
+font-size:17px;
+font-weight:600;
+border:none;
+border-radius:14px;
+background:linear-gradient(45deg,#4e7bff,#00c6ff);
+color:white;
+cursor:pointer;
+transition:.3s;
 }
 
 .back-btn:hover{
     background:rgba(0,0,0,0.7);
 }
 
-
-/* 🔥 POPUP BACKDROP */
 .popup-overlay{
     position:fixed;
     top:0;
@@ -90,54 +111,42 @@ h2{
     z-index:9999;
 }
 
-/* 🔥 POPUP CARD */
 .popup{
     width:320px;
     padding:25px;
     border-radius:20px;
-
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(25px);
-
     border:1px solid rgba(255,255,255,0.15);
-
     box-shadow:
         0 10px 40px rgba(0,0,0,0.6),
         inset 0 0 15px rgba(255,255,255,0.05);
-
     text-align:center;
     animation: fadeIn 0.3s ease;
 }
 
-/* 🔥 TITLE */
 .popup h3{
     margin-bottom:15px;
     font-weight:600;
 }
 
-/* 🔥 INPUTS */
 .popup input{
     width:100%;
     padding:12px;
     margin:8px 0;
-
     border-radius:10px;
     border:none;
-
     background:rgba(255,255,255,0.1);
     color:white;
-
     outline:none;
     transition:0.3s;
 }
 
-/* 🔥 INPUT FOCUS */
 .popup input:focus{
     background:rgba(255,255,255,0.15);
     box-shadow:0 0 10px rgba(0,198,255,0.3);
 }
 
-/* 🔥 BUTTONS CONTAINER */
 .popup-buttons{
     display:flex;
     justify-content:space-between;
@@ -145,32 +154,36 @@ h2{
     margin-top:15px;
 }
 
-/* 🔥 BUTTON STYLE */
 .popup button{
     flex:1;
     padding:10px;
     border-radius:10px;
     border:none;
     cursor:pointer;
-
     background:rgba(255,255,255,0.1);
     color:white;
-
     transition:0.3s;
 }
 
-/* 🔥 HOVER EFFECT */
 .popup button:hover{
     background:rgba(255,255,255,0.2);
     transform:scale(1.03);
 }
 
-/* 🔥 PRIMARY BUTTON */
 .popup .primary{
     background:linear-gradient(45deg,#6a5cff,#00c6ff);
 }
+.card-header{
+    padding:22px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
 
-/* 🔥 ANIMATION */
+.card-header h2{
+    margin:0;
+    font-size:28px;
+}
+
 @keyframes fadeIn{
     from{
         opacity:0;
@@ -181,48 +194,77 @@ h2{
         transform:translateY(0);
     }
 }
+.section{
+    margin:18px;
+    padding:20px;
+    border-radius:18px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+}
 
-/* 🔥 TOAST */
+.section h3{
+    margin-top:0;
+    margin-bottom:18px;
+}
+
 #toast{
     position:fixed;
     top:30px;
     left:50%;
     transform:translateX(-50%) translateY(-20px);
-
     padding:12px 20px;
     border-radius:12px;
-
     background:rgba(255,255,255,0.1);
     backdrop-filter:blur(15px);
-
     color:white;
     font-size:14px;
-
     opacity:0;
     pointer-events:none;
-
     transition:0.4s ease;
     z-index:99999;
-
     border:1px solid rgba(255,255,255,0.15);
 }
 
-/* SHOW */
 #toast.show{
     opacity:1;
     transform:translateX(-50%) translateY(0);
 }
 
-/* SUCCESS */
 #toast.success{
     box-shadow:0 0 15px rgba(0,255,150,0.4);
 }
 
-/* ERROR */
 #toast.error{
     box-shadow:0 0 15px rgba(255,80,80,0.4);
 }
+@media(max-width:600px){
 
+.card{
+    max-width:100%;
+}
+
+.card-header h2{
+    font-size:22px;
+}
+
+.section{
+    margin:12px;
+}
+
+.info{
+    font-size:15px;
+}
+
+.edit-btn{
+    font-size:16px;
+}
+
+.popup{
+    width:90%;
+    padding:20px;
+}
+
+}
 
 </style>
 
@@ -234,11 +276,46 @@ h2{
 
 <div class="card">
 
-<h2>Account Details</h2>
+<div class="card-header">
+    <h2>Account Profile & Security</h2>
+</div>
 
-<div class="info"><b>UserName:</b> {{ user.username }}</div>
-<div class="info"><b>Email:</b> {{ user.email }}</div>
-<div class="info"><b>Mobile:</b> {{ user.mobile }}</div>
+<div class=""section">
+<h3>Personal Information</h3>
+<div class="info">
+    <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none" stroke-width="2">
+        <path d="M20 21a8 8 0 0 0-16 0"/>
+        <circle cx="12" cy="8" r="4"/>
+    </svg>
+
+    <div>
+        <b>Username</b><br>
+        {{ user.username }}
+    </div>
+</div>
+<div class="info">
+    <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none" stroke-width="2">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <polyline points="3,7 12,13 21,7"/>
+    </svg>
+
+    <div>
+        <b>Email</b><br>
+        {{ user.email }}
+    </div>
+</div>
+<div class="info">
+    <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none" stroke-width="2">
+        <rect x="7" y="2" width="10" height="20" rx="2"/>
+        <circle cx="12" cy="18" r="1"/>
+    </svg>
+
+    <div>
+        <b>Mobile</b><br>
+        {{ user.mobile }}
+    </div>
+</div>
+</div>
 
 <a href="/edit_profile">
     <button class="edit-btn">Edit Profile</button>
