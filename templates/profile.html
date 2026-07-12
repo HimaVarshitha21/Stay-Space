@@ -314,6 +314,18 @@ transition:0.3s ease;
     opacity:1;
 }
 
+.topbar svg{
+    transition:.3s;
+}
+
+.topbar div:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.topbar div:active{
+    transform:scale(.95);
+}
+
 @media (max-width:768px){
 
 .container{
@@ -379,11 +391,32 @@ transition:0.3s ease;
 
     <div style="position:relative;">
 
-    <div onclick="toggleMenu()" style="cursor:pointer; padding:6px;">
-        <svg width="24" height="24" viewBox="0 0 24 24" stroke="white" fill="none">
-            <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2"/>
-        </svg>
-    </div>
+    <div onclick="toggleMenu()" style="
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    cursor:pointer;
+    background:rgba(255,255,255,0.08);
+    transition:0.3s;
+">
+
+    <svg width="34" height="34"
+         viewBox="0 0 24 24"
+         stroke="white"
+         fill="none"
+         stroke-width="2.5"
+         stroke-linecap="round">
+
+        <path d="M4 6h16"/>
+        <path d="M4 12h16"/>
+        <path d="M4 18h16"/>
+
+    </svg>
+
+</div>
 
     <div id="menuBox" style="
         display:none;
