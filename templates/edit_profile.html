@@ -8,170 +8,179 @@
 body{
     margin:0;
     font-family:'Segoe UI',sans-serif;
-
     background:
-    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
+    linear-gradient(rgba(10,15,40,.82),rgba(10,15,40,.92)),
     url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
-    no-repeat center/cover;
-
-    color:white;
-
+    center/cover no-repeat;
     min-height:100vh;
-
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
+    padding:70px 15px 30px;
+    color:white;
+    box-sizing:border-box;
 }
 
-/* CARD */
 .card{
-    width:420px;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,0.12);
-
-    box-shadow:
-        0 10px 40px rgba(0,0,0,0.5),
-        inset 0 0 10px rgba(255,255,255,0.05);
+width:100%;
+max-width:470px;
+padding:32px 26px;
+border-radius:28px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,.12);
+box-shadow:
+0 15px 45px rgba(0,0,0,.45),
+inset 0 0 12px rgba(255,255,255,.05);
 }
 
-/* TITLE */
 h2{
+    margin:0 0 28px;
+    font-size:38px;
     text-align:center;
-    margin-bottom:25px;
+    font-weight:700;
 }
 
-/* INPUTS */
 .input-box{
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .input-box label{
     display:block;
-    margin-bottom:6px;
-    font-size:14px;
-    opacity:0.9;
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight: 600;
+    color:#dfe7ff;
 }
 
-.input-box input,
-.input-box textarea{
+.input-box input,.input-box textarea{
+width:100%;
+padding:15px 16px;
+font-size:15px;
+border-radius:14px;
+background:rgba(255,255,255,.10);
+border:none;
+color:white;
+box-sizing:border-box;
+outline:none;
+transition:.25s;}
 
-    width:100%;
+.input-box textarea{height:95px;resize:none;}
 
-    padding:12px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,0.1);
-
-    color:white;
-
-    outline:none;
-
-    box-sizing:border-box;
-
-    transition:0.3s;
-}
-
-.input-box textarea{
-    resize:none;
-    height:90px;
-}
-
-.input-box input:focus,
-.input-box textarea:focus{
-
+.input-box input:focus,.input-box textarea:focus{
     background:rgba(255,255,255,0.15);
-
     box-shadow:0 0 12px rgba(0,198,255,0.3);
 }
 
-/* BUTTONS */
 .buttons{
     display:flex;
-    gap:10px;
-    margin-top:20px;
+    justify-content: space-between;
+    gap:16px;
+    margin-top:30px;
 }
 
 .btn{
     flex:1;
-
-    padding:12px;
-
+    height:52px;
     border:none;
-
-    border-radius:12px;
-
-    color:white;
-
     cursor:pointer;
-
-    transition:0.3s;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    border-radius:14px;
+    transition:.3s;
 }
 
 .save-btn{
-    background:linear-gradient(45deg,#6a5cff,#00c6ff);
+    background:linear-gradient(90deg,#695CFF,#00C6FF);
 }
 
 .cancel-btn{
-    background:rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
 .btn:hover{
     transform:scale(1.03);
 }
 
-/* BACK BUTTON */
 .back-btn{
-
-    position:absolute;
-
-    top:20px;
-    left:20px;
-
+    position:fixed;
+    top:18px;
+    left:18px;
     text-decoration:none;
-
     color:#00c6ff;
-
     background:rgba(0,0,0,0.4);
-
     padding:8px 14px;
-
     border-radius:10px;
-
     backdrop-filter:blur(10px);
+    z-index: 100;
 }
 
-/* FLASH MESSAGE */
 .flash{
-
-    margin-bottom:15px;
-
+    margin-bottom:18px;
     padding:12px;
-
     border-radius:10px;
-
     text-align:center;
-
     background:rgba(255,80,80,0.15);
-
     border:1px solid rgba(255,80,80,0.4);
-
     color:#ffb3b3;
+}
+
+.change-picture{
+display:inline-block;
+margin-top:12px;
+padding:11px 24px;
+border-radius:12px;
+background:rgba(255,255,255,.1);
+font-size:15px;
+cursor:pointer;
+transition:.25s;
+}
+
+.change-picture:hover{
+background:rgba(255,255,255,.18);
+}
+@media(max-width:600px){
+body{
+padding:55px 14px 20px;
+
+}
+
+.card{
+max-width:100%;
+padding:28px 18px;
+border-radius:24px;
+}
+
+h2{
+font-size:32px;
+}
+
+#profilePreview{
+width:115px !important;
+height:115px !important;
+}
+
+.input-box input,
+.input-box textarea{
+font-size:15px;
+padding:14px;
+}
+
+.buttons{
+flex-direction:row;
+gap:12px;
+}
+
+.btn{
+height:50px;
+font-size:15px;
+}
 }
 
 </style>
 </head>
-
 <body>
 
 <a href="/account" class="back-btn">← Back</a>
@@ -180,7 +189,6 @@ h2{
 
     <h2>Edit Profile</h2>
 
-    <!-- FLASH MESSAGES -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -193,7 +201,6 @@ h2{
 
     <form method="POST" enctype="multipart/form-data">
 
-        <!-- PROFILE IMAGE -->
 <div style="text-align:center; margin-bottom:25px;">
 
     <label for="profileInput" style="cursor:pointer;">
@@ -202,52 +209,26 @@ h2{
             src="{% if user.profile_image %}{{ url_for('static', filename='uploads/' + user.profile_image) }}{% else %}https://cdn-icons-png.flaticon.com/512/149/149071.png{% endif %}"
             id="profilePreview"
 
-            style="
-                width:120px;
-                height:120px;
-
+            style="width:135px;
+                height:135px;
                 border-radius:50%;
-
                 object-fit:cover;
-
-                border:4px solid rgba(255,255,255,0.25);
-
-                box-shadow:0 0 20px rgba(0,198,255,0.3);
-
-                transition:0.3s;
-            "
-        >
-
+                border:5px solid rgba(255,255,255,0.25);
+                box-shadow:0 0 18px rgba(0,198,255,0.35);
+                transition:0.3s;">
     </label>
-
     <br><br>
-
-    <label for="profileInput"
-        style="
-            padding:10px 18px;
-            border-radius:12px;
-
-            background:rgba(255,255,255,0.1);
-
-            cursor:pointer;
-
-            font-size:14px;
-        ">
-        Change Picture
+    <label for="profileInput" class="change-picture">
+    Change Picture
     </label>
-
     <input
         type="file"
         id="profileInput"
         name="profile_image"
-
         accept="image/*"
-
-        style="display:none;"
-    >
+        style="display:none;">
 
 </div>
-
         <div class="input-box">
             <label>Username</label>
             <input type="text"
@@ -263,7 +244,6 @@ h2{
                    value="{{ user.email }}"
                    required>
         </div>
-
         <div class="input-box">
             <label>Mobile</label>
             <input type="text"
@@ -271,33 +251,28 @@ h2{
                    value="{{ user.mobile }}"
                    required>
         </div>
-
         <div class="input-box">
             <label>First Name</label>
             <input type="text"
                    name="first_name"
                    value="{{ user.firstName }}">
         </div>
-
         <div class="input-box">
             <label>Last Name</label>
             <input type="text"
                    name="last_name"
                    value="{{ user.lastName }}">
         </div>
-
         <div class="input-box">
             <label>Location</label>
             <input type="text"
                    name="location"
                    value="{{ user.location }}">
         </div>
-
         <div class="input-box">
             <label>About</label>
             <textarea name="about">{{ user.about }}</textarea>
         </div>
-
         <div class="buttons">
 
             <a href="/account" style="flex:1;">
@@ -306,20 +281,14 @@ h2{
                     Cancel
                 </button>
             </a>
-
             <button type="submit"
                     class="btn save-btn">
                 Save Changes
             </button>
-
         </div>
-
     </form>
-
 </div>
-
 <script>
-
 document.getElementById("profileInput")
 .addEventListener("change", function(event){
 
@@ -335,14 +304,9 @@ document.getElementById("profileInput")
             .src = e.target.result;
 
         };
-
         reader.readAsDataURL(file);
     }
-
 });
-
 </script>
-
-
 </body>
 </html>

@@ -36,18 +36,26 @@ h2{
 }
 
 .info{
-    display:flex;
-    align-items:flex-start;
-    gap:14px;
-    margin-bottom:18px;
-    font-size:15px;
-    line-height:1.5;
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:14px;
+font-size:14px;
+}
+
+.info div{
+line-height:1.2;
+}
+
+.info b{
+font-size:13px;
+margin-bottom:2px;
 }
 
 .info svg{
-    width:22px;
-    height:22px;
-    stroke:#ffffff;
+    width:18px;
+    height:18px;
+    stroke:#d9e3ff;
     flex-shrink:0;
     margin-top:2px;
     opacity:0.9;
@@ -62,36 +70,26 @@ h2{
 
 .edit-btn{
 width:100%;
-padding:16px;
-margin-top:15px;
-font-size:17px;
-font-weight:600;
+height:52px;
 border:none;
-border-radius:14px;
-background:linear-gradient(45deg,#4e7bff,#00c6ff);
+border-radius:12px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.08);
 color:white;
+font-size:16px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin-top:14px;
 cursor:pointer;
-transition:.3s;
+transition:.25s;
 }
 
-.edit-btn:hover {
-    background: rgba(255, 255, 255b, 0.2);
-    transform: translateY(-2px);
+.edit-btn:hover{
+background:rgba(255,255,255,.16);
 }
 
-.edit-btn{
-width:100%;
-padding:16px;
-margin-top:15px;
-font-size:17px;
-font-weight:600;
-border:none;
-border-radius:14px;
-background:linear-gradient(45deg,#4e7bff,#00c6ff);
-color:white;
-cursor:pointer;
-transition:.3s;
-}
 
 .back-btn:hover{
     background:rgba(0,0,0,0.7);
@@ -195,11 +193,11 @@ transition:.3s;
     }
 }
 .section{
-    margin:18px;
-    padding:20px;
-    border-radius:18px;
+    margin:16px;
+    padding:18px;
+    border-radius:16px;
     background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.08);
 }
 
 .section h3{
@@ -244,7 +242,8 @@ transition:.3s;
 }
 
 .card-header h2{
-    font-size:22px;
+    font-size:18px;
+    font-weight: 600;
 }
 
 .section{
@@ -265,14 +264,33 @@ transition:.3s;
 }
 
 }
-
+.back-btn{
+position:fixed;
+top:18px;
+left:18px;
+width:44px;
+height:44px;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.1);
+}
 </style>
 
 </head>
 
 <body>
 
-<a href="/profile" class="back-btn">← Back</a>
+<a href="/profile" class="back-btn">
+
+<svg viewBox="0 0 24 24" width="22" height="22" stroke="#00c6ff" fill="none" stroke-width="2">
+<path d="M15 18l-6-6 6-6"/>
+</svg>
+
+</a>
 
 <div class="card">
 
@@ -280,7 +298,7 @@ transition:.3s;
     <h2>Account Profile & Security</h2>
 </div>
 
-<div class=""section">
+<div class="section">
 <h3>Personal Information</h3>
 <div class="info">
     <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none" stroke-width="2">
@@ -317,12 +335,35 @@ transition:.3s;
 </div>
 </div>
 
+<div class="section">
+
+<h3>Security &amp; Actions</h3>
+
 <a href="/edit_profile">
-    <button class="edit-btn">Edit Profile</button>
+<button class="edit-btn">
+
+<svg viewBox="0 0 24 24" width="18" height="18" stroke="white" fill="none" stroke-width="2">
+<path d="M12 20h9"/>
+<path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/>
+</svg>
+
+<span>Edit Profile</span>
+
+</button>
 </a>
 
-    <button class="edit-btn" onclick="openConfirm()">Change Password</button>
+<button class="edit-btn" onclick="openConfirm()">
 
+<svg viewBox="0 0 24 24" width="18" height="18" stroke="white" fill="none" stroke-width="2">
+<rect x="5" y="11" width="14" height="10" rx="2"/>
+<path d="M8 11V8a4 4 0 118 0v3"/>
+</svg>
+
+<span>Change Password</span>
+
+</button>
+
+</div>
 
 </div>
 <div id="confirmBox" class="popup-overlay" style="display:none;">
