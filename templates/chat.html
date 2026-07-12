@@ -26,21 +26,19 @@ max-width: 380px;
 height: 600px;
 background: rgba(255,255,255,0.08);
 backdrop-filter: blur(25px);
-border-radius:25px;
 display:flex;
 flex-direction:column;
 overflow:hidden;
-position:relative;
 }
 
 .header{
-flex-shrink: 0;
-height: 72px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0px 14px;
-border-bottom:1px solid rgba(255,255,255,0.8);
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 12px;
+    border-bottom:1px solid rgba(255,255,255,.25);
+    flex-shrink:0;
 }
 
 html,body{
@@ -277,7 +275,7 @@ html:hover::-webkit-scrollbar-thumb,body:hover::-webkit-scrollbar-thumb { backgr
 .chat-user{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
     margin-left: 10px;
     cursor:pointer;
 }
@@ -314,7 +312,6 @@ html:hover::-webkit-scrollbar-thumb,body:hover::-webkit-scrollbar-thumb { backgr
     }
     .messages{
         flex: 1;
-        padding: 16px;
         overflow-y: auto;
     }
     .msg{
@@ -322,7 +319,7 @@ html:hover::-webkit-scrollbar-thumb,body:hover::-webkit-scrollbar-thumb { backgr
         font-size: 14px;
     }
     .bottom-area{
-        flex-shrink: 0;
+        margin-top: auto;
         display: flex;
         flex-direction: column;
     }
@@ -331,7 +328,7 @@ html:hover::-webkit-scrollbar-thumb,body:hover::-webkit-scrollbar-thumb { backgr
         width: 100%;
         background: rgba(20,20,30,0.9);
     }
-    .header{padding: 20px;flex-shrink: 0;}
+    .header{padding:0 12px;}
 }
 
 .input-area{
@@ -524,8 +521,7 @@ Clear Chat
 </div>
 {% endif %}
 {% endfor %}
-
-
+</div>
 <div class="bottom-area">
 <div id="replyBox" style="display:none;
 background:rgba(255,255,255,0.1);padding:6px 10px;
@@ -576,7 +572,6 @@ unblock to message
 </button>
 </form>
 {% endif %}
-</div>
 </div>
 <div class="emoji-box" id="emojiBox">
 <div class="emoji-grid" id="emojiGrid"></div>
