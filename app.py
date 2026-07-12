@@ -640,8 +640,8 @@ def search_page():
 # ================================
 
 @app.route("/send_message/<int:property_id>", methods=["POST"])
-def send_message(property_id):
-
+def send_message():
+    property_id = int(request.form.get("property_id",0))
 
     if "user" not in session:
         return redirect("/login")
@@ -654,7 +654,6 @@ def send_message(property_id):
     reply_to = request.form.get("reply_to")
     reply_to = int(reply_to) if reply_to else None
 
-    # 🔥 receiver username from hidden input
     receiver_username = request.form.get("receiver")
 
     receiver_user = User.query.filter_by(username=receiver_username).first()
@@ -681,19 +680,12 @@ def send_message(property_id):
     if blocked:
         return redirect(request.referrer)
 
-    # OPTIONAL PROPERTY
-    property = None
-
     if property_id != 0:
         property = Property.query.get(property_id)
 
-    # EMPT
-    # 
-    # MESSAGE CHECK
     if not text:
         return redirect(f"/chat/{receiver_user.username}")
 
-    # SAVE MESSAGE
     msg = Message(
         sender=sender,
         receiver=receiver,
@@ -705,7 +697,6 @@ def send_message(property_id):
 
     db.session.add(msg)
 
-    # NOTIFICATION
     existing_notification = Notification.query.filter_by(
         user_mobile=receiver,
         type="message",
@@ -916,7 +907,7 @@ def chat(username):
         time_ago=time_ago,
         is_blocked=is_blocked,
         is_restricted=is_restricted,
-        blocked_by_other=blocked_by_other
+        blocked_by_other=blocked_by_other,
     )
 # ================================
 # BLOCK USER
