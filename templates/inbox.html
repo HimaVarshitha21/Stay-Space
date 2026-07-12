@@ -299,8 +299,8 @@ stroke-linejoin="round">
 </div>
 
 <script>
-function openChat(user, property_id){
-    window.location.href = "/chat/" + user+ "/" + property_id;
+function openChat(user){
+    window.location.href = "/chat/" + encodeURIComponent(user);
 }
 </script>
 

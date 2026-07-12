@@ -725,7 +725,7 @@ def send_message(property_id):
 
     db.session.commit()
 
-    return redirect(f"/chat/{receiver_user.username}/{property_id}")
+    return redirect(f"/chat/{receiver_user.username}")
 
 # ================================
 # INBOX
