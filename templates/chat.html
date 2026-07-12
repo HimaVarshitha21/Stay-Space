@@ -299,27 +299,27 @@ html:hover::-webkit-scrollbar-thumb,body:hover::-webkit-scrollbar-thumb { backgr
 
 @media (max-width: 600px){
 
-    body{display:block;margin: 0;}
+    body{margin: 0; overflow: hidden;}
     .chat{
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
+        inset: 0;
         display: flex;
-        flex-direction: column ;
-        overflow: hidden;
+        width: 100%;
+        height: 100dvh;
+        max-width: none;
     }
     .messages{
         flex: 1;
+        min-height: 0;
         overflow-y: auto;
+        padding: 16px;
     }
     .msg{
         max-width: 80%;
         font-size: 14px;
     }
     .bottom-area{
-        margin-top: auto;
+        flex-shrink: 0;
         display: flex;
         flex-direction: column;
     }
