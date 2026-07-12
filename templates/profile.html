@@ -19,7 +19,6 @@ body{
     color:white;
 }
 
-/* TOP BAR */
 .topbar{
     position:fixed;
     top:0;
@@ -39,14 +38,13 @@ body{
     text-decoration:none;
 }
 
-/* MAIN */
 .container{
-    max-width:500px;
-    margin:80px auto;
-    padding:15px;
+    width: 95%;
+    max-width:700px;
+    margin:90px auto 30px;
+    padding:20px;
 }
 
-/* PROFILE CARD */
 .profile-card{
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(25px);
@@ -55,10 +53,9 @@ body{
     text-align:center;
 }
 
-/* 🔥 STORY RING ANIMATION */
 .avatar-wrapper{
-    width:110px;
-    height:110px;
+    width:140px;
+    height:140px;
     margin:auto;
     padding:3px;
     border-radius:50%;
@@ -80,14 +77,13 @@ body{
     cursor:pointer;
 }
 
-/* TEXT */
-.name{font-size:20px;font-weight:600;}
-.sub{opacity:0.7;font-size:14px;}
+.name{font-size:30px;font-weight:700;}
+.sub{opacity:0.7;font-size:18px;}
 
-/* BUTTONS */
 .btn{
     margin-top:12px;
-    padding:12px;
+    padding:16px;
+    font-size: 18px;
     border-radius:12px;
     border:none;
     width:100%;
@@ -126,26 +122,23 @@ body{
     border:1px solid rgba(255,255,255,0.15);
 }
 
-/* LISTINGS */
-.section{margin-top:30px;font-weight:600;}
+.section{margin-top:35px;font-size:24px;font-weight: 700;}
 
 .property{
     display:flex;
     gap:10px;
     background: rgba(255,255,255,0.08);
-    padding:10px;
-    border-radius:10px;
+    padding:18px;
+    border-radius:18px;
     margin-top:10px;
 }
 
 .property img{
-    width:90px;
-    height:80px;
-    border-radius:10px;
+    width:120px;
+    height:100px;
+    border-radius:14px;
     object-fit:cover;
 }
-
-/* ================= VIEWER ================= */
 
 .viewer{
     position:fixed;
@@ -160,7 +153,6 @@ body{
     justify-content:center;
 }
 
-/* 🔥 BLUR BACKGROUND IMAGE */
 .viewer-bg{
     position:absolute;
     width:100%;
@@ -171,7 +163,6 @@ body{
     transform: scale(1.2);
 }
 
-/* IMAGE */
 .viewer img{
     width:220px;
     height:220px;
@@ -181,7 +172,6 @@ body{
     transition: transform 0.2s ease;
 }
 
-/* CLOSE */
 .close-btn{
     position:absolute;
     top:25px;
@@ -190,7 +180,6 @@ body{
     cursor:pointer;
 }
 
-/* OPTIONS */
 .options{
     display:flex;
     gap:30px;
@@ -234,13 +223,11 @@ body{
     transition:0.3s;
 }
 
-/* HOVER EFFECT */
 .icon:hover{
     opacity:1;
     transform:scale(1.2);
 }
 
-/* OPTIONAL: subtle color feedback */
 .icon:hover{
     stroke:#6a5cff;
 }
@@ -257,8 +244,6 @@ body{
 .menu-item:hover{
     background: rgba(255,255,255,0.1);
 }
-
-/* ===== ADMIN CARD =====*/
 
 .admin-card{
     margin-top:22px;
@@ -343,6 +328,61 @@ body{
     opacity:1;
 }
 
+@media (max-width:768px){
+
+.container{
+    width:100%;
+    padding:20px;
+}
+
+.avatar-wrapper{
+    width:140px;
+    height:140px;
+}
+
+.name{
+    font-size:28px;
+}
+
+.section{
+    font-size:24px;
+}
+
+.property{
+    padding:18px;
+}
+
+.property img{
+    width:120px;
+    height:100px;
+}
+
+.btn{
+    font-size:18px;
+    height:55px;
+}
+
+.admin-card{
+    padding:20px;
+}
+
+.admin-title{
+    font-size:20px;
+}
+
+.admin-sub{
+    font-size:15px;
+}
+
+.topbar{
+    height:65px;
+}
+
+.back{
+    font-size:18px;
+}
+}
+
 </style>
 </head>
 
@@ -353,14 +393,12 @@ body{
 
     <div style="position:relative;">
 
-    <!-- MENU BUTTON -->
     <div onclick="toggleMenu()" style="cursor:pointer; padding:6px;">
         <svg width="24" height="24" viewBox="0 0 24 24" stroke="white" fill="none">
             <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2"/>
         </svg>
     </div>
 
-    <!-- DROPDOWN -->
     <div id="menuBox" style="
         display:none;
         position:absolute;
@@ -375,11 +413,8 @@ body{
         z-index:9999;
     ">
 
-    
-
         <hr style="border-color:rgba(255,255,255,0.1);">
 
-        <!-- LOGOUT -->
         <a href="/account" class="menu-item">Account</a>
         <a href="/help" class="menu-item">Help Center</a>
         <a href="/privacy" class="menu-item">Privacy Policy</a>
@@ -392,9 +427,6 @@ body{
 </div>
 
 <div class="container">
-
-
-    <!-- 🔥 CLEAN PROFILE (NO BOX) -->
 
 <div style="text-align:center; margin-top:20px;">
 
@@ -415,8 +447,6 @@ body{
         {{ user.firstName }} {{ user.lastName }}
     </div>
 
-    <!-- 📍 LOCATION -->
-
     {% if user.location %}
 <div style="
     display:flex;
@@ -424,11 +454,9 @@ body{
     justify-content:center;
     gap:6px;
     opacity:0.8;
-    font-size:14px;
+    font-size:18px;
     margin-top:4px;
 ">
-
-    <!-- 📍 SVG ICON -->
     <svg class="location-icon" viewBox="0 0 24 24" width="16" height="16" stroke="white" fill="none">
         <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" stroke-width="2"/>
         <circle cx="12" cy="10" r="2.5" stroke-width="2"/>
@@ -438,11 +466,10 @@ body{
 </div>
 {% endif %}
 
-<!-- 📝 ABOUT -->
 {% if user.about %}
 <div style="
     margin-top:8px;
-    font-size:14px;
+    font-size:18px;
     opacity:0.75;
     line-height:1.4;
     max-width:300px;
@@ -453,23 +480,19 @@ body{
 </div>
 {% endif %}
 
-    <!-- ✅ LIKES -->
     <div style="opacity:0.7; font-size:14px; margin-top:4px;">
         {{ user.likes if user.likes else 0 }} Likes
     </div>
 
-    <!-- EDIT BUTTON -->
     <div style="margin-top:12px;">
         <a href="/edit_profile">
-            <button class="btn edit" style="width:220px;">
+            <button class="btn edit" style="width:260px;height:55px;">
                 Edit Profile
             </button>
         </a>
     </div>
 
 </div>
-
-    
 
 {% if is_admin %}
 
@@ -501,20 +524,23 @@ body{
 
 <div class="property">
 
-    <!-- CLICKABLE AREA -->
     <a href="/view/{{ p.id }}" 
        style="display:flex; gap:10px; text-decoration:none; color:white; flex:1; align-items:center;">
 
         <img src="{{ p.image if p.image else 'https://via.placeholder.com/100' }}">
 
         <div>
-            <b>{{ p.area }}, {{ p.city }}</b><br>
-            ₹ {{ p.price }}
+            <div style="font-size:22px;font-weight:700;">
+    {{ p.area }}, {{ p.city }}
+</div>
+
+<div style="font-size:19px;margin-top:6px;color:#00c6ff;">
+    ₹ {{ p.price }}
+</div>
         </div>
 
     </a>
 
-    <!-- ACTION BUTTONS -->
     <div style="display:flex; gap:15px; align-items:center;">
 
         <!-- EDIT -->
@@ -525,7 +551,6 @@ body{
             </svg>
         </a>
 
-        <!-- DELETE -->
         <a href="/delete_property/{{ p.id }}">
             <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none">
                 <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" stroke-width="2"/>
@@ -544,7 +569,6 @@ body{
 
 <div class="property">
 
-    <!-- LEFT SIDE (CLICKABLE) -->
     <a href="/view/{{ p.id }}" 
        style="display:flex; gap:10px; text-decoration:none; color:white; flex:1; align-items:center;">
 
@@ -557,7 +581,6 @@ body{
 
     </a>
 
-    <!-- RIGHT SIDE DELETE -->
     <a href="/unsave/{{ p.id }}" style="display:flex; align-items:center;">
         <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" fill="none">
             <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" stroke-width="2"/>
@@ -578,14 +601,11 @@ let startX = 0, startY = 0;
 let isDragging = false;
 let lastTap = 0;
 
-
 function toggleMenu(){
     const menu = document.getElementById("menuBox");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-
-/* OPEN VIEWER */
 function openViewer(){
 
     const imgSrc = document.querySelector(".avatar-img").src;
@@ -616,7 +636,7 @@ function openViewer(){
 
     const img = document.getElementById("zoomImg");
 
-    /* 🔥 DOUBLE TAP ZOOM */
+
     img.addEventListener("click", function(e){
         const now = Date.now();
         if(now - lastTap < 300){
@@ -626,7 +646,6 @@ function openViewer(){
         lastTap = now;
     });
 
-    /* 🔥 DRAG */
     img.addEventListener("mousedown", (e)=>{
         isDragging = true;
         startX = e.clientX - posX;
@@ -642,7 +661,6 @@ function openViewer(){
 
     document.addEventListener("mouseup", ()=> isDragging=false);
 
-    /* TOUCH DRAG */
     img.addEventListener("touchstart", (e)=>{
         isDragging = true;
         startX = e.touches[0].clientX - posX;
@@ -659,7 +677,6 @@ function openViewer(){
     img.addEventListener("touchend", ()=> isDragging=false);
 }
 
-/* SHARE */
 function shareProfile(){
     const url = window.location.href;
     if(navigator.share){
@@ -670,13 +687,11 @@ function shareProfile(){
     }
 }
 
-/* COPY */
 function copyLink(){
     navigator.clipboard.writeText(window.location.href);
     alert("Copied!");
 }
 
-/* EDIT */
 function editProfile(){
     window.location.href="/edit_profile";
 }

@@ -391,14 +391,16 @@ color:white;
 
 {% if property.images %}
     {% for img in property.images.split(',') %}
-    <img src="/{{ img }}" 
-         class="slide {% if loop.index0 == 0 %}active{% endif %}" 
-         onclick="openImage('/{{ img }}')">
+    <img
+src="{{ url_for('static', filename=img.replace('static/','')) }}"
+class="slide {% if loop.first %}active{% endif %}"
+onclick="openImage(this.src)">
     {% endfor %}
 {% else %}
-    <img src="/{{ property.image }}" 
-         class="slide active" 
-         onclick="openImage('/{{ property.image }}')">
+    <img
+src="{{ url_for('static', filename=property.image.replace('static/','')) }}"
+class="slide active"
+onclick="openImage(this.src)">
 {% endif %}
 
 <button class="prev" onclick="prevSlide()">❮</button>
