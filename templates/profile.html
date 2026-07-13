@@ -41,9 +41,9 @@ body{
 
 .container{
     width: 100%;
-    max-width:900px;
-    margin:90px auto 40px;
-    padding:24px;
+    max-width:100%;
+    margin:85px auto 30px;
+    padding:16px;
     box-sizing: border-box;
 }
 
@@ -56,8 +56,8 @@ body{
 }
 
 .avatar-wrapper{
-    width:165px;
-    height:165px;
+    width:155px;
+    height:155px;
     margin:auto;
     padding:3px;
     border-radius:50%;
@@ -122,16 +122,17 @@ transition:0.3s ease;
 
 .property{
     display:flex;
-    gap:18px;
+    gap:16px;
+    width: 100%;
     background: rgba(255,255,255,0.08);
-    padding:22px;
-    border-radius:24px;
+    padding:18px;
+    border-radius:18px;
     margin-top:18px;
 }
 
 .property img{
-    width:150px;
-    height:125px;
+    width:115px;
+    height:95px;
     border-radius:18px;
     object-fit:cover;
 }
@@ -231,9 +232,9 @@ transition:0.3s ease;
 .menu-item{
     display:flex;
     align-items: center;
-    gap: 16px;
-    padding:18px 22px;
-    font-size: 17px;
+    gap: 18px;
+    padding:20px 24px;
+    font-size: 18px;
     font-weight: 500;
     color:white;
     text-decoration:none;
@@ -246,11 +247,12 @@ transition:0.3s ease;
 
 .admin-card{
     margin-top:35px;
-    padding:24px;
+    width: 100%;
+    padding:22px;
     display:flex;
     align-items:center;
     gap:14px;
-    border-radius:24px;
+    border-radius:22px;
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(30px);
     border: 1px solid rgba(255,255,255,0.08);
@@ -295,6 +297,11 @@ transition:0.3s ease;
     animation: fadeInUp 0.6s ease;
 }
 
+.profile-btn{
+    width:100%;
+    max-width:340px;
+    height: 56px;
+}
 @keyframes fadeInUp{
     from{
         opacity:0;
@@ -337,8 +344,8 @@ transition:0.3s ease;
 }
 
 .avatar-wrapper{
-    width:140px;
-    height:140px;
+    width:145px;
+    height:145px;
 }
 
 .name{
@@ -350,7 +357,9 @@ transition:0.3s ease;
 }
 
 .property{
-    padding:18px;
+    flex-direction: row;
+    align-items: center;
+    padding:16px;
 }
 
 .property img{
@@ -381,6 +390,15 @@ transition:0.3s ease;
 
 .back{
     font-size:24px;
+}
+#menuBox{
+    position: fixed;
+    top: 75px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+    border-radius: 22px;
 }
 }
 
@@ -473,7 +491,7 @@ stroke-width="2">
 <path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6L12 2z"/>
 <path d="M9 12l2 2 4-4"/>
 </svg>
-            <span>Policy</span> </a>
+            <span>Privacy Policy</span> </a>
         <a href="/logout" class="menu-item">
            <svg width="22" height="22"
 viewBox="0 0 24 24"
@@ -550,7 +568,7 @@ stroke-width="2">
 
     <div style="margin-top:12px;">
         <a href="/edit_profile">
-            <button class="btn edit" style="width:260px;height:55px;">
+            <button class="btn edit profile-btn">
                 Edit Profile
             </button>
         </a>
