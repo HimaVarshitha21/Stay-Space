@@ -7,12 +7,16 @@
 
 body{
     margin:0;
-    font-family:'Segoe UI', sans-serif;
-    background:
-    linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
-    url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920')
-    no-repeat center/cover;
+    font-family:'Segoe UI',sans-serif;
     color:white;
+    background:
+    linear-gradient(rgba(8,12,32,.82),rgba(8,12,32,.92)),
+    url("https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    min-height:100vh;
 }
 
 .topbar{
@@ -33,39 +37,63 @@ body{
 }
 
 .card{
-    width: 100%;
-    margin-bottom: 18px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(25px);
-    border-radius:22px;
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-    overflow:hidden;
+width:100%;
+margin-bottom:22px;
+background:rgba(24,28,46,.82);
+backdrop-filter:blur(24px);
+border-radius:24px;
+border:1px solid rgba(115,205,255,.18);
+box-shadow:
+0 10px 35px rgba(0,0,0,.45),
+inset 0 0 0 1px rgba(255,255,255,.03);
+overflow:hidden;
+}
+
+.toggle-icon{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
 }
 
 .card-header{
-    padding:22px;
-    font-size: 20px;
-    font-weight: 600;
-    cursor:pointer;
-    font-weight:600;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    transition: 0.3s;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:24px;
+cursor:pointer;
+font-size:24px;
+font-weight:700;
+transition:.25s;
 }
 
 .card-content{
-    padding:0 22px 22px;
-    font-size:17px;
+    padding:0 24px 24px;
+    font-size:18px;
     line-height:1.9;
-    color: #e3e3e3;
+    background: rgba(255,255,255,.03);
     display:none;
     opacity:0.85;
 }
 
+.card-content ul{
+    margin: 0;
+    padding-left: 24px;
+}
+
+.card-content li{
+    margin:14px 0;
+    font-size:18px;
+}
+
 .card-header:hover{
     background: rgba(255,255,255,0.05);
+}
+
+.footer{
+    text-align: center;
+    padding: 35px 20px;
 }
 @media(max-width:768px){
 
@@ -78,17 +106,21 @@ border-radius:22px;
 }
 
 .card-header{
-padding:20px;
-font-size:18px;
+padding:2px;
+font-size:22px;
 }
 
 .card-content{
-font-size:16px;
+font-size:17px;
 line-height:1.8;
 }
 
+.card-content li{
+    font-size: 17px;
+}
+
 h1{
-font-size:32px !important;
+font-size:46px !important;
 }
 
 }
@@ -133,29 +165,47 @@ Last updated • April 2026
     <div class="card">
         <div class="card-header" onclick="toggle(this)">
             What We Collect
-            <span style="
-font-size:28px;
-font-weight:bold;
-color:#00c6ff;">
-+
+            <span class="toggle-icon">
+
+<svg width="26"
+height="26"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#18d5ff"
+stroke-width="2.5"
+stroke-linecap="round">
+<path d="M12 5V19"/>
+<path d="M5 12H19"/>
+
+</svg>
+
 </span>
         </div>
         <div class="card-content">
-            We collect basic information such as your name, email address, and mobile number 
-            when you create an account. Additionally, we collect property details you provide 
-            such as location, price, images, and descriptions to help display listings properly 
-            on the platform.
+            <ul>
+                <li>We collect basic information such as your name, email address, and mobile number.</li>
+                <li>when you create an account. Additionally, we collect property details you provide.</li>
+                <li>such as location, price, images, and descriptions to help display listings properly on the platform.</li> 
         </div>
     </div>
 
     <div class="card">
         <div class="card-header" onclick="toggle(this)">
             Why We Collect
-            <span style="
-font-size:28px;
-font-weight:bold;
-color:#00c6ff;">
-+
+            <span class="toggle-icon">
+
+<svg width="26"
+height="26"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#18d5ff"
+stroke-width="2.5"
+stroke-linecap="round">
+<path d="M12 5V19"/>
+<path d="M5 12H19"/>
+
+</svg>
+
 </span>
         </div>
         <div class="card-content">
@@ -168,11 +218,20 @@ color:#00c6ff;">
     <div class="card">
         <div class="card-header" onclick="toggle(this)">
             What We Do NOT Do
-            <span style="
-font-size:28px;
-font-weight:bold;
-color:#00c6ff;">
-+
+            <span class="toggle-icon">
+
+<svg width="26"
+height="26"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#18d5ff"
+stroke-width="2.5"
+stroke-linecap="round">
+<path d="M12 5V19"/>
+<path d="M5 12H19"/>
+
+</svg>
+
 </span>
         </div>
         <div class="card-content">
@@ -185,11 +244,20 @@ color:#00c6ff;">
     <div class="card">
         <div class="card-header" onclick="toggle(this)">
             Security
-            <span style="
-font-size:28px;
-font-weight:bold;
-color:#00c6ff;">
-+
+            <span class="toggle-icon">
+
+<svg width="26"
+height="26"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#18d5ff"
+stroke-width="2.5"
+stroke-linecap="round">
+<path d="M12 5V19"/>
+<path d="M5 12H19"/>
+
+</svg>
+
 </span>
         </div>
         <div class="card-content">
@@ -202,11 +270,20 @@ color:#00c6ff;">
     <div class="card">
         <div class="card-header" onclick="toggle(this)">
             User Control
-            <span style="
-font-size:28px;
-font-weight:bold;
-color:#00c6ff;">
-+
+            <span class="toggle-icon">
+
+<svg width="26"
+height="26"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#18d5ff"
+stroke-width="2.5"
+stroke-linecap="round">
+<path d="M12 5V19"/>
+<path d="M5 12H19"/>
+
+</svg>
+
 </span>
         </div>
         <div class="card-content">
@@ -218,31 +295,49 @@ color:#00c6ff;">
 
 </div>
 
+<div class="footer">
+    Need more information?
+    <a href="/support">Contact Support</a>
+</div>
+
 <script>
 
 function toggle(el){
 
-    const content = el.nextElementSibling;
-    const icon = el.querySelector("span");
+const content=el.nextElementSibling;
 
-    // close others
-    document.querySelectorAll(".card-content").forEach(c => {
-        if(c !== content){
-            c.style.display = "none";
-        }
-    });
+const svg=el.querySelector("svg");
 
-    // toggle current
-    if(content.style.display === "block"){
-        content.style.display = "none";
-        icon.innerText = "+";
-    } else {
-        content.style.display = "block";
-        icon.innerText = "−";
-    }
+document.querySelectorAll(".card-content").forEach(c=>{
+
+if(c!==content)
+c.style.display="none";
+
+});
+
+document.querySelectorAll(".toggle-icon svg").forEach(s=>{
+
+s.innerHTML=
+'<path d="M12 5V19"/><path d="M5 12H19"/>';
+
+});
+
+if(content.style.display==="block"){
+
+content.style.display="none";
+
+svg.innerHTML='<path d="M12 5V19"/><path d="M5 12H19"/>';
+
+}
+else{
+
+content.style.display="block";
+
+svg.innerHTML='<path d="M5 12H19"/>';
+
 }
 
+}
 </script>
-
 </body>
 </html>
