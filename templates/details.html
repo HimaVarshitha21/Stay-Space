@@ -9,13 +9,10 @@ body{
 margin:0;
 font-family:'Segoe UI', sans-serif;
 min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
 color:white;
+overflow-y: auto;
 }
 
-/* 🔥 BACKGROUNDS */
 .land-bg{
 background:
 linear-gradient(rgba(10,15,40,0.85), rgba(10,15,40,0.95)),
@@ -44,18 +41,21 @@ url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab')
 no-repeat center/cover;
 }
 
-/* CARD */
 .card{
-background: rgba(255,255,255,0.08);
-backdrop-filter: blur(25px);
-padding:30px;
-border-radius:24px;
-width:380px;
-box-shadow:0 25px 70px rgba(0,0,0,0.6);
+background: rgba(40,44,70,0.55);
+backdrop-filter: blur(18px);
+border: none;
+padding:28px;
+border-radius:0;
+width:100%;
+max-width: 720px;
+min-height: 100vh;
+margin: auto;
+box-shadow:none;
 position:relative;
+box-sizing: border-box;
 }
 
-/* 🔙 BACK ICON */
 .back-icon{
 position:absolute;
 top:18px;
@@ -69,24 +69,25 @@ height:22px;
 stroke:white;
 }
 
-/* TITLE */
 h2{
 text-align:center;
 margin-bottom:20px;
 }
 
-/* 🔥 GLASS INPUTS */
-input, select{
+input,
+select{
 width:100%;
-padding:14px;
-margin:10px 0;
-border-radius:12px;
-border:none;
-outline:none;
-font-size:14px;
-
-background: rgba(255,255,255,0.12);
+height:58px;
+padding:0 18px;
+margin:0 0 16px 0;     
+border-radius:16px;
+border:1px solid rgba(255,255,255,.12);
+background:rgba(255,255,255,.08);
 color:white;
+font-size:16px;
+box-sizing:border-box;
+outline:none;
+transition:.25s;
 }
 
 input::placeholder{
@@ -105,37 +106,94 @@ select {
 }
 
 select option {
-    background: #1a1a2e; /* dark instead of white */
+    background: #1a1a2e; 
     color: white;
 }
 
-
-/* focus effect */
-select:focus {
-    outline: none;
-    border: 1px solid #00c6ff;
-    box-shadow: 0 0 10px rgba(0,198,255,0.3);
+input:focus,select:focus {
+    border: 1px solid #72dfff;
+    background: rgba(255,255,255,.12);
+    box-shadow: 0 0 12px rgba(114,223,255,0.18);
 }
 
-/* BUTTON */
 .next-btn{
-margin-top:15px;
-padding:14px;
-border:none;
-border-radius:12px;
-width:100%;
-cursor:pointer;
-font-weight:600;
-font-size:15px;
+height:60px;
+width: 100%;
+margin-top:25px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
 color:white;
-background: linear-gradient(45deg,#6a5cff,#00c6ff);
-transition:0.25s;
+font-size:18px;
+font-weight:700;
+border-radius:18px;
+transition:.3s;
+}
+.next-btn:hover{
+background:rgba(255,255,255,.14);
+transform:translateY(-2px);
 }
 
 .next-btn:hover{
 transform:scale(1.05);
 }
+.form-section{
+    margin-top:28px;
+}
+.form-section:first-child{
+    margin-top: 0;
+}
+.page-header{
+margin-top:38px;
+margin-bottom:28px;
+text-align:center;
+}
 
+.page-title{
+font-size:30px;
+font-weight:700;
+color:white;
+margin-bottom:8px;
+}
+
+.subtitle{
+font-size:15px;
+color:rgba(255,255,255,.7);
+line-height:1.5;
+}
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:30px 0 15px;
+    font-size:20px;
+    font-weight:700;
+    color:#72dfff;
+    border-bottom:1px solid rgba(255,255,255,.12);
+    padding-bottom:10px;
+}
+
+.progress{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:30px 0;
+}
+
+.step{
+width:38px;
+height:38px;
+border-radius:50%;
+background:rgba(255,255,255,.12);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+}
+
+.step.active{
+background:#59d8ff;
+color:#091326;
+}
 </style>
 </head>
 
@@ -145,16 +203,37 @@ transform:scale(1.05);
 
 <div class="card">
 
-<!-- 🔙 BACK -->
 <div class="back-icon" onclick="window.history.back()">
 <svg viewBox="0 0 24 24" fill="none">
 <path d="M15 18l-6-6 6-6" stroke-width="2"/>
 </svg>
 </div>
 
-<h2>Property Details</h2>
+<div class="page-header">
 
-<!-- COMMON -->
+    <div class="page-title">
+        Property Details
+    </div>
+
+    <div class="subtitle">
+        Complete all required information below
+    </div>
+
+</div>
+<div class="section-title">
+
+<svg width="22" height="22" viewBox="0 0 24 24"
+fill="none" stroke="#72dfff" stroke-width="2">
+
+<path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/>
+
+<circle cx="12" cy="10" r="2"/>
+
+</svg>
+
+Location Details
+
+</div>
 <input name="state" placeholder="State *" required value="{{ data.get('state','') }}">
 <input name="pincode" placeholder="Pin Code *" required value="{{ data.get('pincode','') }}">
 <input name="city" placeholder="City *" required value="{{ data.get('city','') }}">
@@ -162,9 +241,23 @@ transform:scale(1.05);
 <input name="street" placeholder="Street *" required value="{{ data.get('street','') }}">
 <input name="landmark" placeholder="Nearby Landmark *" required value="{{ data.get('landmark','') }}">
 
-<!-- LAND -->
 {% if propertyType == "land" %}
 
+<div class="section-title">
+
+<svg width="22" height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#72dfff"
+stroke-width="2">
+
+<path d="M3 17l6-6 4 4 8-8"/>
+
+</svg>
+
+Property Details
+
+</div>
 <input name="size" placeholder="Plot Size *" required value="{{ data.get('size','') }}">
 
 <select name="plotType" required>
@@ -184,11 +277,23 @@ transform:scale(1.05);
 
 <input name="road" placeholder="Road Access">
 <input name="boundary" placeholder="Boundary Wall">
+<div class="section-title">
+<svg width="22" height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#72dfff"
+stroke-width="2">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v10"/>
+<path d="M9 10h6"/>
+<path d="M9 14h6"/>
+</svg>
+Pricing
+</div>
 <input name="price" placeholder="Total Price *" required value="{{ data.get('price','') }}">
 
 {% endif %}
 
-<!-- HOUSE SALE -->
 {% if propertyType == "house" and listingType == "sale" %}
 
 <input name="bhk" placeholder="BHK *" required value="{{ data.get('bhk','') }}">
@@ -209,7 +314,6 @@ transform:scale(1.05);
 
 {% endif %}
 
-<!-- RENT -->
 {% if propertyType == "house" and listingType == "rent" %}
 
 <input name="bhk" placeholder="BHK *" required>
@@ -220,7 +324,6 @@ transform:scale(1.05);
 
 {% endif %}
 
-<!-- HOSTEL -->
 {% if propertyType == "hostel" %}
 
 <select name="roomType" required>
@@ -236,15 +339,13 @@ transform:scale(1.05);
 
 {% endif %}
 
-<!-- COMMERCIAL -->
 {% if propertyType == "commercial" %}
 
 <input name="type" placeholder="Type *" required>
 <input name="size" placeholder="Area Size *" required>
 <input name="parking" placeholder="Parking">
 <input name="power" placeholder="Power Supply">
-<input name="price" placeholder="Price *" required>
-
+<input name="price" placeholder="Price *" required value="{{ data.get('price','')}}">
 {% endif %}
 
 <button class="next-btn">Next →</button>

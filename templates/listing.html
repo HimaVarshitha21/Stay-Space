@@ -7,36 +7,35 @@
 
 body{
 margin:0;
-font-family:'Segoe UI', sans-serif;
+font-family:'Segoe UI',sans-serif;
 min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-
 background:
-linear-gradient(rgba(10,15,40,0.78), rgba(10,15,40,0.88)),
+linear-gradient(rgba(10,15,40,.78),rgba(10,15,40,.90)),
 url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1920')
-no-repeat center/cover;
+center/cover no-repeat;
+color:white;
 }
 
-/* CARD */
 .card{
-background: rgba(255,255,255,0.08);
-backdrop-filter: blur(25px);
-padding:45px;
-border-radius:24px;
-box-shadow:0 25px 70px rgba(0,0,0,0.6);
-text-align:center;
-width:380px;
-color:white;
+width:100%;
+min-height:100vh;
+padding:28px 22px 40px;
+box-sizing:border-box;
+background:transparent;
 position:relative;
 }
-
-/* BACK ICON */
 .back-icon{
 position:absolute;
-top:18px;
+top:25px;
 left:18px;
+width:42px;
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
 cursor:pointer;
 }
 
@@ -46,28 +45,42 @@ height:22px;
 stroke:white;
 }
 
-/* TITLE */
 h2{
-margin-bottom:25px;
+margin-top:70px;
+margin-bottom:8px;
+font-size:40px;
+font-weight:700;
+text-align:left;
 }
 
-/* BUTTON */
+.subtitle{
+font-size:19px;
+opacity:.75;
+margin-bottom:35px;
+}
+
 .option{
-display:block;
 width:100%;
-padding:14px;
-margin:10px 0;
-border:none;
-border-radius:14px;
-cursor:pointer;
-font-weight:600;
+height:84px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 24px;
+margin-bottom:18px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.18);
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
 color:white;
-background: linear-gradient(45deg,#6a5cff,#00c6ff);
-transition:0.25s;
+font-size:24px;
+font-weight:600;
+cursor:pointer;
+transition:.25s;
 }
 
 .option:hover{
-transform:scale(1.05);
+background:rgba(255,255,255,.14);
+transform:translateY(-2px);
 }
 
 form{ margin:0; }
@@ -87,35 +100,125 @@ form{ margin:0; }
 </div>
 
 <h2>What are you listing?</h2>
+<p class="subtitle">
+Tap to select your property type.
+</p>
 
 <form method="POST">
 <input type="hidden" name="listingType" value="sale">
 <input type="hidden" name="propertyType" value="land">
-<button class="option">Sell Land</button>
+<button class="option">
+
+<span>Sell Land</span>
+
+<svg width="28"
+     height="28"
+     viewBox="0 0 24 24"
+     fill="none"
+     stroke="white"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <path d="M3 19L9 10L13 15L16 12L21 19"/>
+
+    <path d="M2 19H22"/>
+
+    <path d="M9 10L11 7L13 10"/>
+
+</svg>
+
+</button>
 </form>
 
 <form method="POST">
 <input type="hidden" name="listingType" value="sale">
 <input type="hidden" name="propertyType" value="house">
-<button class="option">Sell House / Flat</button>
+<button class="option">
+    <span>Sell House / Flat</span>
+ <svg width="28" height="28"
+viewBox="0 0 24 24"
+fill="none"
+stroke="white"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round">
+
+<path d="M3 11L12 4L21 11"/>
+<path d="M5 10V20H19V10"/>
+<path d="M10 20V15H14V20"/>
+
+</svg>
+</button>
 </form>
 
 <form method="POST">
 <input type="hidden" name="listingType" value="rent">
 <input type="hidden" name="propertyType" value="house">
-<button class="option">Rent House / Flat</button>
+<button class="option">
+   <span>Rent House / Flat</span> 
+<svg width="28" height="28"
+viewBox="0 0 24 24"
+fill="none"
+stroke="white"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round">
+
+<path d="M3 11L12 4L21 11"/>
+<path d="M5 10V20H19V10"/>
+<path d="M10 20V15H14V20"/>
+
+<circle cx="18" cy="17" r="1.5"/>
+<path d="M19.5 17H22"/>
+<path d="M21 17V18"/>
+
+</svg>
+</button>
 </form>
 
 <form method="POST">
 <input type="hidden" name="listingType" value="rent">
 <input type="hidden" name="propertyType" value="hostel">
-<button class="option">Hostel / PG</button>
+<button class="option">
+   <span>Hostel / PG</span> 
+<svg width="34" height="34"
+viewBox="0 0 24 24"
+fill="none"
+stroke="white"
+stroke-width="1.8">
+
+<rect x="4" y="3" width="16" height="18"/>
+<path d="M8 7h2"/>
+<path d="M14 7h2"/>
+<path d="M8 11h2"/>
+<path d="M14 11h2"/>
+<path d="M11 21v-5h2v5"/>
+
+</svg>
+</button>
 </form>
 
 <form method="POST">
 <input type="hidden" name="listingType" value="sale">
 <input type="hidden" name="propertyType" value="commercial">
-<button class="option">Commercial Property</button>
+<button class="option">
+    <span>Commercial Property</span>
+<svg width="34" height="34"
+viewBox="0 0 24 24"
+fill="none"
+stroke="white"
+stroke-width="1.8">
+
+<rect x="4" y="8" width="6" height="12"/>
+<rect x="12" y="4" width="8" height="16"/>
+<path d="M6 12h2"/>
+<path d="M14 8h2"/>
+<path d="M14 12h2"/>
+<path d="M14 16h2"/>
+
+</svg>
+</button>
 </form>
 
 </div>

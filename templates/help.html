@@ -53,24 +53,25 @@ body{
     background: rgba(46,48,72,0.82);
     backdrop-filter: blur(28px);
     border-radius:26px;
-    padding:28px;
-    margin-bottom:22px;
+    padding:22px;
+    margin-bottom:30px;
     border:2px solid rgba(111,223,255,.25);
     box-shadow: 0 0 0 1px rgba(255,255,255,.05),
     0 18px 45px rgba(0,0,0,.45);
     box-sizing: border-box;
 }
 .card-title{
-    font-size: 38px;
+    font-size: 18px;
     font-weight: 700;
+    margin: 6px 0;
     margin-top: 14px;
     margin-bottom: 10px;
 }
 .card-text{
-    font-size: 20px;
-    opacity: .82;
+    font-size: 15px;
+    opacity: .75;
     line-height: 1.6;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
 }
 
 .title{font-size:24px; margin-bottom:18px; font-weight: 700;}
@@ -90,7 +91,7 @@ body{
 }
 
 .faq-item{
-    padding:18px 0;
+    padding:16px 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -101,7 +102,7 @@ body{
     transition:0.3s;
 }
 
-.faq-item:hover{background: rgba(255,255,255,0.05);}
+.faq-item:hover{background: rgba(255,255,255,0.03);}
 
 .faq-q{font-weight:600; font-size: 18px; align-items: center; justify-content: space-between; display: flex;width: 100%;}
 
@@ -133,7 +134,7 @@ body{
     left:0;
     width:100%;
     height:100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.12);
     display:none;
     justify-content:center;
     align-items:center;
@@ -177,6 +178,15 @@ body{
     border:none;
     border-radius:8px;
     cursor:pointer;
+}
+
+button{
+    max-width: 330px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
 }
 
 .modal{
@@ -230,48 +240,73 @@ body{
     background:rgba(255,255,255,0.1);
     color:white;
 }
-
 .delete-btn{
 width:100%;
-height:64px;
+height:56px;
 border:none;
-border-radius:18px;
+border-radius:14px;
 display:flex;
-justify-content:center;
 align-items:center;
-gap:14px;
-font-size:20px;
-font-weight:700;
-background:#d52b2b;
-color:white;
+justify-content:center;
+gap:10px;
+font-size:17px;
+font-weight:600;
+background:rgba(255,60,60,.14);
+border:1px solid rgba(255,70,70,.35);
+color:#ff5a5a;
+transition:.25s;
+}
+
+.delete-btn:hover{
+background:rgba(255,60,60,.22);
 }
 .purple-btn{
-width:100%;
-height:64px;
-border:none;
-border-radius:18px;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:14px;
-font-size:20px;
-font-weight:700;
-background:linear-gradient(90deg,#6d30ff,#a33fff);
-color:white;
+    width:320px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:14px;
+
+    color:#ffffff;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    backdrop-filter:blur(12px);
+}
+
+.purple-btn:hover{
+    background:rgba(255,255,255,.08);
+    border-color:rgba(255,255,255,.30);
 }
 .blue-btn{
-width:100%;
-height:64px;
-border:none;
-border-radius:18px;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:14px;
-font-size:20px;
-font-weight:700;
-background:linear-gradient(90deg,#2f7eff,#4ca9ff);
-color:white;
+    width:320px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:14px;
+
+    color:#ffffff;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    backdrop-filter:blur(12px);
+}
+
+.blue-btn:hover{
+    background:rgba(255,255,255,.08);
+    border-color:rgba(255,255,255,.30);
 }
 #reason{
     width:100%;
@@ -328,6 +363,9 @@ color:white;
 }
 
 .mini-heading{
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-top:18px;
     margin-bottom: 10px;
     font-size: 22px;
@@ -742,15 +780,17 @@ Report Issue
 <button class="purple-btn" onclick="openReport()">
 
 <svg width="20"
-height="20"
-viewBox="0 0 24 24"
-stroke="white"
-fill="none"
-stroke-width="2">
+     height="20"
+     viewBox="0 0 24 24"
+     fill="none"
+     stroke="white"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
 
-<path d="M20 7L9 18"/>
-<path d="M15 6h5v5"/>
-<path d="M4 4l6 6"/>
+    <path d="M12 9v4"/>
+    <path d="M12 17h.01"/>
+    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0"/>
 
 </svg>
 
