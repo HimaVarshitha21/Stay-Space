@@ -229,16 +229,19 @@ transition:0.3s ease;
 }
 
 .menu-item{
-    display:block;
-    padding:10px 5px;
+    display:flex;
+    align-items: center;
+    gap: 16px;
+    padding:18px 22px;
+    font-size: 17px;
+    font-weight: 500;
     color:white;
     text-decoration:none;
-    border-radius:8px;
-    transition:0.3s;
+    transition:.25s;
 }
 
 .menu-item:hover{
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
 }
 
 .admin-card{
@@ -400,8 +403,7 @@ transition:0.3s ease;
     border-radius:14px;
     cursor:pointer;
     background:rgba(255,255,255,0.08);
-    transition:0.3s;
-">
+    transition:0.3s;">
 
     <svg width="34" height="34"
          viewBox="0 0 24 24"
@@ -423,21 +425,66 @@ transition:0.3s ease;
         position:absolute;
         right:0;
         top:40px;
-        width:260px;
-        padding:20px;
-        border-radius:15px;
-        background: rgba(0,0,0,0.9);
+        width:300px;
+        max-width: 85vw;
+        padding:18px 0;
+        border-radius:22px;
+        background: rgba(26,28,45,0.98);
+        box-shadow: 0 18px 45px rgba(0,0,0,.55),
+        0 0 20px rgba(106, 92, 255, .12);
         backdrop-filter: blur(20px);
         border:1px solid rgba(255,255,255,0.1);
-        z-index:9999;
-    ">
+        z-index:9999;">
 
-        <hr style="border-color:rgba(255,255,255,0.1);">
+        <a href="/account" class="menu-item">
 
-        <a href="/account" class="menu-item">Account</a>
-        <a href="/help" class="menu-item">Help Center</a>
-        <a href="/privacy" class="menu-item">Privacy Policy</a>
-        <a href="/logout" class="menu-item">Logout</a>
+<svg width="22" height="22"
+viewBox="0 0 24 24"
+stroke="white"
+fill="none"
+stroke-width="2">
+
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 20c2-4 14-4 16 0"/>
+
+</svg>
+
+<span>Account</span>
+
+</a>
+        <a href="/help" class="menu-item">
+            <svg width="22" height="22"
+viewBox="0 0 24 24"
+stroke="white"
+fill="none"
+stroke-width="2">
+<circle cx="12" cy="12" r="10"/>
+<path d="M9.5 9a2.5 2.5 0 1 1 4.5 1.5c-.8.8-2 1.4-2 2.5"/>
+<circle cx="12" cy="17" r="1"/>
+</svg>
+<span>Help Center</span> </a>
+
+        <a href="/privacy" class="menu-item">
+            <svg width="22" height="22"
+viewBox="0 0 24 24"
+stroke="white"
+fill="none"
+stroke-width="2">
+<path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6L12 2z"/>
+<path d="M9 12l2 2 4-4"/>
+</svg>
+            <span>Policy</span> </a>
+        <a href="/logout" class="menu-item">
+           <svg width="22" height="22"
+viewBox="0 0 24 24"
+stroke="white"
+fill="none"
+stroke-width="2">
+<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+<path d="M16 17l5-5-5-5"/>
+<path d="M21 12H9"/>
+</svg> 
+<span>Logout</span> </a>
 
     </div>
 
@@ -474,8 +521,7 @@ transition:0.3s ease;
     gap:6px;
     opacity:0.8;
     font-size:22px;
-    margin-top:4px;
-">
+    margin-top:4px;">
     <svg class="location-icon" viewBox="0 0 24 24" width="16" height="16" stroke="white" fill="none">
         <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" stroke-width="2"/>
         <circle cx="12" cy="10" r="2.5" stroke-width="2"/>
@@ -493,8 +539,7 @@ transition:0.3s ease;
     line-height:1.4;
     max-width:550px;
     margin-left:auto;
-    margin-right:auto;
-">
+    margin-right:auto;">
     {{ user.about }}
 </div>
 {% endif %}
