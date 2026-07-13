@@ -16,11 +16,28 @@ body{
 }
 
 .topbar{
-    height:70px;
+    height:75px;
     display:flex;
     align-items:center;
+    justify-content:space-between;
     padding:0 18px;
-    background: rgba(0,0,0,0.6);
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.page-title{
+    font-size:30px;
+    font-weight:700;
+}
+
+.back-btn{
+    color:#7fdfff;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:600;
 }
 
 .container{
@@ -35,9 +52,9 @@ body{
     width: 100%;
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(25px);
-    border-radius:22px;
-    padding:22px;
-    margin-bottom:18px;
+    border-radius:24px;
+    padding:28px;
+    margin-bottom:24px;
     border:1px solid rgba(255,255,255,.08);
     box-shadow: 0 12px 30px
     rgba(0,0,0,0.3);
@@ -51,8 +68,10 @@ body{
 }
 
 .faq-item{
-    padding:18px 0;
-    font-size: 17px;
+    padding:22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom:1px solid rgba(255,255,255,0.0.8);
     cursor:pointer;
     transition:0.3s;
@@ -184,6 +203,10 @@ body{
 }
 
 .delete-btn{
+    height: 56px;
+    font-size: 19px;
+    font-weight: 700;
+    border-radius: 16px;
     background:linear-gradient(90deg, #ff4b4b, #ff7676);
     color:white;
 }
@@ -194,10 +217,8 @@ body{
     border:none;
     outline:none;
     font-size:14px;
-
     background:rgba(255,255,255,0.08);
     color:white;
-
     backdrop-filter:blur(10px);
 }
 
@@ -210,6 +231,29 @@ body{
     border:1px solid #4facfe;
     box-shadow:0 0 8px rgba(79,172,254,0.5);
 }
+
+.search-box{
+width:100%;
+height:58px;
+border:none;
+outline:none;
+padding:0 18px;
+font-size:18px;
+border-radius:16px;
+margin:18px 0 25px;
+background:rgba(255,255,255,.08);
+color:white;
+box-sizing:border-box;
+}
+
+.mini-heading{
+    margin-top:18px;
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #5cdcff;
+}
+
 @media(max-width:768px){
 
 .container{
@@ -241,7 +285,6 @@ font-size:16px;
 .modal-box{
 width:94%;
 }
-
 }
 
 </style>
@@ -251,23 +294,43 @@ width:94%;
 <body>
 
 <div class="topbar">
-    <a href="/profile" style="
-color:#00c6ff;
-text-decoration:none;
-font-size:18px;
-font-weight:600;">
-← Back
-</a>
+
+    <a href="/profile" class="back-btn">
+        ← Back
+    </a>
+
+    <div class="page-title">
+        Support & Help
+    </div>
+
+    <div style="width:60px;"></div>
+
 </div>
 
 <div class="container">
-
     <div class="card">
 
-    <div class="title">Quick Help</div>
+<div class="section-heading">
+Self-Service Help
+</div>
 
-    <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-q">Can't upload property?</div>
+<input
+type="text"
+placeholder="🔍 Search help..."
+class="search-box">
+
+<div class="mini-heading">
+Quick Help Topics
+</div>
+
+<div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">
+
+<span>Can't upload property?</span>
+
+<span style="font-size:22px;">›</span>
+
+</div>
         <div class="faq-a">
             If you are unable to upload a property, first check that all required fields such as location, price, and description are filled correctly. 
             Make sure you have uploaded at least one image, as properties without images may not be accepted. 
@@ -277,7 +340,10 @@ font-weight:600;">
     </div>
 
     <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-q">Chat not working?</div>
+        <div class="faq-q">
+            <span>Chat not working?</span>
+        <span style="font-size:22px;">›</span>
+</div>
         <div class="faq-a">
             If the chat feature is not working, ensure that you are logged in and have an active internet connection. 
             Try refreshing the page or reopening the chat window. 
@@ -288,7 +354,10 @@ font-weight:600;">
     </div>
 
     <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-q">Edit profile issue?</div>
+        <div class="faq-q">
+            <span>Edit profile issue?</span>
+            <span style="font-size:22px;"></span>
+        </div>
         <div class="faq-a">
             If you are facing issues while editing your profile, check that all fields are entered correctly and no invalid data is submitted. 
             Ensure your image size is within allowed limits when uploading a profile picture. 
@@ -297,14 +366,16 @@ font-weight:600;">
         </div>
     </div>
 
+
+<div class="mini-heading">
+Common FAQs
 </div>
 
-    <div class="card">
-
-    <div class="title">FAQs</div>
-
-    <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-q">How to add property?</div>
+<div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">
+            <span>How to add property?</span>
+            <span style="font-size:22px;"></span>
+        </div>
         <div class="faq-a">
             To add a property, go to the home page and click on the "Add Property" option. 
             You will be asked to fill in important details such as location, price, area, and description. 
@@ -314,7 +385,10 @@ font-weight:600;">
     </div>
 
     <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-q">How to delete property?</div>
+        <div class="faq-q">
+            <span>How to delete property?</span>
+            <span style="font-size:22px;"></span>
+        </div>
         <div class="faq-a">
             To delete a property, go to your profile page and navigate to "My Listings". 
             You will see all the properties you have added. Click on the delete icon next to the property 
@@ -324,7 +398,10 @@ font-weight:600;">
     </div>
 
     <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-q">How to contact owner?</div>
+        <div class="faq-q">
+            <span>How to contact owner?</span>
+            <span style="font-size:22px;"></span>
+        </div>
         <div class="faq-a">
             To contact a property owner, open the property you are interested in and click on the "Chat" button. 
             This will open a messaging interface where you can directly communicate with the owner. 
@@ -334,7 +411,10 @@ font-weight:600;">
     </div>
 
     <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-q">Why my listing not visible?</div>
+        <div class="faq-q">
+            <span>Why my listing not visible?</span>
+            <span style="font-size:22px;"></span>
+        </div>
         <div class="faq-a">
             If your listing is not visible, it may be due to incomplete details or missing images. 
             Ensure that all required fields are filled correctly and that at least one image is uploaded. 
@@ -343,35 +423,49 @@ font-weight:600;">
         </div>
     </div>
 
+
 </div>
 
-<div class="card danger">
+    <div class="mini-heading">
+Account Management
+</div>
 
-    <h3>Delete Account</h3>
-    <p>This action is permanent and cannot be undone.</p>
+<h2 style="margin-top:15px;">
+Delete Account
+</h2>
+
+<p>
+This action is permanent and cannot be undone.
+</p>
 
     <button class="full-btn delete-btn" onclick="startDelete()">
-        Delete My Account
+        🗑 DELETE MY ACCOUNT
     </button>
 
 </div>
 
-    <div class="card">
-        <div class="title">Report Issue</div>
+    <div class="mini-heading">
+Problem Reporting
+</div>
 
-        <button class="btn" onclick="openReport()">Report a Problem</button>
+<h2>Report Issue</h2>
+
+        <button class="btn" onclick="openReport()">🐞 REPORT A PROBLEM</button>
     </div>
 
-    <div class="card">
-        <div class="title">Contact Support system</div>
+    <div class="mini-heading">
+Support Contact
+</div>
+
+<h2>
+Contact Support System
+</h2>
         <button class="btn" onclick="window.location.href='/support'">
-     contact support
+     💬 START LIVE CHAT
 </button>
     </div>
 
 </div>
-
-
 <div id="reportBox" class="report-box">
 
     <div class="report-content">
@@ -384,9 +478,7 @@ font-weight:600;">
             <button type="button" onclick="submitReport()">Submit</button>
             <button onclick="closeReport()">Cancel</button>
         </div>
-
     </div>
-
 </div>
 
 <div id="successMsg" style="
@@ -399,8 +491,7 @@ font-weight:600;">
     border-radius: 10px;
     color: lightgreen;
     display: none;
-    z-index: 9999;
-">
+    z-index: 9999;">
     Issue submitted successfully!
 </div>
 
