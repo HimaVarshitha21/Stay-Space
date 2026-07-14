@@ -42,25 +42,33 @@ no-repeat center/cover;
 }
 
 .card{
-background: rgba(40,44,70,0.55);
-backdrop-filter: blur(18px);
-border: none;
-padding:28px;
+background: rgba(30,34,60,0.60);
+backdrop-filter: blur(22px);
+border-left: 1px solid rgba(255,255,255,.06);
+border-right: 1px solid rgba(255,255,255,.06);
+padding:34px 22px 60px;
 border-radius:0;
 width:100%;
-max-width: 720px;
+max-width: 520px;
 min-height: 100vh;
 margin: auto;
 box-shadow:none;
 position:relative;
 box-sizing: border-box;
+overflow: hidden;
 }
 
 .back-icon{
-position:absolute;
-top:18px;
-left:18px;
-cursor:pointer;
+top:22px;
+left:20px;
+width:44px;
+height:44px;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
 }
 
 .back-icon svg{
@@ -77,32 +85,31 @@ margin-bottom:20px;
 input,
 select{
 width:100%;
-height:58px;
-padding:0 18px;
-margin:0 0 16px 0;     
-border-radius:16px;
-border:1px solid rgba(255,255,255,.12);
+height:68px;
+padding:0 22px;
+margin-bottom: 20px;   
+box-sizing: border-box;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.14);
 background:rgba(255,255,255,.08);
 color:white;
-font-size:16px;
-box-sizing:border-box;
-outline:none;
+font-size:18px;
 transition:.25s;
 }
 
 input::placeholder{
-color:rgba(255,255,255,0.6);
+font-size: 17px;
+color:rgba(255,255,255,0.65);
 }
 
-select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-
-    background: rgba(255,255,255,0.08);
-    color: white;
-
-    border: 1px solid rgba(255,255,255,0.2);
+select{
+appearance:none;
+background:
+rgba(255,255,255,.08)
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E")
+no-repeat right 18px center;
+background-size:18px;
+padding-right:55px;
 }
 
 select option {
@@ -117,16 +124,16 @@ input:focus,select:focus {
 }
 
 .next-btn{
-height:60px;
-width: 100%;
-margin-top:25px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.15);
-color:white;
-font-size:18px;
+width:100%;
+height:72px;
+margin-top:30px;
+border-radius:22px;
+font-size:22px;
 font-weight:700;
-border-radius:18px;
-transition:.3s;
+background:rgba(255,255,255,.10);
+border:1px solid rgba(255,255,255,.15);
+backdrop-filter:blur(18px);
+transition:.25s;
 }
 .next-btn:hover{
 background:rgba(255,255,255,.14);
@@ -143,33 +150,33 @@ transform:scale(1.05);
     margin-top: 0;
 }
 .page-header{
-margin-top:38px;
-margin-bottom:28px;
+margin-top:60px;
+margin-bottom:45px;
 text-align:center;
 }
 
 .page-title{
-font-size:30px;
-font-weight:700;
-color:white;
-margin-bottom:8px;
+font-size:42px;
+font-weight:800;
+letter-spacing: -.5px;
+margin-bottom:10px;
 }
 
 .subtitle{
-font-size:15px;
-color:rgba(255,255,255,.7);
-line-height:1.5;
+font-size:18px;
+color:rgba(255,255,255,.75);
+line-height:1.6;
 }
 .section-title{
     display:flex;
     align-items:center;
-    gap:10px;
-    margin:30px 0 15px;
-    font-size:20px;
+    gap:12px;
+    margin:42px 0 20px;
+    font-size:24px;
     font-weight:700;
     color:#72dfff;
-    border-bottom:1px solid rgba(255,255,255,.12);
-    padding-bottom:10px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+    padding-bottom:14px;
 }
 
 .progress{
@@ -193,6 +200,33 @@ font-weight:bold;
 .step.active{
 background:#59d8ff;
 color:#091326;
+}
+*{
+    box-sizing: border-box;
+}
+@media(max-width:600px){
+.card{
+padding:28px 18px 50px;
+}
+.page-title{
+font-size:34px;
+}
+.subtitle{
+font-size:16px;
+}
+.section-title{
+font-size:21px;
+margin-top:36px;
+}
+input,
+select{
+height:62px;
+font-size:17px;
+}
+.next-btn{
+height:64px;
+font-size:20px;
+}
 }
 </style>
 </head>
