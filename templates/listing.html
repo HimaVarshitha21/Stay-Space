@@ -9,32 +9,32 @@
 <style>
 
 body{
-margin:0;
-padding:0;
-font-family:'Segoe UI',sans-serif;
-background:
-linear-gradient(rgba(10,15,40,.55),rgba(10,15,40,.70)),
-url("https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1920");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-background-attachment:scroll;
-min-height:100vh;
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    font-family:'Segoe UI',sans-serif;
+    background:
+    linear-gradient(rgba(10,15,40,.55),rgba(10,15,40,.70)),
+    url("https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1920");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 }
 
 .card{
-width:calc(100% - 32px);
-max-width:520px;
-min-height:auto;
-margin:20px auto;
-padding:24px;
-border-radius:28px;
-background:rgba(45,52,74,.42);
-backdrop-filter:blur(30px);
--webkit-backdrop-filter:blur(30px);
-border:1px solid rgba(255,255,255,.18);
-box-shadow:0 18px 45px rgba(0,0,0,.35);
-position:relative;
+    position:relative;
+    width:min(94vw,520px);
+    margin:18px;
+    padding:22px;
+    border-radius:30px;
+    background:rgba(45,52,74,.42);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.18);
+    box-sizing:border-box;
 }
 
 .back-icon{
@@ -158,41 +158,35 @@ box-shadow: 0 14px 35px rgba(0,0,0,.35);
 }
 
 form{ margin:0; }
+@media screen and (max-width:768px){
 
-@media (max-width:768px){
+body{
+    display:block;
+}
 
 .card{
-width:92%;
-margin:18px auto;
-padding:18px;
-}
-
-h2{
-font-size:32px;
-margin-top:55px;
-}
-
-.subtitle{
-font-size:15px;
-margin-bottom:20px;
+    width:calc(100vw - 24px);
+    margin:12px;
+    padding:20px;
+    border-radius:24px;
 }
 
 .property-grid{
-gap:12px;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
 .property-card{
-height:170px;
-padding:14px;
+    height:170px;
 }
 
 .property-card img{
-width:80px;
-height:80px;
+    width:80px;
+    height:80px;
 }
 
-.property-card h3{
-font-size:16px;
+h2{
+    font-size:38px;
 }
 }
 
