@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Select Listing Type</title>
 
 <style>
@@ -15,19 +18,16 @@ linear-gradient(rgba(10,15,40,.70),rgba(10,15,40,.82)),
 url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1920')
 center center/cover no-repeat fixed;
 color:white;
-display:flex;
-justify-content:center;
-align-items:flex-start;
 }
 
 .card{
-width:96%;
-max-width:650px;
-min-height:calc(100vh - 30px);
-margin:15px auto;
-padding:28px;
+width:100%;
+max-width:none;
+min-height:100vh;
+margin:0;
+padding:26px;
 box-sizing:border-box;
-border-radius:30px;
+border-radius:0;
 background:rgba(255,255,255,.08);
 backdrop-filter:blur(26px);
 -webkit-backdrop-filter:blur(26px);
@@ -157,33 +157,33 @@ box-shadow: 0 14px 35px rgba(0,0,0,.35);
 
 form{ margin:0; }
 
-@media(max-width:600px){
+@media (max-width:768px){
 
 .card{
-padding:24px 16px 35px;
+padding:22px;
+}
+
+.property-grid{
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.property-card{
+height:180px;
+padding:14px;
+}
+
+.property-card img{
+width:85px;
+height:85px;
+}
+
+.property-card h3{
+font-size:24px;
 }
 
 h2{
-font-size:38px;
-margin-top:68px;
-}
-
-.subtitle{
-font-size:16px;
-margin-bottom:30px;
-}
-
-.option{
-height:74px;
-font-size:22px;
-padding:0 18px;
-border-radius:18px;
-margin-bottom:16px;
-}
-
-.option svg{
-width:32px;
-height:32px;
+font-size:48px;
 }
 }
 
