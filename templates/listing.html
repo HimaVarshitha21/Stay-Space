@@ -9,22 +9,34 @@ body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
 min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+box-sizing:border-box;
 background:
-linear-gradient(rgba(10,15,40,.78),rgba(10,15,40,.90)),
+linear-gradient(rgba(15,20,45,.68),rgba(15,20,45,.82)),
 url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1920')
-center/cover no-repeat;
+center center/cover no-repeat fixed;
 color:white;
 }
 
 .card{
-width:100%;
-max-width: 480px;
-min-height:100vh;
-margin: auto;
-padding:30px 20px 40px;
+width:92%;
+max-width:520px;
+min-height:92vh;
+margin:4vh auto;
+padding:32px;
 box-sizing:border-box;
-background:transparent;
 position:relative;
+border-radius:30px;
+background:rgba(255,255,255,.10);
+backdrop-filter:blur(28px);
+-webkit-backdrop-filter:blur(28px);
+border:1px solid rgba(255,255,255,.18);
+box-shadow:
+0 10px 40px rgba(0,0,0,.35),
+inset 0 1px 1px rgba(255,255,255,.12);
 }
 .back-icon{
 position:absolute;
@@ -48,13 +60,13 @@ stroke:white;
 }
 
 h2{
-margin-top:75px;
-margin-bottom:12px;
-font-size:52px;
+margin-top:65px;
+margin-bottom:12;
+font-size:48px;
 font-weight:800;
-line-height: 1.1;
-letter-spacing: -1px;
-text-shadow: 0 4px 12px rgba(0,0,0,.35);
+line-height:1.1;
+letter-spacing:-1px;
+text-shadow:0 6px 16px rgba(0,0,0,.45);
 }
 
 .subtitle{
@@ -62,6 +74,59 @@ font-size:18px;
 color: rgba(255,255,255,.75);
 line-height: 1.6;
 margin-bottom:35px;
+}
+
+.property-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+margin-top:25px;
+}
+
+.property-grid form{
+margin:0;
+}
+
+.property-card{
+width:100%;
+height:220px;
+border:none;
+cursor:pointer;
+border-radius:24px;
+padding:20px;
+background:rgba(255,255,255,.10);
+backdrop-filter:blur(24px);
+-webkit-backdrop-filter:blur(24px);
+border:1px solid rgba(255,255,255,.18);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+align-items:flex-start;
+transition:.3s;
+color:white;
+}
+
+.property-card:hover{
+transform:translateY(-6px);
+border-color:#67d8ff;
+box-shadow:0 18px 35px rgba(0,0,0,.35);
+background:rgba(255,255,255,.14);
+}
+.property-card img{
+width:92px;
+height:92px;
+object-fit:contain;
+align-self:center;
+margin-top:8px;
+}
+
+.property-card h3{
+margin:0;
+font-size:28px;
+font-weight:700;
+text-align:left;
+line-height:1.2;
+color:white;
 }
 
 .option{
@@ -141,122 +206,91 @@ height:32px;
 Tap to select your property type.
 </p>
 
+<div class="property-grid">
+
 <form method="POST">
 <input type="hidden" name="listingType" value="sale">
 <input type="hidden" name="propertyType" value="land">
-<button class="option">
 
-<span>Sell Land</span>
+<button class="property-card">
 
-<svg width="38"
-     height="38"
-     viewBox="0 0 24 24"
-     fill="none"
-     stroke="white"
-     stroke-width="2"
-     stroke-linecap="round"
-     stroke-linejoin="round">
+<img src="/static/images/land.png" alt="Land">
 
-    <path d="M3 19L9 10L13 15L16 12L21 19"/>
-
-    <path d="M2 19H22"/>
-
-    <path d="M9 10L11 7L13 10"/>
-
-</svg>
+<h3>Sell Land</h3>
 
 </button>
+
 </form>
+
+<form method="POST">
+<input type="hidden" name="listingType" value="rent">
+<input type="hidden" name="propertyType" value="house">
+
+<button class="property-card">
+
+<img src="/static/images/rent.png" alt="Rent">
+
+<h3>Rent House / Flat</h3>
+
+</button>
+
+</form>
+
 
 <form method="POST">
 <input type="hidden" name="listingType" value="sale">
 <input type="hidden" name="propertyType" value="house">
-<button class="option">
-    <span>Sell House / Flat</span>
- <svg width="38" height="38"
-viewBox="0 0 24 24"
-fill="none"
-stroke="white"
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round">
 
-<path d="M3 11L12 4L21 11"/>
-<path d="M5 10V20H19V10"/>
-<path d="M10 20V15H14V20"/>
+<button class="property-card">
 
-</svg>
+<img src="/static/images/house.png" alt="House">
+
+<h3>Sell House / Flat</h3>
+
 </button>
+
 </form>
 
-<form method="POST">
-<input type="hidden" name="listingType" value="rent">
-<input type="hidden" name="propertyType" value="house">
-<button class="option">
-   <span>Rent House / Flat</span> 
-<svg width="38" height="38"
-viewBox="0 0 24 24"
-fill="none"
-stroke="white"
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round">
-
-<path d="M3 11L12 4L21 11"/>
-<path d="M5 10V20H19V10"/>
-<path d="M10 20V15H14V20"/>
-
-<circle cx="18" cy="17" r="1.5"/>
-<path d="M19.5 17H22"/>
-<path d="M21 17V18"/>
-
-</svg>
-</button>
-</form>
-
-<form method="POST">
-<input type="hidden" name="listingType" value="rent">
-<input type="hidden" name="propertyType" value="hostel">
-<button class="option">
-   <span>Hostel / PG</span> 
-<svg width="38" height="38"
-viewBox="0 0 24 24"
-fill="none"
-stroke="white"
-stroke-width="1.8">
-
-<rect x="4" y="3" width="16" height="18"/>
-<path d="M8 7h2"/>
-<path d="M14 7h2"/>
-<path d="M8 11h2"/>
-<path d="M14 11h2"/>
-<path d="M11 21v-5h2v5"/>
-
-</svg>
-</button>
-</form>
 
 <form method="POST">
 <input type="hidden" name="listingType" value="sale">
 <input type="hidden" name="propertyType" value="commercial">
-<button class="option">
-    <span>Commercial Property</span>
-<svg width="38" height="38"
-viewBox="0 0 24 24"
-fill="none"
-stroke="white"
-stroke-width="1.8">
 
-<rect x="4" y="8" width="6" height="12"/>
-<rect x="12" y="4" width="8" height="16"/>
-<path d="M6 12h2"/>
-<path d="M14 8h2"/>
-<path d="M14 12h2"/>
-<path d="M14 16h2"/>
+<button class="property-card">
 
-</svg>
+<img src="/static/images/commercial.png" alt="Commercial">
+
+<h3>Commercial Property</h3>
+
 </button>
+
 </form>
+
+
+<form method="POST">
+<input type="hidden" name="listingType" value="rent">
+<input type="hidden" name="propertyType" value="hostel">
+
+<button class="property-card">
+
+<img src="/static/images/hostel.png" alt="Hostel">
+
+<h3>Hostel / PG</h3>
+
+</button>
+
+</form>
+
+</div>
+
+
+
+
+
+
+
+
+
 
 </div>
 
