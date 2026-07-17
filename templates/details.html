@@ -42,20 +42,18 @@ no-repeat center/cover;
 }
 
 .card{
-background: rgba(30,34,60,0.60);
-backdrop-filter: blur(22px);
-border-left: 1px solid rgba(255,255,255,.06);
-border-right: 1px solid rgba(255,255,255,.06);
-padding:34px 22px 60px;
-border-radius:0;
 width:100%;
-max-width: 520px;
-min-height: 100vh;
-margin: auto;
-box-shadow:none;
+max-width:620px;
+min-height:100vh;
+margin:0 auto;
+padding:26px;
+box-sizing:border-box;
+background:rgba(30,34,60,.58);
+backdrop-filter:blur(22px);
+-webkit-backdrop-filter:blur(22px);
+border-left:1px solid rgba(255,255,255,.08);
+border-right:1px solid rgba(255,255,255,.08);
 position:relative;
-box-sizing: border-box;
-overflow: hidden;
 }
 
 .back-icon{
@@ -197,6 +195,58 @@ justify-content:center;
 font-weight:bold;
 }
 
+.section-label{
+font-size:18px;
+font-weight:700;
+margin-bottom:12px;
+margin-top:18px;
+}
+
+.room-type{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-bottom:24px;
+}
+
+.room-card input{
+display:none;
+}
+
+.room-content{
+height:100px;
+border-radius:18px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+transition:.25s;
+cursor:pointer;
+}
+
+.room-content img{
+width:36px;
+height:36px;
+margin-bottom:10px;
+object-fit:contain;
+}
+
+.room-content span{
+font-size:15px;
+font-weight:600;
+color:white;
+}
+
+.room-card input:checked + .room-content{
+background:#59d8ff33;
+border-color:#59d8ff;
+box-shadow:0 0 14px rgba(89,216,255,.35);
+}
+
 .step.active{
 background:#59d8ff;
 color:#091326;
@@ -204,30 +254,136 @@ color:#091326;
 *{
     box-sizing: border-box;
 }
-@media(max-width:600px){
-.card{
-padding:28px 18px 50px;
+
+.two-col{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+margin-bottom:18px;
 }
+
+.two-col input{
+margin-bottom:0;
+}
+
+.toggle-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:18px 20px;
+margin-bottom:20px;
+
+border-radius:18px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.14);
+}
+
+.toggle-row>label{
+font-size:18px;
+font-weight:600;
+color:white;
+}
+
+.toggle-group{
+display:flex;
+gap:8px;
+}
+
+.toggle-group input{
+display:none;
+}
+
+.toggle-btn{
+padding:8px 18px;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+cursor:pointer;
+transition:.25s;
+font-weight:600;
+color:white;
+}
+
+.toggle-group input:checked + .toggle-btn{
+background:#59d8ff;
+color:#091326;
+border-color:#59d8ff;
+box-shadow:0 0 12px rgba(89,216,255,.35);
+}
+
+.beds-box{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 20px;
+margin-bottom:20px;
+border-radius:18px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.14);
+}
+
+.beds-box label{
+font-size:18px;
+font-weight:600;
+}
+
+.beds-control{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.beds-control button{
+width:42px;
+height:42px;
+border:none;
+border-radius:12px;
+font-size:26px;
+cursor:pointer;
+background:rgba(255,255,255,.12);
+color:white;
+}
+
+.beds-control input{
+width:50px;
+height:42px;
+margin:0;
+padding:0;
+text-align:center;
+border:none;
+background:transparent;
+font-size:20px;
+color:white;
+}
+
+@media (max-width:768px){
+
+.card{
+width:100%;
+max-width:none;
+padding:22px;
+margin:0;
+border-radius:0;
+border:none;
+min-height:100vh;
+}
+
 .page-title{
 font-size:34px;
 }
+
 .subtitle{
-font-size:16px;
+font-size:15px;
 }
+
 .section-title{
-font-size:21px;
-margin-top:36px;
-}
-input,
-select{
-height:62px;
-font-size:17px;
-}
-.next-btn{
-height:64px;
 font-size:20px;
+margin-top:30px;
 }
+
 }
+
 </style>
 </head>
 
@@ -269,8 +425,10 @@ Location Details
 
 </div>
 <input name="state" placeholder="State *" required value="{{ data.get('state','') }}">
+<div class="two-col">
 <input name="pincode" placeholder="Pin Code *" required value="{{ data.get('pincode','') }}">
 <input name="city" placeholder="City *" required value="{{ data.get('city','') }}">
+</div>
 <input name="area" placeholder="Area *" required value="{{ data.get('area','') }}">
 <input name="street" placeholder="Street *" required value="{{ data.get('street','') }}">
 <input name="landmark" placeholder="Nearby Landmark *" required value="{{ data.get('landmark','') }}">
@@ -360,16 +518,87 @@ Pricing
 
 {% if propertyType == "hostel" %}
 
-<select name="roomType" required>
-<option value="">Room Type *</option>
-<option>Single</option>
-<option>Shared</option>
-</select>
+<div class="section-label">Room Type *</div>
+<div class="room-type">
+<label class="room-card">
+<input type="radio" name="roomType" value="Single" required>
+<div class="room-content">
+<img src="/static/images/single.png">
+<span>Single</span>
+</div>
+</label>
+<label class="room-card">
+<input type="radio" name="roomType" value="Double">
+<div class="room-content">
+<img src="/static/images/double.png">
+<span>Double</span>
+</div>
+</label>
+<label class="room-card">
+<input type="radio" name="roomType" value="Triple">
+<div class="room-content">
+<img src="/static/images/shared.png">
+<span>shared</span>
+</div>
+</label>
+</div>
 
 <input name="rent" placeholder="Rent *" required>
-<input name="food" placeholder="Food Included">
-<input name="gender" placeholder="Boys / Girls">
-<input name="beds" placeholder="Available Beds">
+<div class="toggle-row">
+
+<label>Food Included</label>
+
+<div class="toggle-group">
+<input type="radio" id="food_yes" name="food" value="Yes">
+<label for="food_yes" class="toggle-btn">Yes</label>
+<input type="radio" id="food_no" name="food" value="No">
+<label for="food_no" class="toggle-btn">No</label>
+
+</div>
+
+</div>
+<div class="toggle-row">
+<label>Boys / Girls</label>
+<div class="toggle-group">
+<input type="radio" id="boys" name="gender" value="Boys">
+<label for="boys" class="toggle-btn">Boys</label>
+<input type="radio" id="girls" name="gender" value="Girls">
+<label for="girls" class="toggle-btn">Girls</label>
+
+</div>
+
+</div>
+<div class="beds-box">
+<label>Available Beds</label>
+<div class="beds-control">
+<button type="button" onclick="changeBeds(-1)">−</button>
+<input
+type="number"
+id="beds"
+name="beds"
+value="1"
+min="1"
+readonly>
+<button type="button" onclick="changeBeds(1)">+</button>
+
+</div>
+
+</div>
+
+<script>
+function changeBeds(value){
+
+const input=document.getElementById("beds");
+
+let count=parseInt(input.value);
+
+count+=value;
+
+if(count<1) count=1;
+
+input.value=count;
+}
+</script>
 
 {% endif %}
 
