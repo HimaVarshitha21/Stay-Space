@@ -28,10 +28,10 @@ body{
     padding: 0 22px;
     display:flex;
     align-items:center;
-    justify-content:space-between; /* ✅ IMPORTANT */
-    padding:0 15px; /* reduce a bit */
+    justify-content:space-between;
+    padding:0 15px;
     background: rgba(0,0,0,0.6);
-    box-sizing:border-box; /* ✅ prevents overflow */
+    box-sizing:border-box;
 }
 
 .back{
@@ -41,25 +41,28 @@ body{
 
 .container{
     width: 100%;
-    max-width:100%;
-    margin:85px auto 30px;
-    padding:16px;
+    max-width:700px;
+    margin:85px auto 40px;
+    padding:20px;
     box-sizing: border-box;
 }
 
 .profile-card{
+    width: 100%;
     background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(25px);
-    border-radius:25px;
-    padding:25px;
+    backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 15px 45px rbba(0,0,0,.35);
+    border-radius:28px;
+    padding:34px 28px;
     text-align:center;
 }
 
 .avatar-wrapper{
-    width:155px;
-    height:155px;
+    width:170px;
+    height:170px;
     margin:auto;
-    padding:3px;
+    padding:4px;
     border-radius:50%;
     background: linear-gradient(270deg,#ff00cc,#00c6ff,#6a5cff,#ff00cc);
     background-size:400% 400%;
@@ -79,7 +82,7 @@ body{
     cursor:pointer;
 }
 
-.name{font-size:42px;font-weight:700;margin-top: 18px;line-height: 1.2;}
+.name{font-size:38px;font-weight:700;margin-top: 18px;line-height: 1.2;}
 .sub{opacity:0.7;font-size:18px;}
 
 .btn{
@@ -246,12 +249,12 @@ transition:0.3s ease;
 }
 
 .admin-card{
-    margin-top:35px;
+    margin-top:28px;
     width: 100%;
-    padding:22px;
+    padding:24px;
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:18px;
     border-radius:22px;
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(30px);
@@ -272,8 +275,8 @@ transition:0.3s ease;
 }
 
 .admin-icon{
-    width:72px;
-    height:72px;
+    width:68px;
+    height:68px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -299,8 +302,10 @@ transition:0.3s ease;
 
 .profile-btn{
     width:100%;
-    max-width:340px;
-    height: 56px;
+    max-width:420px;
+    height: 62px;
+    font-size: 24px;
+    border-radius: 18px;
 }
 @keyframes fadeInUp{
     from{
@@ -336,70 +341,82 @@ transition:0.3s ease;
     transform:scale(.95);
 }
 
-@media (max-width:768px){
+@media(max-width:768px){
 
 .container{
-    width:100%;
-    padding:20px;
+width:100%;
+padding:16px;
+margin-top:75px;
+}
+
+.profile-card{
+padding:26px 20px;
 }
 
 .avatar-wrapper{
-    width:145px;
-    height:145px;
+width:130px;
+height:130px;
 }
 
 .name{
-    font-size:28px;
+font-size:26px;
+}
+
+.profile-location{
+font-size:18px;
+}
+
+.profile-about{
+font-size:17px;
+}
+
+.profile-likes{
+font-size:18px;
+}
+
+.profile-btn{
+max-width:100%;
+height:54px;
+font-size:18px;
 }
 
 .section{
-    font-size:24px;
+font-size:22px;
+margin:28px 0 14px;
 }
 
 .property{
-    flex-direction: row;
-    align-items: center;
-    padding:16px;
+padding:14px;
+gap:12px;
 }
 
 .property img{
-    width:120px;
-    height:100px;
-}
-
-.btn{
-    font-size:18px;
-    height:55px;
-}
-
-.admin-card{
-    padding:20px;
+width:90px;
+height:80px;
 }
 
 .admin-title{
-    font-size:20px;
+font-size:20px;
 }
 
 .admin-sub{
-    font-size:15px;
+font-size:14px;
+}
+
+.admin-icon{
+width:55px;
+height:55px;
+}
+
+.property svg{
+width:24px;
+height:24px;
 }
 
 .topbar{
-    height:65px;
+height:62px;
 }
 
-.back{
-    font-size:24px;
-}
-#menuBox{
-    position: fixed;
-    top: 75px;
-    right: 12px;
-    left: 12px;
-    width: auto;
-    max-width: none;
-    border-radius: 22px;
-}
 }
 
 </style>
@@ -512,7 +529,7 @@ stroke-width="2">
 
 <div class="container">
 
-<div style="text-align:center; margin-top:20px;">
+<div class="profile-card">
 
     <div class="avatar-wrapper">
         <img
@@ -536,10 +553,10 @@ stroke-width="2">
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:6px;
-    opacity:0.8;
+    gap:8px;
+    opacity:0.85;
     font-size:22px;
-    margin-top:4px;">
+    margin-top:8px;">
     <svg class="location-icon" viewBox="0 0 24 24" width="16" height="16" stroke="white" fill="none">
         <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" stroke-width="2"/>
         <circle cx="12" cy="10" r="2.5" stroke-width="2"/>
@@ -553,16 +570,15 @@ stroke-width="2">
 <div style="
     margin-top:8px;
     font-size:22px;
-    opacity:0.75;
-    line-height:1.4;
-    max-width:550px;
-    margin-left:auto;
-    margin-right:auto;">
+    opacity:0.8;
+    line-height:1.6;
+    max-width:600px;
+    margin: 15px auto;">
     {{ user.about }}
 </div>
 {% endif %}
 
-    <div style="opacity:0.7; font-size:20px; margin-top:12px;">
+    <div style="opacity:0.8; font-size:22px; margin-top:15px;">
         {{ user.likes if user.likes else 0 }} Likes
     </div>
 
