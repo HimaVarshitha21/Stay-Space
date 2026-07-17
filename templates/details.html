@@ -168,13 +168,31 @@ line-height:1.6;
 .section-title{
     display:flex;
     align-items:center;
-    gap:12px;
-    margin:42px 0 20px;
-    font-size:24px;
+    gap:10px;
+    margin:35px 0 20px;
+    font-size:26px;
     font-weight:700;
     color:#72dfff;
-    border-bottom:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(255,255,255,.12);
     padding-bottom:14px;
+}
+
+.field-group{
+    margin-bottom:18px;
+}
+
+.field-label{
+    display:block;
+    margin-bottom:8px;
+    font-size:17px;
+    font-weight:600;
+    color:white;
+}
+
+.field-divider{
+    height:1px;
+    background:rgba(255,255,255,.12);
+    margin:25px 0;
 }
 
 .progress{
@@ -424,6 +442,13 @@ fill="none" stroke="#72dfff" stroke-width="2">
 Location Details
 
 </div>
+
+<div class="field-group">
+
+<label class="field-label">
+State *
+</label>
+
 <select name="state" required>
     <option value="">Select State *</option>
     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -454,15 +479,47 @@ Location Details
     <option value="Uttar Pradesh">Uttar Pradesh</option>
     <option value="Uttarakhand">Uttarakhand</option>
     <option value="West Bengal">West Bengal</option>
-
 </select>
-<div class="two-col">
-<input name="pincode" placeholder="Pin Code *" required value="{{ data.get('pincode','') }}">
-<input name="city" placeholder="City *" required value="{{ data.get('city','') }}">
 </div>
-<input name="area" placeholder="Area *" required value="{{ data.get('area','') }}">
-<input name="street" placeholder="Street *" required value="{{ data.get('street','') }}">
-<input name="landmark" placeholder="Nearby Landmark *" required value="{{ data.get('landmark','') }}">
+
+<div class="two-col">
+
+<div class="field-group">
+<label class="field-label">Pin Code *</label>
+<input name="pincode">
+</div>
+
+<div class="field-group">
+<label class="field-label">City *</label>
+<input name="city">
+</div>
+
+</div>
+<div class="field-group">
+
+<label class="field-label">
+Area *
+</label>
+
+<input name="area">
+
+</div>
+<div class="field-group">
+
+<label class="field-label">
+Street *
+</label>
+
+<input name="street">
+
+</div>
+<div class="field-group">
+
+<label class="field-label">
+Nearby Landmark *
+</label>
+<input name="landmark">
+</div>
 
 {% if propertyType == "land" %}
 
@@ -501,22 +558,10 @@ Property Details
 
 <div class="toggle-group">
 
-<input type="radio"
-id="wall_yes"
-name="boundary"
-value="Yes">
-<label for="wall_yes"
-class="toggle-btn">
-Yes
-</label>
-<input type="radio"
-id="wall_no"
-name="boundary"
-value="No">
-<label for="wall_no"
-class="toggle-btn">
-No
-</label>
+<input type="radio" id="wall_yes" name="boundary" value="Yes">
+<label for="wall_yes" class="toggle-btn"> Yes </label>
+<input type="radio" id="wall_no" name="boundary" value="No">
+<label for="wall_no" class="toggle-btn"> No </label>
 </div>
 </div>
 <div class="section-title">
@@ -537,9 +582,23 @@ Pricing
 {% endif %}
 
 {% if propertyType == "house" and listingType == "sale" %}
+<div class="section-title">
 
-<input name="bhk" placeholder="BHK *" required value="{{ data.get('bhk','') }}">
-<input name="bathrooms" placeholder="Bathrooms *" required value="{{ data.get('bathrooms','') }}">
+<svg width="22" height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#72dfff"
+stroke-width="2">
+
+<path d="M4 20V8l8-5 8 5v12"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+Property Specifications
+</div>
+<div class="two-col">
+    <input name="bhk" placeholder="BHK *">
+    <input name="bathrooms" placeholder="Bathrooms *">
+</div>
 
 <select name="furnishing">
 <option value="">Furnishing</option>
@@ -547,11 +606,46 @@ Pricing
 <option>Semi Furnished</option>
 <option>Unfurnished</option>
 </select>
+<div class="section-title">
 
-<input name="floor" placeholder="Floor Number">
-<input name="totalFloors" placeholder="Total Floors">
-<input name="parking" placeholder="Parking">
+<svg width="22" height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#72dfff"
+stroke-width="2">
+
+<rect x="5" y="3"
+width="14"
+height="18"/>
+
+<path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/>
+</svg>
+Building & Size
+</div>
+<div class="two-col">
+    <input name="floor" placeholder="Floor Number">
+    <input name="totalFloors" placeholder="Total Floors">
+</div>
+<select name="parking">
+<option value="">Parking</option>
+<option>Covered</option>
+<option>Open</option>
+<option>No Parking</option>
+</select>
 <input name="size" placeholder="Size (sqft)">
+<div class="section-title">
+
+<svg width="22"
+height="22"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#72dfff"
+stroke-width="2">
+
+<path d="M20 12L12 20L4 12L12 4Z"/>
+</svg>
+Pricing
+</div>
 <input name="price" placeholder="Total Price *" required>
 
 {% endif %}
@@ -636,13 +730,7 @@ Property Specification
 <label>Available Beds</label>
 <div class="beds-control">
 <button type="button" onclick="changeBeds(-1)">−</button>
-<input
-type="number"
-id="beds"
-name="beds"
-value="1"
-min="1"
-readonly>
+<input type="number" id="beds" name="beds" value="1" min="1" readonly>
 <button type="button" onclick="changeBeds(1)">+</button>
 
 </div>
@@ -668,18 +756,68 @@ input.value=count;
 
 {% if propertyType == "commercial" %}
 
-<input name="type" placeholder="Type *" required>
-<input name="size" placeholder="Area Size *" required>
-<input name="parking" placeholder="Parking">
-<input name="power" placeholder="Power Supply">
-<input name="price" placeholder="Price *" required value="{{ data.get('price','')}}">
-{% endif %}
+<div class="field-group">
+<label class="field-label">Type *</label>
 
-<button class="next-btn">Next →</button>
+<select name="type">
 
+<option>Office</option>
+
+<option>Shop</option>
+
+<option>Warehouse</option>
+
+<option>Showroom</option>
+
+</select>
 </div>
 
-</form>
+<div class="field-group">
+<label class="field-label">Area Size *</label>
+<input name="size">
+</div>
+<input name="size" placeholder="Area Size *" required>
+<div class="toggle-row">
 
+<label>Parking</label>
+
+<div class="toggle-group">
+
+<input type="radio" id="park_yes" name="parking" value="Yes">
+
+<label for="park_yes" class="toggle-btn"> Yes </label>
+
+<input type="radio" id="park_no" name="parking" value="No">
+
+<label for="park_no" class="toggle-btn"> No </label>
+</div>
+</div>
+<div class="toggle-row">
+<label> Power Supply </label>
+
+<div class="toggle-group">
+
+<input type="radio" id="power_yes" name="power" value="Yes">
+
+<label for="power_yes" class="toggle-btn"> Yes </label>
+
+<input type="radio" id="power_partial" name="power" value="Partial">
+
+<label for="power_partial" class="toggle-btn"> Partial </label>
+ 
+<input type="radio" id="power_no" name="power" value="No">
+
+<label for="power_no" class="toggle-btn"> No </label>
+</div>
+</div>
+<div class="field-group">
+
+<label class="field-label">Price *</label>
+<input type="number" name="price" placeholder="₹">
+</div>
+{% endif %}
+<button class="next-btn">Next →</button>
+</div>
+</form>
 </body>
 </html>
