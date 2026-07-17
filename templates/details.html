@@ -43,17 +43,17 @@ no-repeat center/cover;
 
 .card{
 width:95%;
-max-width:760px;
+max-width:680px;
 height: auto;
-margin:20px auto;
+margin:50px auto;
 padding:34px;
+border-radius: 28px;
 box-sizing:border-box;
 background:rgba(30,34,60,.58);
 backdrop-filter:blur(22px);
 -webkit-backdrop-filter:blur(22px);
-border-left:1px solid rgba(255,255,255,.08);
-border-right:1px solid rgba(255,255,255,.08);
-position:relative;
+border: 1px solid rgba(255,255,255,.08);
+
 }
 
 .back-icon{
@@ -148,8 +148,8 @@ transform:scale(1.05);
     margin-top: 0;
 }
 .page-header{
-margin-top:60px;
-margin-bottom:45px;
+margin-top:25px;
+margin-bottom:30px;
 text-align:center;
 }
 
@@ -557,6 +557,20 @@ Pricing
 {% endif %}
 
 {% if propertyType == "house" and listingType == "rent" %}
+
+<div class="section-title">
+<svg width="22" height="22" viewBox="0 0 24 24"
+fill="none"
+stroke="#72dfff"
+stroke-width="2">
+
+<path d="M4 18L10 12L14 16L20 8"/>
+
+</svg>
+
+Property Specification
+
+</div>
 
 <input name="bhk" placeholder="BHK *" required>
 <input name="rent" placeholder="Monthly Rent *" required>
